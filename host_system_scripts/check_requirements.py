@@ -24,11 +24,25 @@ def satisfied(req: Requirement, installed_version) -> bool:
 
     # ignore any part that only exists in one
     for part in zip(min_parts, ins_parts):
+        if part[0][-1].isdigit():
+            min_part = part[0]
+            min_last_letter = ""
+        else:
+            min_part = part[0][:-1]
+            min_last_letter = part[0][-1]
+
+        if part[1][-1].isdigit():
+            ins_part = part[1]
+            ins_last_letter = ""
+        else:
+            ins_part = part[1][:-1]
+            ins_last_letter = part[1][-1]
+
         # todo: letters missing
         # required part is bigger than installed
-        if part[0] > part[1]:
+        if int(min_part) > int(ins_part):
             return False
-        if part[0] < part[1]:
+        if int(min_part) < int(ins_part):
             return True
     # everything is the same
     return True
@@ -37,7 +51,7 @@ def satisfied(req: Requirement, installed_version) -> bool:
 # get installed version from command output
 def get_installed_version(req: Requirement, output: str) -> str:
     pattern = re.compile(req.version_regex_pattern)
-    match = pattern.match(output)
+    match = pattern.match(output.replace("\n", ""))
     if match is not None:
         return match.group()
     raise ValueError(f"regex broken for {req}")
