@@ -14,7 +14,7 @@ Gzip;1.3.12;gzip --version;.*
 Linux kernel;3.2;cat /proc/version;.*
 M4;1.4.10;cat /proc/version;.*
 Make;4.0;make --version;.*
-Patch.2.5.4;patch --version;.*
+Patch;2.5.4;patch --version;.*
 Perl;5.8.8;perl --version;.*
 Python;3.4;python3 --version;.*
 Sed;4.15;sed --version;.*
