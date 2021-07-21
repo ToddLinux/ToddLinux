@@ -62,7 +62,7 @@ def get_installed_version(req: Requirement, output: str) -> str:
     pattern = re.compile(req.version_regex_pattern)
     match = pattern.findall(output.replace("\n", ""))
     if match:
-        return match[0]
+        return match[0][0]
     raise ValueError(f"regex broken for {req}")
 
 
