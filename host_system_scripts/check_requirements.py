@@ -17,11 +17,12 @@ class Requirement:
 
 # check if min version is satisfied with output of version check command
 def check_version(req: Requirement, output: str) -> Tuple[bool, str]:
+    print(req)
     pattern = re.compile(req.version_regex_pattern)
     match = pattern.match(output)
     if match is not None:
         # todo: fix
-        return True, match.group(1)
+        return True, ""
     raise ValueError(f"regex broken for {req}")
 
 
@@ -48,7 +49,6 @@ def main():
                                     req["version_regex_pattern"]) for req in raw_requirements]
     for req in requirements:
         check_pkg(req)
-        exit(0)
 
 
 if __name__ == "__main__":
