@@ -16,15 +16,20 @@ class Requirement:
 
 
 # check if min version is satisfied with output of version check command
-def check_version(min_version: str, output: str) -> Tuple[bool, str]:
-    return False, ""
+def check_version(req: Requirement, output: str) -> Tuple[bool, str]:
+    pattern = re.compile(req.version_regex_pattern)
+    match = pattern.match(output)
+    if match is not None:
+        # todo: fix
+        return True, match.group(1)
+    raise ValueError(f"regex broken for {req}")
 
 
 def check_pkg(req: Requirement) -> None:
     try:
         # quotes in command not supported
         output = subprocess.check_output(req.command.split(" ")).decode()
-        satisfied, installed_version = check_version(req.min_version, output)
+        satisfied, installed_version = check_version(req, output)
         if not satisfied:
             print(
                 f"'{req.name}' requires version '{req.min_version}' but only version '{installed_version}' is installed!")
