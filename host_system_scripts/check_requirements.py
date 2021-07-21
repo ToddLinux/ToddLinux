@@ -1,4 +1,5 @@
 import csv
+import pathlib
 import subprocess
 import re
 import sys
@@ -15,6 +16,15 @@ class Requirement:
 
     def __repr__(self):
         return f"<Requirement name: '{self.name}'\tmin_version: '{self.min_version}'\tcommand: '{self.command}'\tversion_regex_pattern: '{self.version_regex_pattern}'>"
+
+
+class SymRequirement:
+    def __init__(self, cmd_name, sym_link):
+        self.cmd_name = cmd_name
+        self.sym_link = sym_link
+
+    def __repr__(self):
+        return f"< SymRequirement cmd_name: '{self.cmd_name}'\t'{self.sym_link}'>"
 
 
 # check if min version is satisfied with output of version check command
@@ -88,9 +98,11 @@ def check_pkg(req: Requirement) -> bool:
         return False
 
 
-def main() -> int:
+# return True if all packages are satisfied
+def check_requirements() -> bool:
+    file_dir_path = pathlib.Path(__file__).parent.resolve()
     # load csv
-    with open("requirements.csv", "r", newline="") as file:
+    with open(f"{file_dir_path}/requirements.csv", "r", newline="") as file:
         raw_requirements = csv.DictReader(file, delimiter=";")
         requirements = [Requirement(req["name"],
                                     req["min_version"],
@@ -100,7 +112,45 @@ def main() -> int:
     for req in requirements:
         if not check_pkg(req):
             all_ok = False
-    return 0 if all_ok else 1
+    return all_ok
+
+
+# return False if not satisfied
+def check_sym(req: SymRequirement) -> bool:
+    print(f"checking sym for {req.cmd_name}:\t...\r", end="")
+    if str(pathlib.Path(req.sym_link).resolve()).endswith(req.cmd_name):
+        print(
+            f"checking sym for {req.cmd_name}:\tincorrect sym link at {req.sym_link}")
+        return False
+    else:
+        # space in end is required to overwrite previous loading dots
+        print(f"checking sym for {req.cmd_name}:\tok ")
+        return True
+
+
+# return True if all sym links correct
+def check_sym_links() -> bool:
+    file_dir_path = pathlib.Path(__file__).parent.resolve()
+    # load csv
+    with open(f"{file_dir_path}/required_sym_links.csv", "r", newline="") as file:
+        raw_sym_requirements = csv.DictReader(file, delimiter=";")
+        sym_requirements = [SymRequirement(req["cmd_name"],
+                                           req["sym_link"]) for req in raw_sym_requirements]
+    all_ok = True
+    for req in sym_requirements:
+        if not check_sym(req):
+            all_ok = False
+    return all_ok
+
+
+def main() -> int:
+    all_ok = True
+    if not check_requirements():
+        all_ok = False
+    if not check_sym_links():
+        all_ok = False
+
+    return 0 if all_ok else -1
 
 
 if __name__ == "__main__":
