@@ -62,13 +62,13 @@ def get_installed_version(req: Requirement, output: str) -> str:
     pattern = re.compile(req.version_regex_pattern)
     match = pattern.findall(output.replace("\n", ""))
     if match:
-        return match[0]
+        return match[0][0]
     raise ValueError(f"regex broken for {req}")
 
 
 # return False if not satisfied
 def check_pkg(req: Requirement) -> bool:
-    print(f"checking {req.name}: ...\r", end="")
+    print(f"checking {req.name}:\t...\r", end="")
     try:
         output = subprocess.check_output(
             req.command, stderr=subprocess.STDOUT).decode()
@@ -77,13 +77,14 @@ def check_pkg(req: Requirement) -> bool:
 
         if not satisfied(req, installed_version):
             print(
-                f"checking {req.name}: required version is '{req.min_version}' but only version '{installed_version}' is installed!")
+                f"checking {req.name}:\trequired version is '{req.min_version}' but only version '{installed_version}' is installed!")
             return False
         else:
-            print(f"checking {req.name}: ok")
+            # space in end is required to overwrite previous loading dots
+            print(f"checking {req.name}:\tok ")
             return True
     except FileNotFoundError:
-        print(f"checking {req.name}: package not installed!")
+        print(f"checking {req.name}:\tpackage not installed!")
         return False
 
 
