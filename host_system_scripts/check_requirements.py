@@ -119,13 +119,13 @@ def check_requirements() -> bool:
 def check_sym(req: SymRequirement) -> bool:
     print(f"checking sym for {req.cmd_name}:\t...\r", end="")
     if str(pathlib.Path(req.sym_link).resolve()).endswith(req.cmd_name):
-        print(
-            f"checking sym for {req.cmd_name}:\tincorrect sym link at {req.sym_link}")
-        return False
-    else:
         # space in end is required to overwrite previous loading dots
         print(f"checking sym for {req.cmd_name}:\tok ")
         return True
+    else:
+        print(
+            f"checking sym for {req.cmd_name}:\tincorrect sym link at {req.sym_link}")
+        return False
 
 
 # return True if all sym links correct
