@@ -8,7 +8,8 @@ class Requirement:
     def __init__(self, name: str, min_version: str, command: str, version_regex_pattern: str):
         self.name = name
         self.min_version = min_version
-        self.command = command
+        # quotes in command not supported
+        self.command = command.split(" ")
         self.version_regex_pattern = version_regex_pattern
 
     def __repr__(self):
@@ -17,19 +18,17 @@ class Requirement:
 
 # check if min version is satisfied with output of version check command
 def check_version(req: Requirement, output: str) -> Tuple[bool, str]:
-    print(req)
     pattern = re.compile(req.version_regex_pattern)
     match = pattern.match(output)
     if match is not None:
-        # todo: fix
-        return True, ""
+        return False, match.group()
     raise ValueError(f"regex broken for {req}")
 
 
 def check_pkg(req: Requirement) -> None:
     try:
-        # quotes in command not supported
-        output = subprocess.check_output(req.command.split(" ")).decode()
+        output = subprocess.check_output(
+            req.command, stderr=subprocess.STDOUT).decode()
         satisfied, installed_version = check_version(req, output)
         if not satisfied:
             print(
