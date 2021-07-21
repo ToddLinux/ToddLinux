@@ -19,41 +19,50 @@ class Requirement:
 
 # check if min version is satisfied with output of version check command
 def satisfied(req: Requirement, installed_version) -> bool:
-    min_parts = req.min_version.split(".")
-    ins_parts = installed_version.split(".")
+    try:
+        min_parts = req.min_version.split(".")
+        ins_parts = installed_version.split(".")
 
-    # ignore any part that only exists in one
-    for part in zip(min_parts, ins_parts):
-        if part[0][-1].isdigit():
-            min_part = part[0]
-            min_last_letter = ""
-        else:
-            min_part = part[0][:-1]
-            min_last_letter = part[0][-1]
+        # ignore any part that only exists in one
+        for part in zip(min_parts, ins_parts):
+            # sometimes version contain letters in the end, like '3.4.1a'
+            if part[0][-1].isdigit():
+                min_part = part[0]
+                min_last_letter = ""
+            else:
+                min_part = part[0][:-1]
+                min_last_letter = part[0][-1]
 
-        if part[1][-1].isdigit():
-            ins_part = part[1]
-            ins_last_letter = ""
-        else:
-            ins_part = part[1][:-1]
-            ins_last_letter = part[1][-1]
+            if part[1][-1].isdigit():
+                ins_part = part[1]
+                ins_last_letter = ""
+            else:
+                ins_part = part[1][:-1]
+                ins_last_letter = part[1][-1]
 
-        # todo: letters missing
-        # required part is bigger than installed
-        if int(min_part) > int(ins_part):
-            return False
-        if int(min_part) < int(ins_part):
-            return True
-    # everything is the same
-    return True
+            # check number part
+            if int(min_part) > int(ins_part):
+                return False
+            if int(min_part) < int(ins_part):
+                return True
+
+            # check letter part
+            if min_last_letter > ins_last_letter:
+                return False
+            if min_last_letter < ins_last_letter:
+                return True
+        # everything is the same
+        return True
+    except ValueError:
+        raise ValueError(f"Version broken for {req}")
 
 
 # get installed version from command output
 def get_installed_version(req: Requirement, output: str) -> str:
     pattern = re.compile(req.version_regex_pattern)
-    match = pattern.match(output.replace("\n", ""))
-    if match is not None:
-        return match.group()
+    match = pattern.findall(output.replace("\n", ""))
+    if match:
+        return match[0]
     raise ValueError(f"regex broken for {req}")
 
 
@@ -65,7 +74,6 @@ def check_pkg(req: Requirement) -> bool:
             req.command, stderr=subprocess.STDOUT).decode()
 
         installed_version = get_installed_version(req, output)
-        print(installed_version)
 
         if not satisfied(req, installed_version):
             print(
