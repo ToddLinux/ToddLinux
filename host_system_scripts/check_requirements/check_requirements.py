@@ -1,3 +1,4 @@
+# See LICENSE for license details.
 import csv
 import pathlib
 import subprocess
