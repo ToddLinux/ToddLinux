@@ -5,6 +5,8 @@ import re
 import sys
 from typing import Tuple
 
+file_dir_path = pathlib.Path(__file__).parent.resolve()
+
 
 class Requirement:
     def __init__(self, name: str, min_version: str, command: str, version_regex_pattern: str):
@@ -100,7 +102,6 @@ def check_pkg(req: Requirement) -> bool:
 
 # return True if all packages are satisfied
 def check_requirements() -> bool:
-    file_dir_path = pathlib.Path(__file__).parent.resolve()
     # load csv
     with open(f"{file_dir_path}/requirements.csv", "r", newline="") as file:
         raw_requirements = csv.DictReader(file, delimiter=";")
@@ -130,7 +131,6 @@ def check_sym(req: SymRequirement) -> bool:
 
 # return True if all sym links correct
 def check_sym_links() -> bool:
-    file_dir_path = pathlib.Path(__file__).parent.resolve()
     # load csv
     with open(f"{file_dir_path}/required_sym_links.csv", "r", newline="") as file:
         raw_sym_requirements = csv.DictReader(file, delimiter=";")
