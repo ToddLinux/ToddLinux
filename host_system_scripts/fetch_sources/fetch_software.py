@@ -4,8 +4,18 @@ import os
 import requests
 import urllib
 import pathlib
+import csv
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
+
+
+class Source:
+    def __init__(self, dir_name, link):
+        self.dir_name = dir_name
+        self.link = link
+
+    def __repr__(self):
+        return f"<Source '{self.dir_name}' '{self.link}'"
 
 
 def dwn_file_in_new_folder(url: str):
@@ -27,17 +37,18 @@ def main():
         raise ValueError("Add path to LFS mount point as first argument")
     lfs_dir = sys.argv[1]
 
-    with open(f"{file_dir_path}/wget-list", "r") as file:
-        sources = [url.strip() for url in file.readlines()]
+    with open(f"{file_dir_path}/wget_list.csv", "r", newline="") as file:
+        raw_sources = csv.DictReader(file, delimiter=";")
+        sources = [Source(source["dir_name"], source["link"])
+                   for source in raw_sources]
 
     os.chdir(lfs_dir)
     os.mkdir("src")
     os.chdir("src")
     for source in sources:
-        filename = source.split('/')[-1]
-        os.mkdir(filename)
-        os.chdir(filename)
-        dwn_file_in_new_folder(source)
+        os.mkdir(source.dir_name)
+        os.chdir(source.dir_name)
+        dwn_file_in_new_folder(source.link)
         os.chdir("..")
 
 
