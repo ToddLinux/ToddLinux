@@ -20,9 +20,27 @@ def main():
 
     # start build
     with open(f"{file_dir_path}/build.yaml", "r") as file:
-        build = yaml.safe_load(file)
+        builds = yaml.safe_load(file)
 
-    print(build[0]["build-commands"])
+    for build in builds:
+        print(f"building {build['package']}: extracting...\r")
+        os.chdir(build["package"])
+        # find archive
+        dirs = os.listdir(".")
+        if len(dirs) != 1:
+            print(
+                f"building {build['package']}: extracting failed; not only one archive found")
+            continue
+
+        if os.system(f"tar xf {dirs[0]}"):
+            print(f"building {build['package']}: extracting failed")
+            continue
+        os.remove(dirs[0])
+
+        while(len(dirs := os.listdir(".")) == 1):
+            os.chdir(dirs[1])
+        print(os.getcwd())
+        break
 
 
 if __name__ == "__main__":
