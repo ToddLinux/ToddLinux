@@ -11,9 +11,9 @@ def main():
     if len(sys.argv) < 2:
         raise ValueError("Add path to LFS mount point as first argument")
     lfs_dir = sys.argv[1]
+    os.chdir(lfs_dir)
 
     # print("creating minimal directory layout")
-    # os.chdir(lfs_dir)
     # folders = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools"]
     # for folder in folders:
     #     os.mkdir(folder)
@@ -22,6 +22,7 @@ def main():
     with open(f"{file_dir_path}/build.yaml", "r") as file:
         builds = yaml.safe_load(file)
 
+    os.chdir("src")
     for build in builds:
         print(f"building {build['package']}: extracting...\r")
         os.chdir(build["package"])
@@ -37,10 +38,14 @@ def main():
             continue
         os.remove(dirs[0])
 
-        while(len(dirs := os.listdir(".")) == 1):
-            os.chdir(dirs[1])
+        dirs = os.listdir(".")
+        while(len(dirs) == 1):
+            print(dirs[0])
+            os.chdir(dirs[0])
+            dirs = os.listdir(".")
         print(os.getcwd())
         break
+        os.chdir(lfs_dir)
 
 
 if __name__ == "__main__":
