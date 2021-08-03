@@ -24,6 +24,7 @@ def main():
     lfs_dir = os.path.abspath(sys.argv[1])
     os.environ["LFS"] = lfs_dir
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
+    os.environ["MAKEFLAGS"] ='-j4'
     os.chdir(lfs_dir)
 
     print("creating minimal directory layout")
