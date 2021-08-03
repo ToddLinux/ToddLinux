@@ -21,12 +21,15 @@ class Build:
 def main():
     if len(sys.argv) < 2:
         raise ValueError("Add path to LFS mount point as first argument")
-    lfs_dir = sys.argv[1]
+    lfs_dir = os.path.abspath(sys.argv[1])
+    os.environ["LFS"] = lfs_dir
+    os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.chdir(lfs_dir)
 
     print("creating minimal directory layout")
-    folders = ["bin", "etc", "lib", "lib64",
-               "sbin", "usr", "var", "tools", "builds"]
+    # folders = ["bin", "etc", "lib", "lib64",
+    #            "sbin", "usr", "var", "tools", "builds"]
+    folders = ["builds", "tools"]
     for folder in folders:
         os.mkdir(folder)
 
@@ -57,10 +60,13 @@ def main():
 
         print(
             f"building {build.target}: execute build script...                      \r")
-        if os.system(f"{file_dir_path}/build_scripts/{build.target}.sh") != 0:
+        os.chdir(f"builds/{build.target}")
+        if os.system(f"{file_dir_path}/build_scripts/{build.build_script}") != 0:
             print(
-                f"building {build.target}: build script failed...                 \r")
+                f"building {build.target}: build script failed...                 ")
+            continue
         print(f"building {build.target}: ok                      ")
+        os.chdir(lfs_dir)
 
 
 if __name__ == "__main__":

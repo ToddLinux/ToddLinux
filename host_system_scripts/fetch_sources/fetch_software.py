@@ -35,7 +35,7 @@ def dwn_file_in_new_folder(url: str):
 def main():
     if len(sys.argv) < 2:
         raise ValueError("Add path to LFS mount point as first argument")
-    lfs_dir = sys.argv[1]
+    lfs_dir = os.path.abspath(sys.argv[1])
 
     with open(f"{file_dir_path}/wget_list.csv", "r", newline="") as file:
         raw_sources = csv.DictReader(file, delimiter=";")

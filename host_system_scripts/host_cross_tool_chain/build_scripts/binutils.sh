@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -euo pipefail
 
 unpack_src() {
     rm -r binutils-2.36.1 2>/dev/null
