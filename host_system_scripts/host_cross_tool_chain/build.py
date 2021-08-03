@@ -1,10 +1,21 @@
 # See LICENSE for license details.
 import sys
 import os
-import yaml
+import shutil
+import csv
 import pathlib
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
+
+
+class Build:
+    def __init__(self, target: str, src_packages: str, build_script: str):
+        self.target = target
+        self.src_packages = src_packages.split(":")
+        self.build_script = build_script
+
+    def __repr__(self):
+        return f"<Build target: '{self.target}' src_packages: {self.src_packages} build_script: '{self.build_script}'>"
 
 
 def main():
@@ -13,39 +24,36 @@ def main():
     lfs_dir = sys.argv[1]
     os.chdir(lfs_dir)
 
-    # print("creating minimal directory layout")
-    # folders = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools"]
-    # for folder in folders:
-    #     os.mkdir(folder)
+    print("creating minimal directory layout")
+    folders = ["bin", "etc", "lib", "lib64",
+               "sbin", "usr", "var", "tools", "builds"]
+    for folder in folders:
+        os.mkdir(folder)
 
     # start build
-    with open(f"{file_dir_path}/build.yaml", "r") as file:
-        builds = yaml.safe_load(file)
+    with open(f"{file_dir_path}/builds.csv", "r", newline="") as file:
+        raw_builds = csv.DictReader(file, delimiter=";")
+        builds = [Build(build["target"], build["src_packages"],
+                        build["build_script"]) for build in raw_builds]
 
-    os.chdir("src")
     for build in builds:
-        print(f"building {build['package']}: extracting...\r")
-        os.chdir(build["package"])
-        # find archive
-        dirs = os.listdir(".")
-        if len(dirs) != 1:
-            print(
-                f"building {build['package']}: extracting failed; not only one archive found")
-            continue
+        try:
+            print(f"building {build.target}: creating build folder...\r")
+            os.mkdir(f"builds/{build.target}")
 
-        if os.system(f"tar xf {dirs[0]}"):
-            print(f"building {build['package']}: extracting failed")
+            for source in build.src_packages:
+                print(
+                    f"building {build.target}: copying source '{source}'...\r")
+                # find archive
+                dirs = os.listdir(f"src/{source}")
+                if len(dirs) != 1:
+                    print(
+                        f"building {build.target}: copying failed; not only one archive found")
+                    raise ValueError
+                shutil.copy(
+                    f"src/{source}/{dirs[0]}", f"builds/{build.target}")
+        except ValueError:
             continue
-        os.remove(dirs[0])
-
-        dirs = os.listdir(".")
-        while(len(dirs) == 1):
-            print(dirs[0])
-            os.chdir(dirs[0])
-            dirs = os.listdir(".")
-        print(os.getcwd())
-        break
-        os.chdir(lfs_dir)
 
 
 if __name__ == "__main__":
