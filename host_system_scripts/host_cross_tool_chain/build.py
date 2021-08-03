@@ -20,9 +20,6 @@ class Build:
 
 def build_targets(lfs_dir: str, quiet_mode: bool):
     output_redirect = " >/dev/null 2>&1" if quiet_mode else ""
-    os.environ["LFS"] = lfs_dir
-    os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
-    os.environ["MAKEFLAGS"] ='-j4'
     os.chdir(lfs_dir)
 
     print("creating minimal directory layout")
@@ -68,6 +65,12 @@ def build_targets(lfs_dir: str, quiet_mode: bool):
         os.chdir(lfs_dir)
 
 
+def set_environ_variables(lfs_dir):
+    os.environ["LFS"] = lfs_dir
+    os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
+    os.environ["MAKEFLAGS"] ='-j4'
+
+
 def main():
     if len(sys.argv) < 2:
         raise ValueError("Add path to LFS mount point as first argument")
@@ -75,6 +78,8 @@ def main():
     args = [a for a in sys.argv if a != "-quiet"]
     lfs_dir = os.path.abspath(args[1])
     quiet_mode = "-quiet" in sys.argv
+
+    set_environ_variables(lfs_dir)
     build_targets(lfs_dir, quiet_mode)
 
 if __name__ == "__main__":
