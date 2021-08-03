@@ -1,2 +1,3 @@
 target;src_packages;build_script
 binutils;binutils;binutils.sh
+gcc;gcc;gcc.sh
