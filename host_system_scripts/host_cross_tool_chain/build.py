@@ -18,10 +18,8 @@ class Build:
         return f"<Build target: '{self.target}' src_packages: {self.src_packages} build_script: '{self.build_script}'>"
 
 
-def main():
-    if len(sys.argv) < 2:
-        raise ValueError("Add path to LFS mount point as first argument")
-    lfs_dir = os.path.abspath(sys.argv[1])
+def build_targets(lfs_dir: str, quiet_mode: bool):
+    output_redirect = " >/dev/null 2>&1" if quiet_mode else ""
     os.environ["LFS"] = lfs_dir
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["MAKEFLAGS"] ='-j4'
@@ -62,13 +60,22 @@ def main():
         print(
             f"building {build.target}: execute build script...                      \r")
         os.chdir(f"builds/{build.target}")
-        if os.system(f"{file_dir_path}/build_scripts/{build.build_script}") != 0:
+        if os.system(f"{file_dir_path}/build_scripts/{build.build_script}" + output_redirect) != 0:
             print(
                 f"building {build.target}: build script failed...                 ")
             continue
         print(f"building {build.target}: ok                      ")
         os.chdir(lfs_dir)
 
+
+def main():
+    if len(sys.argv) < 2:
+        raise ValueError("Add path to LFS mount point as first argument")
+
+    args = [a for a in sys.argv if a != "-quiet"]
+    lfs_dir = os.path.abspath(args[1])
+    quiet_mode = "-quiet" in sys.argv
+    build_targets(lfs_dir, quiet_mode)
 
 if __name__ == "__main__":
     main()
