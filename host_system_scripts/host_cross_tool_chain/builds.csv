@@ -1,3 +1,4 @@
 target;src_packages;build_script
 binutils;binutils;binutils.sh
 gcc;gcc:mpfr:gmp:mpc;gcc.sh
+linux_headers;kernel;linux_headers.sh

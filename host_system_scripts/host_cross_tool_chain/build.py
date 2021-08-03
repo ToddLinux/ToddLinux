@@ -23,9 +23,9 @@ def build_targets(lfs_dir: str, quiet_mode: bool):
     os.chdir(lfs_dir)
 
     print("creating minimal directory layout")
-    # folders = ["bin", "etc", "lib", "lib64",
-    #            "sbin", "usr", "var", "tools", "builds"]
-    folders = ["builds", "tools"]
+    folders = ["bin", "etc", "lib", "lib64",
+               "sbin", "usr", "var", "tools", "builds"]
+    # folders = ["builds", "tools"]
     for folder in folders:
         os.mkdir(folder)
 
