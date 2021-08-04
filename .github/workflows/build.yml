@@ -34,9 +34,9 @@ jobs:
 
       - name: Fetch Sources
         run: |
-          python3 ${{github.workspace}}/host_system_scripts/fetch_sources/fetch_sources.py
+          python3 ${{github.workspace}}/host_system_scripts/fetch_sources/fetch_sources.py ${{github.workspace}}/lfs
 
       - name: Build Cross Toolchain
         run: |
-          python3 ${{github.workspace}}/host_system_scripts/host_cross_tool_chain/build.py
+          python3 ${{github.workspace}}/host_system_scripts/host_cross_tool_chain/build.py ${{github.workspace}}/lfs
 
