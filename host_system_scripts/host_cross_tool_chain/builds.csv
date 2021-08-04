@@ -3,3 +3,4 @@ binutils;binutils;binutils.sh
 gcc;gcc:mpfr:gmp:mpc;gcc.sh
 linux_headers;kernel;linux_headers.sh
 glibc;glibc:glibc-patch;glibc.sh
+libstdcpp;gcc;libstdcpp.sh

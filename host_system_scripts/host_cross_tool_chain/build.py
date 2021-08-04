@@ -69,6 +69,7 @@ def set_environ_variables(lfs_dir):
     os.environ["LFS"] = lfs_dir
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["MAKEFLAGS"] ='-j4'
+    os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
 
 def main():
