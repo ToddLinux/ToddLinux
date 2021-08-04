@@ -20,9 +20,12 @@ jobs:
       - name: Update environment
         run: |
           sudo apt install -y bash binutils bison bzip2 coreutils diffutils findutils gawk gcc g++ grep gzip m4 make patch perl python3 sed tar texinfo xz-utils
-          ln -s bash /bin/sh
-          ln -s bison /usr/bin/yacc
-          ln -s gawk /usr/bin/awk
+          sudo rm /bin/sh
+          sudo ln -s bash /bin/sh
+          sudo rm /usr/bin/yacc
+          sudo ln -s bison /usr/bin/yacc
+          sudo rm /usr/bin/awk
+          sudo ln -s gawk /usr/bin/awk
 
       - name: Build Cross Toolchain
         run: |
