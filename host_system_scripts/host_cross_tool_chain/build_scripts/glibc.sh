@@ -22,7 +22,7 @@ configure() {
     mkdir build && cd build && \
     ../configure \
         --prefix=/usr \
-        --host=$LFS_TGT \
+        --host=x86_64-lfs-linux-gnu \
         --build=$(../scripts/config.guess) \
         --enable-kernel=3.2 \
         --with-headers=$LFS/usr/include \
