@@ -21,6 +21,7 @@ jobs:
         run: |
           sudo apt install -y bash binutils bison bzip2 coreutils diffutils findutils gawk gcc g++ grep gzip m4 make patch perl python3 sed tar texinfo xz-utils tree
           tree
+          pwd
 
       - name: Build Cross Toolchain
         run: |
