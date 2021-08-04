@@ -19,14 +19,12 @@ jobs:
 
       - name: Update environment
         run: |
-          sudo apt install -y bash binutils bison bzip2 coreutils diffutils findutils gawk gcc g++ grep gzip m4 make patch perl python3 sed tar texinfo xz-utils tree
-          tree
-          pwd
+          sudo apt install -y bash binutils bison bzip2 coreutils diffutils findutils gawk gcc g++ grep gzip m4 make patch perl python3 sed tar texinfo xz-utils
 
       - name: Build Cross Toolchain
         run: |
           mkdir lfs
-          python3 ${{github.workspace}}/host_system_scripts/check_requirements.py
+          python3 ${{github.workspace}}/host_system_scripts/check_requirements/check_requirements.py
           python3 ${{github.workspace}}/host_system_scripts/fetch_sources/fetch_sources.py
           python3 ${{github.workspace}}/host_system_scripts/host_cross_tool_chain/build.py
 
