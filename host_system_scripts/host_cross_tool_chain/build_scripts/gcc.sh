@@ -2,7 +2,7 @@
 set -euo pipefail
 
 unpack_src() {
-    rm -r binutils-2.36.1 2>/dev/null
+    rm -r gcc-10.2.0 2>/dev/null
     tar xf gcc-10.2.0.tar.xz && cd gcc-10.2.0 && \
         tar -xf ../mpfr-4.1.0.tar.xz && mv mpfr-4.1.0 mpfr && \
         tar -xf ../gmp-6.2.1.tar.xz && mv gmp-6.2.1 gmp && \
