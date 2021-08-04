@@ -23,7 +23,7 @@ def dwn_file_in_new_folder(url: str) -> bool:
     print(f"downloading {local_filename}:\t...\r", end="")
     with requests.get(url, stream=True) as r:
         if r.status_code != 200:
-            print(f"downloading {local_filename}:\tit just doesn't work")
+            print(f"downloading {local_filename}:\tfailure")
             return False
         with open(local_filename, 'wb') as f:
             for chunk in r.iter_content(chunk_size=8192):

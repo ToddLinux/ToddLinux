@@ -47,11 +47,11 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
     with open("builds/builds.lock", "a", newline="") as file:
         for build in builds:
             if build.package in finished_builds:
-                print(f"building {build.package}: already built")
+                print(f"building {build.package}:\talready built")
                 continue
             try:
                 print(
-                    f"building {build.package}: creating package folder...\r", end="")
+                    f"building {build.package}:\tcreating package folder...\r", end="")
                 if os.path.isdir(f"builds/{build.package}"):
                     shutil.rmtree(f"builds/{build.package}")
                 os.mkdir(f"builds/{build.package}")
@@ -59,12 +59,12 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
                 # copy all sources
                 for source in build.src_packages:
                     print(
-                        f"building {build.package}: copying source '{source}'...                \r", end="")
+                        f"building {build.package}:\tcopying source '{source}'...                \r", end="")
                     # find archive
                     dirs = os.listdir(f"src/{source}")
                     if len(dirs) != 1:
                         print(
-                            f"building {build.package}: copying failed; not only one archive found             ", end="")
+                            f"building {build.package}:\tcopying failed; not only one archive found             ", end="")
                         raise ValueError
                     shutil.copy(
                         f"src/{source}/{dirs[0]}", f"builds/{build.package}")
@@ -73,14 +73,14 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
                 continue
 
             print(
-                f"building {build.package}: execute build script...                      \r", end="")
+                f"building {build.package}:\texecute build script...                      \r", end="")
             os.chdir(f"builds/{build.package}")
             if os.system(f"{file_dir_path}/build_scripts/{build.build_script}" + output_redirect) != 0:
                 print(
-                    f"building {build.package}: build script failed...                 ", end="")
+                    f"building {build.package}:\tbuild script failed...                 ", end="")
                 all_ok = False
                 continue
-            print(f"building {build.package}: ok                      ")
+            print(f"building {build.package}:\tok                      ")
             os.chdir(lfs_dir)
 
             # package built
