@@ -26,11 +26,17 @@ jobs:
           sudo ln -s bison /usr/bin/yacc
           sudo rm /usr/bin/awk
           sudo ln -s gawk /usr/bin/awk
+          mkdir lfs
+
+      - name: Check Requirements
+        run: |
+          python3 ${{github.workspace}}/host_system_scripts/check_requirements/check_requirements.py
+
+      - name: Fetch Sources
+        run: |
+          python3 ${{github.workspace}}/host_system_scripts/fetch_sources/fetch_sources.py
 
       - name: Build Cross Toolchain
         run: |
-          mkdir lfs
-          python3 ${{github.workspace}}/host_system_scripts/check_requirements/check_requirements.py
-          python3 ${{github.workspace}}/host_system_scripts/fetch_sources/fetch_sources.py
           python3 ${{github.workspace}}/host_system_scripts/host_cross_tool_chain/build.py
 
