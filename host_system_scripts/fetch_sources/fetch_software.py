@@ -18,21 +18,21 @@ class Source:
         return f"<Source '{self.dir_name}' '{self.link}'"
 
 
-def dwn_file_in_new_folder(url: str):
+def dwn_file_in_new_folder(url: str) -> bool:
     local_filename = url.split('/')[-1]
     print(f"downloading {local_filename}:\t...\r", end="")
     with requests.get(url, stream=True) as r:
         if r.status_code != 200:
             print(f"downloading {local_filename}:\tit just doesn't work")
-            return local_filename
+            return False
         with open(local_filename, 'wb') as f:
             for chunk in r.iter_content(chunk_size=8192):
                 f.write(chunk)
     print(f"downloading {local_filename}:\tok ")
-    return local_filename
+    return True
 
 
-def main():
+def main() -> int:
     if len(sys.argv) < 2:
         raise ValueError("Add path to LFS mount point as first argument")
     lfs_dir = os.path.abspath(sys.argv[1])
@@ -45,12 +45,15 @@ def main():
     os.chdir(lfs_dir)
     os.mkdir("src")
     os.chdir("src")
+    all_ok = True
     for source in sources:
         os.mkdir(source.dir_name)
         os.chdir(source.dir_name)
-        dwn_file_in_new_folder(source.link)
+        if not dwn_file_in_new_folder(source.link):
+            all_ok = False
         os.chdir("..")
+    return 0 if all_ok else -1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

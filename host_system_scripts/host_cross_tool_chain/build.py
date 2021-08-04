@@ -19,7 +19,8 @@ class Build:
         return f"<Build package: '{self.package}' src_packages: {self.src_packages} build_script: '{self.build_script}'>"
 
 
-def build_targets(lfs_dir: str, quiet_mode: bool):
+def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
+    all_ok = True
     output_redirect = " >/dev/null 2>&1" if quiet_mode else ""
     os.chdir(lfs_dir)
 
@@ -68,6 +69,7 @@ def build_targets(lfs_dir: str, quiet_mode: bool):
                     shutil.copy(
                         f"src/{source}/{dirs[0]}", f"builds/{build.package}")
             except ValueError:
+                all_ok = False
                 continue
 
             print(
@@ -76,6 +78,7 @@ def build_targets(lfs_dir: str, quiet_mode: bool):
             if os.system(f"{file_dir_path}/build_scripts/{build.build_script}" + output_redirect) != 0:
                 print(
                     f"building {build.package}: build script failed...                 ", end="")
+                all_ok = False
                 continue
             print(f"building {build.package}: ok                      ")
             os.chdir(lfs_dir)
@@ -83,6 +86,7 @@ def build_targets(lfs_dir: str, quiet_mode: bool):
             # package built
             file.write(f"{build.package}\n")
             file.flush()
+    return all_ok
 
 
 def set_environ_variables(lfs_dir):
@@ -94,7 +98,7 @@ def set_environ_variables(lfs_dir):
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
 
-def main():
+def main() -> int:
     if len(sys.argv) < 2:
         raise ValueError("Add path to LFS mount point as first argument")
 
@@ -103,8 +107,8 @@ def main():
     quiet_mode = "-quiet" in sys.argv
 
     set_environ_variables(lfs_dir)
-    build_targets(lfs_dir, quiet_mode)
+    return 0 if build_targets(lfs_dir, quiet_mode) else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
