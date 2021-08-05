@@ -10,13 +10,13 @@ unpack_src() {
 
 configure() {
     ../libstdc++-v3/configure \
-        --host=x86_64-lfs-linux-gnu \
+        --host=$LFS_TGT \
         --build=$(../config.guess) \
         --prefix=/usr \
         --disable-multilib \
         --disable-nls \
         --disable-libstdcxx-pch \
-        --with-gxx-include-dir=/tools/x86_64-lfs-linux-gnu/include/c++/10.2.0
+        --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/10.2.0
     return
 }
 

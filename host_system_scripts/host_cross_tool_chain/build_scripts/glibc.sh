@@ -22,7 +22,7 @@ configure() {
     mkdir build && cd build && \
     ../configure \
         --prefix=/usr \
-        --host=x86_64-lfs-linux-gnu \
+        --host=$LFS_TGT \
         --build=$(../scripts/config.guess) \
         --enable-kernel=3.2 \
         --with-headers=$LFS/usr/include \
@@ -36,12 +36,12 @@ make_install() {
 # TODO: FIX THIS
 # grep output should be "[Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]""
 test_toolchain() {
-    echo 'int main(){}' > dummy.c && $LFS/tools/bin/x86_64-lfs-linux-gnu-gcc dummy.c && readelf -l a.out | grep '/ld-linux'
+    echo 'int main(){}' > dummy.c && $LFS/tools/bin/$LFS_TGT-gcc dummy.c && readelf -l a.out | grep '/ld-linux'
     return
 }
 
 finalize_headers() {
-    $LFS/tools/libexec/gcc/x86_64-lfs-linux-gnu/10.2.0/install-tools/mkheaders
+    $LFS/tools/libexec/gcc/$LFS_TGT/10.2.0/install-tools/mkheaders
     return
 }
 
