@@ -3,7 +3,7 @@ set -euo pipefail
 
 unpack_src() {
     tar xf m4-1.4.18.tar.xz
-    cd m4-1.4.18.tar.xz
+    cd m4-1.4.18
     return
 }
 
