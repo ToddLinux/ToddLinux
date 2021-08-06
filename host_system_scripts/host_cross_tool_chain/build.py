@@ -19,15 +19,14 @@ class Build:
         return f"<Build package: '{self.package}' src_packages: {self.src_packages} build_script: '{self.build_script}'>"
 
 
+# fails when one fails
 def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
-    all_ok = True
     output_redirect = " >/dev/null 2>&1" if quiet_mode else ""
     os.chdir(lfs_dir)
 
     print("creating minimal directory layout")
     folders = ["bin", "etc", "lib", "lib64",
                "sbin", "usr", "var", "tools", "builds"]
-    # folders = ["builds", "tools"]
     for folder in folders:
         if not os.path.isdir(folder):
             os.mkdir(folder)
@@ -49,28 +48,24 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
             if build.package in finished_builds:
                 print(f"building {build.package}:\talready built")
                 continue
-            try:
-                print(
-                    f"building {build.package}:\tcreating package folder...\r", end="")
-                if os.path.isdir(f"builds/{build.package}"):
-                    shutil.rmtree(f"builds/{build.package}")
-                os.mkdir(f"builds/{build.package}")
+            print(
+                f"building {build.package}:\tcreating package folder...\r", end="")
+            if os.path.isdir(f"builds/{build.package}"):
+                shutil.rmtree(f"builds/{build.package}")
+            os.mkdir(f"builds/{build.package}")
 
-                # copy all sources
-                for source in build.src_packages:
+            # copy all sources
+            for source in build.src_packages:
+                print(
+                    f"building {build.package}:\tcopying source '{source}'...                \r", end="")
+                # find archive
+                dirs = os.listdir(f"src/{source}")
+                if len(dirs) != 1:
                     print(
-                        f"building {build.package}:\tcopying source '{source}'...                \r", end="")
-                    # find archive
-                    dirs = os.listdir(f"src/{source}")
-                    if len(dirs) != 1:
-                        print(
-                            f"building {build.package}:\tcopying failed; not only one archive found             ", end="")
-                        raise ValueError
-                    shutil.copy(
-                        f"src/{source}/{dirs[0]}", f"builds/{build.package}")
-            except ValueError:
-                all_ok = False
-                continue
+                        f"building {build.package}:\tcopying failed; not only one archive found             ", end="")
+                    return False
+                shutil.copy(
+                    f"src/{source}/{dirs[0]}", f"builds/{build.package}")
 
             print(
                 f"building {build.package}:\texecute build script...                      \r", end="")
@@ -78,8 +73,7 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
             if os.system(f"{file_dir_path}/build_scripts/{build.build_script}" + output_redirect) != 0:
                 print(
                     f"building {build.package}:\tbuild script failed...                 ", end="")
-                all_ok = False
-                continue
+                return False
             print(f"building {build.package}:\tok                      ")
             os.chdir(lfs_dir)
             shutil.rmtree(f"builds/{build.package}")
@@ -87,7 +81,7 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
             # package built
             file.write(f"{build.package}\n")
             file.flush()
-    return all_ok
+    return True
 
 
 def set_environ_variables(lfs_dir):
