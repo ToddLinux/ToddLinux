@@ -2,7 +2,7 @@
 set -euo pipefail
 
 unpack_src() {
-    tar xf coreutils-8.32.tar.xz
+    tar xf diffutils-3.7.tar.xz
     cd diffutils-3.7
     return
 }
