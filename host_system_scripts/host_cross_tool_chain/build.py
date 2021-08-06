@@ -82,6 +82,7 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
                 continue
             print(f"building {build.package}:\tok                      ")
             os.chdir(lfs_dir)
+            shutil.rmtree(f"builds/{build.package}")
 
             # package built
             file.write(f"{build.package}\n")
