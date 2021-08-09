@@ -89,7 +89,7 @@ def set_environ_variables(lfs_dir):
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     output = subprocess.check_output(
         "nproc", stderr=subprocess.STDOUT).decode()
-    os.environ["MAKEFLAGS"] = f"-j{output}"
+    os.environ["MAKEFLAGS"] = f"-j{int(output) - 1}"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
 
