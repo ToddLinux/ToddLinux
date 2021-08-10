@@ -5,8 +5,14 @@ import shutil
 import csv
 import pathlib
 import subprocess
+import time
+
+from datetime import timedelta
+
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
+
+OPTIONS = ["-time", "-quiet"]
 
 
 class Build:
@@ -98,12 +104,19 @@ def main() -> int:
     if len(sys.argv) < 2:
         raise ValueError("Add path to LFS mount point as first argument")
 
-    args = [a for a in sys.argv if a != "-quiet"]
+    args = [a for a in sys.argv if a not in OPTIONS]
     lfs_dir = os.path.abspath(args[1])
     quiet_mode = "-quiet" in sys.argv
+    measure_time = "-time" in sys.argv
 
     set_environ_variables(lfs_dir)
-    return 0 if build_targets(lfs_dir, quiet_mode) else 1
+    start = time.time()
+    ok = build_targets(lfs_dir, quiet_mode)
+    end = time.time()
+    if measure_time:
+        print("host_cross_tool_chain time:", timedelta(seconds=(end - start)))
+
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":
