@@ -115,7 +115,7 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
 def set_environ_variables(lfs_dir: str):
     output = subprocess.check_output(
         "nproc", stderr=subprocess.STDOUT).decode()
-    n_proc = 1 if output == "1" else int(output) - 1
+    n_proc = output  # 1 if output == "1" else int(output) - 1
 
     os.environ["LFS"] = lfs_dir
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
