@@ -9,6 +9,7 @@ import time
 
 from datetime import timedelta
 from time import time
+from argparse import ArgumentParser
 
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
@@ -65,6 +66,7 @@ def copy_sources(build: Build):
             return False
         shutil.copy(f"src/{source}/{dirs[0]}", f"builds/{build.package}")
 
+
 def build_package(build: Build, lfs_dir: str, output_redirect: str) -> bool:
     print(f"building {build.package}:\tcreating package folder...\r", end="")
     if os.path.isdir(f"builds/{build.package}"):
@@ -112,39 +114,47 @@ def build_targets(lfs_dir: str, quiet_mode: bool) -> bool:
     return True
 
 
-def set_environ_variables(lfs_dir: str):
-    output = subprocess.check_output(
-        "nproc", stderr=subprocess.STDOUT).decode()
-    n_proc = output  # 1 if output == "1" else int(output) - 1
-
+def set_environ_variables(lfs_dir: str, jobs: int):
     os.environ["LFS"] = lfs_dir
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
-    os.environ["MAKEFLAGS"] = f"-j{n_proc}"
+    os.environ["MAKEFLAGS"] = f"-j{jobs}"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
 
-def print_usage(script_name: str):
-    print(f"Usage: {script_name} [options]... [path]")
-    print(f"Options")
-    print(f"  -time   measure time")
-    print(f"  -quiet  don't print building messages from child processes")
+def get_argparser() -> ArgumentParser:
+    parser = ArgumentParser(
+        description='Build cross toolchain and required tools')
+    parser.add_argument('path', help='path to target system', type=str)
+    parser.add_argument('-time', help='measure build time',
+                        action='store_true')
+    parser.add_argument(
+        '-quiet', help='don\'t print messages from underlaying processes', action='store_true')
+    parser.add_argument(
+        '-jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
+
+    return parser
 
 
 def main() -> int:
-    args = [a for a in sys.argv if a not in OPTIONS]
-    quiet_mode = "-quiet" in sys.argv
-    measure_time = "-time" in sys.argv
+    parser = get_argparser()
+    args = parser.parse_args()
 
-    if len(args) < 2:
-        print("Missing path")
-        print_usage(args[0])
-        sys.exit(1)
+    quiet_mode = args.quiet
+    measure_time = args.time
+    jobs = args.jobs
+    lfs_dir = os.path.abspath(args.path)
 
-    lfs_dir = os.path.abspath(args[1])
-    set_environ_variables(lfs_dir)
+    if jobs is None:
+        output = subprocess.check_output(
+            "nproc", stderr=subprocess.STDOUT).decode()
+        jobs = int(output)
+
+    set_environ_variables(lfs_dir, jobs)
+
     start = time()
     ok = build_targets(lfs_dir, quiet_mode)
     end = time()
+
     if measure_time:
         print("host_cross_tool_chain time:", timedelta(seconds=(end - start)))
 
