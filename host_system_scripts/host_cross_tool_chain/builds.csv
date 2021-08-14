@@ -20,3 +20,4 @@ sed;sed;sed.sh
 tar;tar;tar.sh
 xz;xz;xz.sh
 binutils_pass2;binutils;binutils_pass2.sh
+gcc_pass2;gcc:mpfr:gmp:mpc;gcc_pass2.sh
