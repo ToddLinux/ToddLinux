@@ -19,3 +19,4 @@ patch;patch;patch.sh
 sed;sed;sed.sh
 tar;tar;tar.sh
 xz;xz;xz.sh
+binutils_pass2;binutils;binutils_pass2.sh
