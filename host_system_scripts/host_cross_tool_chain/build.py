@@ -12,10 +12,8 @@ from time import time
 from argparse import ArgumentParser
 
 
-file_dir_path = pathlib.Path(__file__).parent.resolve()
-
+FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 LOCK_FILE = "builds/builds.lock"
-OPTIONS = ["-time", "-quiet"]
 DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64",
                     "sbin", "usr", "var", "tools", "builds"]
 
@@ -40,7 +38,7 @@ def get_finished_builds():
 
 
 def get_builds():
-    with open(f"{file_dir_path}/builds.csv", "r", newline="") as file:
+    with open(f"{FILE_DIR_PATH}/builds.csv", "r", newline="") as file:
         raw_builds = csv.DictReader(file, delimiter=";")
         builds = [Build(build["package"], build["src_packages"],
                         build["build_script"]) for build in raw_builds]
@@ -79,7 +77,7 @@ def build_package(build: Build, lfs_dir: str, output_redirect: str) -> bool:
         f"building {build.package}:\texecute build script...                      \r", end="")
     os.chdir(f"builds/{build.package}")
 
-    if os.system(f"{file_dir_path}/build_scripts/{build.build_script}" + output_redirect) != 0:
+    if os.system(f"{FILE_DIR_PATH}/build_scripts/{build.build_script}" + output_redirect) != 0:
         print(
             f"building {build.package}:\tbuild script failed...                 ", end="")
         return False
@@ -136,9 +134,7 @@ def get_argparser() -> ArgumentParser:
 
 
 def main() -> int:
-    parser = get_argparser()
-    args = parser.parse_args()
-
+    args = get_argparser().parse_args()
     quiet_mode = args.quiet
     measure_time = args.time
     jobs = args.jobs

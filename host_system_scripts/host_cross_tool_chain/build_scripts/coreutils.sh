@@ -1,3 +1,4 @@
+# See LICENSE for license details.
 #!/bin/bash
 set -euo pipefail
 
