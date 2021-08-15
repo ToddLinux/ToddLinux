@@ -22,7 +22,7 @@ configure() {
 }
 
 make_install() {
-    make && make DESTDIR=$LFS install
+    make && make -j1 DESTDIR=$LFS install
     return
 }
 

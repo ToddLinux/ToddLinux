@@ -31,7 +31,7 @@ configure() {
 }
 
 make_install() {
-    make -j1 && make DESTDIR=$LFS install
+    make -j1 && make -j1 DESTDIR=$LFS install
 }
 
 # TODO: FIX THIS

@@ -18,7 +18,7 @@ configure() {
 }
 
 make_install() {
-    make && make install
+    make && make -j1 install
     return
 }
 
