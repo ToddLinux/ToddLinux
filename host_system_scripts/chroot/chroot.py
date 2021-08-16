@@ -1,0 +1,54 @@
+# See LICENSE for license details.
+import sys
+import os
+import pathlib
+
+FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
+
+VIRTUAL_KERNEL_FILESYSTEMS = ["dev", "proc", "sys", "run"]
+
+
+def throw_me(cmd: str) -> None:
+    if os.system(cmd) != 0:
+        raise ValueError(f"'{cmd}' failed")
+
+
+def main() -> int:
+    try:
+        if os.geteuid() != 0:
+            print("Script must be executed as root")
+            return 1
+        if len(sys.argv) < 2:
+            print("Set path to LFS as first argument")
+            return 1
+        # Relative Paths Matter
+        lfs_dir = os.path.abspath(sys.argv[1])
+        os.chdir(lfs_dir)
+
+        # set owner to root
+        throw_me(f"chown -R root:root {lfs_dir}")
+
+        # create additional directories
+        for folder in VIRTUAL_KERNEL_FILESYSTEMS:
+            if not os.path.isdir(folder):
+                os.mkdir(folder)
+
+        # create device nodes
+        throw_me(f"mknod -m 600 {lfs_dir}/dev/console c 5 1")
+        throw_me(f"mknod -m 666 {lfs_dir}/dev/null c 1 3")
+
+        # mount virtual kernel filesystems
+        throw_me(f"mount -v --bind /dev {lfs_dir}/dev")
+        throw_me(f"mount -v --bind /dev/pts {lfs_dir}/dev/pts")
+        throw_me(f"mount -v -t proc proc {lfs_dir}/proc")
+        throw_me(f"mount -v -t sysfs sysfs {lfs_dir}/sys")
+        throw_me(f"mount -v -t tmpfs tmpfs {lfs_dir}/run")
+    except ValueError as e:
+        print(str(e))
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
