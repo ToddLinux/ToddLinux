@@ -2,6 +2,7 @@
 import sys
 import os
 import pathlib
+import shutil
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 
@@ -25,13 +26,16 @@ def main() -> int:
         lfs_dir = os.path.abspath(sys.argv[1])
         os.chdir(lfs_dir)
 
-        # set owner to root
-        throw_me(f"chown -R root:root {lfs_dir}")
-
         # create additional directories
         for folder in VIRTUAL_KERNEL_FILESYSTEMS:
-            if not os.path.isdir(folder):
-                os.mkdir(folder)
+            if os.path.isdir(folder):
+                print(f"'{folder}' is already existent; unmounting and deleting...")
+                os.system(f"umount -R -q {folder}")
+                shutil.rmtree(folder)
+            os.mkdir(folder)
+
+        # set owner to root
+        throw_me(f"chown -R root:root {lfs_dir}")
 
         # create device nodes
         throw_me(f"mknod -m 600 {lfs_dir}/dev/console c 5 1")
@@ -43,6 +47,7 @@ def main() -> int:
         throw_me(f"mount -v -t proc proc {lfs_dir}/proc")
         throw_me(f"mount -v -t sysfs sysfs {lfs_dir}/sys")
         throw_me(f"mount -v -t tmpfs tmpfs {lfs_dir}/run")
+
     except ValueError as e:
         print(str(e))
         return 1
