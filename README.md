@@ -39,3 +39,5 @@ mount /dev/XXX /path/to/dir # mount
 - execute `chroot_env/prepare_chroot.py`
 - execute `chroot_env/tmp_tools/run_tool_scripts.py`
 - ...
+
+- `clean.py` can be used to cleanly remove specific created files and applied changes
