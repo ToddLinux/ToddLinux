@@ -19,3 +19,23 @@ mkfs.ext4 /dev/XXX          # create filesystem
 mkdir /path/to/dir          # create mount directory
 mount /dev/XXX /path/to/dir # mount
 ```
+
+## Terminology
+
+- package: program e.g. GCC
+- package source: source for package; one package might require multiple package sources
+- environments:
+    - host environment: initial machine used for the first builds (usually a virtual machine running on it's own "host"-the real hardware)
+    - chroot environment: environment installed on the host used to combat shared object hell and build target
+    - target environment: machine running the final build os
+
+## How to Build?
+
+- clone repository
+- install prerequisites
+- execute `host/check_req/check_requirements.py`, install any missing packages and create required sym links
+- execute `host/fetch_sources/fetch_sources.py`
+- execute `host/cross_tool_chain/build.py`
+- execute `chroot_env/prepare_chroot.py`
+- execute `chroot_env/tmp_tools/run_tool_scripts.py`
+- ...

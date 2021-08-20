@@ -9,6 +9,7 @@ FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 VIRTUAL_KERNEL_FILESYSTEMS = ["dev", "proc", "sys", "run"]
 
 
+# execute command and raise error at failure
 def throw_me(cmd: str) -> None:
     if os.system(cmd) != 0:
         raise ValueError(f"'{cmd}' failed")
@@ -50,12 +51,6 @@ def main() -> int:
 
         # create symbolic link to /run/shm
         throw_me(f"if [ -h {lfs_dir}/dev/shm ]; then; mkdir -pv {lfs_dir}/$(readlink {lfs_dir}/dev/shm); fi")
-
-        # copy script
-        shutil.copyfile(f"{FILE_DIR_PATH}/whatever.py", f"{lfs_dir}")
-
-        # enter chroot
-        throw_me(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 whatever.py")
 
     except ValueError as e:
         print(str(e))

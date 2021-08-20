@@ -25,7 +25,7 @@ def main() -> int:
         lfs_dir = os.path.abspath(sys.argv[1])
         os.chdir(lfs_dir)
 
-        # copy script
+        # copy scripts
         shutil.copytree(
             f"{FILE_DIR_PATH}/{CHROOT_TOOL_SCRIPTS}", f"{lfs_dir}/{CHROOT_TOOL_SCRIPTS}")
 

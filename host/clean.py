@@ -16,21 +16,6 @@ def get_username():
         return getpwuid(getuid())[0]
 
 
-def get_argparser() -> ArgumentParser:
-    parser = ArgumentParser(description='Handy cleanup script, if none of options are specified all are run')
-    parser.add_argument('path', help='path to target system', type=str)
-    parser.add_argument('-chroot', help='clean chroot', action='store_true')
-    parser.add_argument('-sources', help='clean sources', action='store_true')
-    parser.add_argument('-cross', help='clean cross toolchain', action='store_true')
-
-    return parser
-
-
-def change_owner(path: str):
-    user = get_username()
-    system(f"chown -R {user} {path}")
-
-
 def clean_chroot(path: str):
     system(f"umount {path}/run {path}/proc {path}/sys")
     system(f"umount -l {path}/dev/pts")
@@ -48,7 +33,8 @@ def clean_chroot(path: str):
     if isdir(f"{path}/sys"):
         rmtree(f"{path}/sys")
 
-    change_owner(path)
+    user = get_username()
+    system(f"chown -R {user} {path}")
 
 
 def clean_sources(path: str):
@@ -65,7 +51,12 @@ def clean_cross(path: str):
 
 
 def main() -> int:
-    args = get_argparser().parse_args()
+    parser = ArgumentParser(description='Handy cleanup script, if none of options are specified all are run')
+    parser.add_argument('path', help='path to target system', type=str)
+    parser.add_argument('-chroot', help='clean chroot', action='store_true')
+    parser.add_argument('-sources', help='clean sources', action='store_true')
+    parser.add_argument('-cross', help='clean cross toolchain', action='store_true')
+    args = parser.parse_args()
 
     if geteuid() != 0:
         print("Insufficient privliges, run as root")
