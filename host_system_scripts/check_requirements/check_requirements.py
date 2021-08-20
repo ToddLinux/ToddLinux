@@ -89,8 +89,7 @@ def check_pkg(req: Requirement) -> bool:
         installed_version = get_installed_version(req, output)
 
         if not satisfied(req, installed_version):
-            print(
-                f"checking {req.name}:\trequired version is '{req.min_version}' but only version '{installed_version}' is installed!")
+            print(f"checking {req.name}:\trequired version is '{req.min_version}' but only version '{installed_version}' is installed!")
             return False
         else:
             # space in end is required to overwrite previous loading dots
@@ -125,8 +124,7 @@ def check_sym(req: SymRequirement) -> bool:
         print(f"checking sym for {req.cmd_name}:\tok ")
         return True
     else:
-        print(
-            f"checking sym for {req.cmd_name}:\tincorrect sym link at {req.sym_link}")
+        print(f"checking sym for {req.cmd_name}:\tincorrect sym link at {req.sym_link}")
         return False
 
 

@@ -1,3 +1,4 @@
+# to be executed from within chroot environment
 import sys
 import os
 

@@ -6,8 +6,7 @@ from shutil import rmtree
 from os.path import isdir
 from pwd import getpwuid
 
-BUILDS_DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64",
-                    "sbin", "usr", "var", "tools", "builds"]
+BUILDS_DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
 
 
 def get_username():
@@ -16,16 +15,13 @@ def get_username():
     except KeyError:
         return getpwuid(getuid())[0]
 
+
 def get_argparser() -> ArgumentParser:
-    parser = ArgumentParser(
-        description='Handy cleanup script, if none of options are specified all are run')
+    parser = ArgumentParser(description='Handy cleanup script, if none of options are specified all are run')
     parser.add_argument('path', help='path to target system', type=str)
-    parser.add_argument('-chroot', help='clean chroot',
-                        action='store_true')
-    parser.add_argument(
-        '-sources', help='clean sources', action='store_true')
-    parser.add_argument(
-        '-cross', help='clean cross toolchain', action='store_true')
+    parser.add_argument('-chroot', help='clean chroot', action='store_true')
+    parser.add_argument('-sources', help='clean sources', action='store_true')
+    parser.add_argument('-cross', help='clean cross toolchain', action='store_true')
 
     return parser
 
@@ -44,7 +40,7 @@ def clean_chroot(path: str):
             rmtree(f"{path}/dev")
     else:
         print(f"Run manually command: rm {path}/dev/console {path}/dev/null")
-    
+
     if isdir(f"{path}/proc"):
         rmtree(f"{path}/proc")
     if isdir(f"{path}/run"):
@@ -80,10 +76,10 @@ def main() -> int:
 
     if args.cross:
         clean_cross(args.path)
-    
+
     if args.chroot:
         clean_chroot(args.path)
-    
+
     if not any([args.cross, args.chroot, args.sources]):
         clean_sources(args.path)
         clean_cross(args.path)

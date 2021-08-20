@@ -49,15 +49,13 @@ def main() -> int:
         throw_me(f"mount -v -t tmpfs tmpfs {lfs_dir}/run")
 
         # create symbolic link to /run/shm
-        throw_me(
-            f"if [ -h {lfs_dir}/dev/shm ]; then; mkdir -pv {lfs_dir}/$(readlink {lfs_dir}/dev/shm); fi")
+        throw_me(f"if [ -h {lfs_dir}/dev/shm ]; then; mkdir -pv {lfs_dir}/$(readlink {lfs_dir}/dev/shm); fi")
 
         # copy script
         shutil.copyfile(f"{FILE_DIR_PATH}/whatever.py", f"{lfs_dir}")
 
         # enter chroot
-        throw_me(
-            f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 whatever.py")
+        throw_me(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 whatever.py")
 
     except ValueError as e:
         print(str(e))
