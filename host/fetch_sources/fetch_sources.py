@@ -36,13 +36,16 @@ def main() -> int:
     if len(sys.argv) < 2:
         raise ValueError("Add path to LFS mount point as first argument")
     lfs_dir = os.path.abspath(sys.argv[1])
+    os.chdir(lfs_dir)
+    if not os.path.exists("lfs_sign.loc"):
+        print("Error: provided lfs path doesn't have sign file; use sign_lfs.py to create one")
+        return 1
 
     with open(f"{file_dir_path}/wget_list.csv", "r", newline="") as file:
         raw_sources = csv.DictReader(file, delimiter=";")
         sources = [Source(source["dir_name"], source["link"])
                    for source in raw_sources]
 
-    os.chdir(lfs_dir)
     os.mkdir("src")
     os.chdir("src")
     all_ok = True

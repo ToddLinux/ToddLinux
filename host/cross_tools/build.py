@@ -97,7 +97,6 @@ def build_package(build: Build, lfs_dir: str, output_redirect: Optional[str]) ->
 
 def build_all_required_packages(lfs_dir: str, quiet_mode: bool) -> bool:
     output_redirect = "/dev/null" if quiet_mode else None
-    os.chdir(lfs_dir)
 
     create_directory_layout()
     builds = get_builds()
@@ -121,7 +120,7 @@ def build_all_required_packages(lfs_dir: str, quiet_mode: bool) -> bool:
 def main() -> int:
     # handle command line arguments
     parser = ArgumentParser(description='Build cross toolchain and required tools')
-    parser.add_argument('path', help='path to target system', type=str)
+    parser.add_argument('path', help='path to chroot environment', type=str)
     parser.add_argument('-time', help='measure build time', action='store_true')
     parser.add_argument('-quiet', help='don\'t print messages from underlaying processes', action='store_true')
     parser.add_argument('-jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
@@ -131,6 +130,10 @@ def main() -> int:
     measure_time = args.time
     jobs = args.jobs
     lfs_dir = os.path.abspath(args.path)
+    os.chdir(lfs_dir)
+    if not os.path.exists("lfs_sign.loc"):
+        print("Error: provided lfs path doesn't have sign file; use sign_lfs.py to create one")
+        return 1
 
     # use nproc to determin amount of threads to use
     if jobs is None:

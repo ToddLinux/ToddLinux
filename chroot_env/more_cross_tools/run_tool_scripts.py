@@ -21,18 +21,20 @@ def main() -> int:
         if len(sys.argv) < 2:
             print("Set path to LFS as first argument")
             return 1
-        # Relative Paths Matter
+        # Relative Paths Matter (RPM)
         lfs_dir = os.path.abspath(sys.argv[1])
         os.chdir(lfs_dir)
+        if not os.path.exists("lfs_sign.loc"):
+            print("Error: provided lfs path doesn't have sign file; use sign_lfs.py to create one")
+            return 1
 
         # copy scripts
-        shutil.copytree(
-            f"{FILE_DIR_PATH}/{CHROOT_TOOL_SCRIPTS}", f"{lfs_dir}/{CHROOT_TOOL_SCRIPTS}")
+        shutil.copytree(f"{FILE_DIR_PATH}/{CHROOT_TOOL_SCRIPTS}", f"{lfs_dir}/{CHROOT_TOOL_SCRIPTS}")
 
         # enter chroot
-        throw_me(
-            f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 /{CHROOT_TOOL_SCRIPTS}/build_tools.py")
+        throw_me(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 /{CHROOT_TOOL_SCRIPTS}/build_tools.py")
 
+        # remove scripts after use
         shutil.rmtree(f"{lfs_dir}/{CHROOT_TOOL_SCRIPTS}")
 
     except ValueError as e:

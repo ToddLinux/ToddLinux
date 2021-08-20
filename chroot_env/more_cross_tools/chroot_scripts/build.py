@@ -132,6 +132,10 @@ def main() -> int:
     measure_time = args.time
     jobs = args.jobs
     lfs_dir = os.path.abspath(args.path)
+    os.chdir(lfs_dir)
+    if not os.path.exists("lfs_sign.loc"):
+        print("Error: provided lfs path doesn't have sign file; use sign_lfs.py to create one")
+        return 1
 
     # use nproc to determin amount of threads to use
     if jobs is None:

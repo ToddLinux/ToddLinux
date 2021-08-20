@@ -7,6 +7,9 @@ DIRECTORY_LAYOUT = ["boot", "home", "mnt", "opt", "srv"]
 
 def main() -> int:
     os.chdir("/")
+    if not os.path.exists("lfs_sign.loc"):
+        print("Error: executing chroot cript in dir that doesn't have sign file; use sign_lfs.py to create one")
+        return 1
     for folder in DIRECTORY_LAYOUT:
         if not os.path.isdir(folder):
             os.mkdir(folder)

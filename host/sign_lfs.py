@@ -1,16 +1,32 @@
 import os
 from datetime import datetime
 import sys
+from argparse import ArgumentParser
+
+SIGN_FILE = "lfs_sign.loc"
 
 
 def main() -> int:
-    if len(sys.argv) < 2:
-        raise ValueError("Add path to LFS mount point as first argument")
-    lfs_dir = os.path.abspath(sys.argv[1])
+    parser = ArgumentParser(description="Sign LFS Chroot Environment")
+    parser.add_argument('path', help='path to lfs chroot environment', type=str)
+    parser.add_argument("-f", help="Add sign file even when folder is not empty", action="store_true")
+
+    args = parser.parse_args()
+    force = args.f
+    lfs_dir = os.path.abspath(args.path)
 
     os.chdir(lfs_dir)
-    with open("tlh_sign.loc", "w") as file:
+
+    if len(os.listdir(".")) != 0:
+        if force:
+            print("Warning: adding sign file to non-empty directory")
+        else:
+            print("lfs path is not empty, use `-f` to overwrite")
+            return 1
+
+    with open(SIGN_FILE, "w") as file:
         file.write(f"ToddLinux Chroot Environment created on {datetime.now()}")
+    os.chmod(SIGN_FILE, 0o444)
 
     return 0
 

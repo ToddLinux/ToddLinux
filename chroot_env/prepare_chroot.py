@@ -26,6 +26,9 @@ def main() -> int:
         # Relative Paths Matter
         lfs_dir = os.path.abspath(sys.argv[1])
         os.chdir(lfs_dir)
+        if not os.path.exists("lfs_sign.loc"):
+            print("Error: provided lfs path doesn't have sign file; use sign_lfs.py to create one")
+            return 1
 
         # create additional directories
         for folder in VIRTUAL_KERNEL_FILESYSTEMS:
