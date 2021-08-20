@@ -34,7 +34,7 @@ mount /dev/XXX /path/to/dir # mount
 - clone repository
 - install prerequisites
 - create lfs partition
-- execute `host/sign_lfs.py`
+- execute `sign_lfs.py`
 - execute `host/check_req/check_requirements.py`, install any missing packages and create required sym links
 - execute `host/fetch_sources/fetch_sources.py`
 - execute `host/cross_tools/build.py`
