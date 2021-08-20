@@ -28,6 +28,7 @@ jobs:
           sudo ln -s gawk /usr/bin/awk
 
       - name: Create LFS Environment
+        run: |
           mkdir ${{github.workspace}}/lfs
           python3 ${{github.workspace}}/sign_lfs.py ${{github.workspace}}/lfs
 
