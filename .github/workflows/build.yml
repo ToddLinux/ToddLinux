@@ -26,7 +26,10 @@ jobs:
           sudo ln -s bison /usr/bin/yacc
           sudo rm /usr/bin/awk
           sudo ln -s gawk /usr/bin/awk
-          mkdir lfs
+
+      - name: Create LFS Environment
+          mkdir ${{github.workspace}}/lfs
+          python3 ${{github.workspace}}/sign_lfs.py ${{github.workspace}}/lfs
 
       - name: Check Requirements
         run: |
