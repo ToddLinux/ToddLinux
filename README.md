@@ -35,7 +35,7 @@ mount /dev/XXX /path/to/dir # mount
 - install prerequisites
 - execute `host/check_req/check_requirements.py`, install any missing packages and create required sym links
 - execute `host/fetch_sources/fetch_sources.py`
-- execute `host/cross_tool_chain/build.py`
+- execute `host/cross_tools/build.py`
 - execute `chroot_env/prepare_chroot.py`
 - execute `chroot_env/tmp_tools/run_tool_scripts.py`
 - ...

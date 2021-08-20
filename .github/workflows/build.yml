@@ -38,5 +38,5 @@ jobs:
 
       - name: Build Cross Toolchain
         run: |
-          python3 ${{github.workspace}}/host/cross_tool_chain/build.py ${{github.workspace}}/lfs -quiet
+          python3 ${{github.workspace}}/host/cross_tools/build.py ${{github.workspace}}/lfs -quiet
 

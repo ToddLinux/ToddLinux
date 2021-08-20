@@ -1,5 +1,4 @@
 # See LICENSE for license details.
-# to be executed from within chroot environment
 import sys
 import os
 import shutil
