@@ -1,9 +1,10 @@
 # See LICENSE for license details.
+# todo: fix "using namespace std;" garbage
 from argparse import ArgumentParser
-from os import geteuid, getuid, system, environ
+from os import geteuid, getuid, system, environ, chdir
 from sys import exit
 from shutil import rmtree
-from os.path import isdir
+from os.path import isdir, exists
 from pwd import getpwuid
 
 BUILDS_DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
@@ -57,6 +58,10 @@ def main() -> int:
     parser.add_argument('-sources', help='clean sources', action='store_true')
     parser.add_argument('-cross', help='clean cross toolchain', action='store_true')
     args = parser.parse_args()
+    chdir(args.path)
+    if not exists("lfs_sign.loc"):
+        print("Error: provided lfs path doesn't have sign file; use sign_lfs.py to create one")
+        return 1
 
     if geteuid() != 0:
         print("Insufficient privliges, run as root")
