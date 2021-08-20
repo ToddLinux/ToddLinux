@@ -27,7 +27,7 @@ class SymRequirement:
         self.sym_link = sym_link
 
     def __repr__(self):
-        return f"< SymRequirement cmd_name: '{self.cmd_name}'\t'{self.sym_link}'>"
+        return f"<SymRequirement cmd_name: '{self.cmd_name}'\t'{self.sym_link}'>"
 
 
 # check if min version is satisfied with output of version check command

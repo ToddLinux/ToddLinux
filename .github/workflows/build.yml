@@ -30,13 +30,13 @@ jobs:
 
       - name: Check Requirements
         run: |
-          python3 ${{github.workspace}}/host_system_scripts/check_requirements/check_requirements.py
+          python3 ${{github.workspace}}/host/check_req/check_requirements.py
 
       - name: Fetch Sources
         run: |
-          python3 ${{github.workspace}}/host_system_scripts/fetch_sources/fetch_sources.py ${{github.workspace}}/lfs
+          python3 ${{github.workspace}}/host/fetch_sources/fetch_sources.py ${{github.workspace}}/lfs
 
       - name: Build Cross Toolchain
         run: |
-          python3 ${{github.workspace}}/host_system_scripts/host_cross_tool_chain/build.py ${{github.workspace}}/lfs -quiet
+          python3 ${{github.workspace}}/host/cross_tool_chain/build.py ${{github.workspace}}/lfs -quiet
 
