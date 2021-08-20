@@ -7,8 +7,14 @@
 
 ## Install Prerequisites
 
+### Debian
 ```bash
 sudo apt install -y bash binutils bison bzip2 coreutils diffutils findutils gawk gcc g++ grep gzip m4 make patch perl python3 sed tar texinfo xz-utils
+```
+
+## Red Hat
+```bash
+sudo dnf install -y bash binutils bison bzip2 coreutils diffutils findutils gawk gcc g++ grep gzip m4 make patch perl python3 sed tar texinfo xz
 ```
 
 ## Create LFS Partition
