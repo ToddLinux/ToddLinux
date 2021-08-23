@@ -2,16 +2,9 @@
 import sys
 import os
 import shutil
-import csv
 import pathlib
-import subprocess
-import time
-from typing import Optional, List, Dict
-
-from datetime import timedelta
 import requests
-from time import time
-from argparse import ArgumentParser
+from typing import List
 
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
