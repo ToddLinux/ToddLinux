@@ -60,7 +60,7 @@
         },
         {
             "name": "file",
-            "src_urls": ["https://ftp.astron.com/pub/file/file-5.39.tar.gz"],
+            "src_urls": ["http://ftp.astron.com/pub/file/file-5.39.tar.gz"],
             "env": "host"
         },
         {
