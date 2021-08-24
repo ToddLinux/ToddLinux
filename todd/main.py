@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import os
 
 from check_req import check_reqs, check_sym_links
 from argparse import ArgumentParser
