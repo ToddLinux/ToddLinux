@@ -32,15 +32,7 @@ jobs:
           mkdir ${{github.workspace}}/lfs
           python3 ${{github.workspace}}/sign_lfs.py ${{github.workspace}}/lfs
 
-      - name: Check Requirements
+      - name: Build
         run: |
-          python3 ${{github.workspace}}/host/check_req/check_requirements.py
-
-      - name: Fetch Sources
-        run: |
-          python3 ${{github.workspace}}/host/fetch_sources/fetch_sources.py ${{github.workspace}}/lfs
-
-      - name: Build Cross Toolchain
-        run: |
-          python3 ${{github.workspace}}/host/cross_tools/build.py ${{github.workspace}}/lfs -quiet
+          python3 ${{github.workspace}}/main.py ${{github.workspace}}/lfs
 
