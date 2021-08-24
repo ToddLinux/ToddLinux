@@ -15,7 +15,6 @@ from argparse import ArgumentParser
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 LOCK_FILE = "builds/builds.lock"
-DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
 
 
 # load all required builds
@@ -27,18 +26,8 @@ def get_builds() -> List[Build]:
     return builds
 
 
-# create folders in root
-def create_directory_layout():
-    print("creating minimal directory layout")
-    for folder in DIRECTORY_LAYOUT:
-        if not os.path.isdir(folder):
-            os.mkdir(folder)
-
-
 def build_all_required_packages(lfs_dir: str, quiet_mode: bool) -> bool:
     output_redirect = "/dev/null" if quiet_mode else None
-
-    create_directory_layout()
     builds = get_builds()
     finished_builds = get_finished_builds()
     with open(LOCK_FILE, "a", newline="") as file:

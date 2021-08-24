@@ -4,6 +4,16 @@ import sys
 from check_req import check_reqs, check_sym_links
 from argparse import ArgumentParser
 
+DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
+
+
+# create folders in root
+def create_directory_layout():
+    print("creating minimal directory layout")
+    for folder in DIRECTORY_LAYOUT:
+        if not os.path.isdir(folder):
+            os.mkdir(folder)
+
 
 def main() -> int:
     parser = ArgumentParser(description="Run Todd Linux build system")
