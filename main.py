@@ -49,6 +49,8 @@ def main() -> int:
 
     if not install_required_packages(lfs_dir, verbose, jobs, measure_time):
         return 1
+
+    # todo: prepare_chroot missing
     return 0
 
 

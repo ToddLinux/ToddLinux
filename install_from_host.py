@@ -8,7 +8,7 @@ file_dir_path = pathlib.Path(__file__).parent.resolve()
 LOCK_FILE = "host_installed.lock"
 
 REQUIRED_PACKAGES = [
-    "binutils"
+    "binutils",
     "gcc",
     "linux_headers",
     "glibc",
@@ -38,4 +38,4 @@ def install_required_packages(lfs_dir: str, verbose: bool, jobs: int, measure_ti
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
-    return install_packages(REQUIRED_PACKAGES, f"{file_dir_path}/../host_chroot_packages", "host", f"{lfs_dir}/{LOCK_FILE}", verbose, jobs, measure_time)
+    return install_packages(REQUIRED_PACKAGES, f"{file_dir_path}/host_chroot_packages", "host", f"{lfs_dir}/{LOCK_FILE}", verbose, jobs, measure_time)

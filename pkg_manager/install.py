@@ -69,14 +69,20 @@ def load_packages(repo: str) -> Dict[str, Package]:
     with open(f"{repo}/packages.json", "r", newline="") as file:
         raw_packages = json.loads(file.read())
     packages = {}
-    for raw_package in raw_packages["packages"]:
+    for raw_pkg in raw_packages["packages"]:
+        # check integrity of packages file
+        if raw_pkg.get("name") is None or \
+                raw_pkg.get("src_urls") is None or \
+                raw_pkg.get("env") is None:
+            raise ValueError(f"package {raw_pkg} is faulty")
+
         package = Package(
-            raw_package["name"],
-            raw_packages["src_urls"],
-            raw_package["env"],
+            raw_pkg["name"],
+            raw_pkg["src_urls"],
+            raw_pkg["env"],
             repo,
             # using get() <- return None when not found
-            raw_package.get("build_script"))
+            raw_pkg.get("build_script"))
         if package.name in packages:
             raise ValueError(f"The repository '{repo}' contains the package '{package.name}' twice")
         packages[package.name] = package
@@ -100,7 +106,7 @@ def install_packages(names: List[str], repo: str, env: str, lock_file: str, verb
 
     print("attempting installation of the following packages:")
     print(", ".join(names))
-    start = time()
+    start = time.time()
     with open(lock_file, "a", newline="") as file:
         for name in names:
             # go/no-go poll for installation
@@ -120,7 +126,7 @@ def install_packages(names: List[str], repo: str, env: str, lock_file: str, verb
             # package has been successfully installed
             file.write(f"{name}\n")
             file.flush()
-    end = time()
+    end = time.time()
     if measure_time:
         print("all packages installed time:", datetime.timedelta(seconds=(end - start)))
     return True

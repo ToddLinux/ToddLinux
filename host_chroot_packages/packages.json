@@ -155,7 +155,7 @@
         },
         {
             "name": "texinfo",
-            "src_urls": ["http://ftp.gnu.org/gnu/texinfo/texinfo-6.7.tar.xz"],
+            "src_urls": ["https://ftp.gnu.org/gnu/texinfo/texinfo-6.7.tar.xz"],
             "env": "chroot"    
         },
         {
