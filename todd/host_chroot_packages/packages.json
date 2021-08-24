@@ -127,6 +127,41 @@
             "name": "python3",
             "src_urls": ["https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz"],
             "env": "host"
+        },
+        {
+            "name": "libstdcpp_pass2",
+            "src_urls": ["https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz"],
+            "env": "chroot"    
+        },
+        {
+            "name": "gettext",
+            "src_urls": ["https://ftp.gnu.org/gnu/gettext/gettext-0.21.tar.xz"],
+            "env": "chroot"    
+        },
+        {
+            "name": "bison",
+            "src_urls": ["https://ftp.gnu.org/gnu/bison/bison-3.7.5.tar.xz"],
+            "env": "chroot"    
+        },
+        {
+            "name": "perl",
+            "src_urls": ["https://www.cpan.org/src/5.0/perl-5.32.1.tar.xz"],
+            "env": "chroot"    
+        },
+        {
+            "name": "python3_pass2",
+            "src_urls": ["https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz"],
+            "env": "chroot"    
+        },
+        {
+            "name": "texinfo",
+            "src_urls": ["http://ftp.gnu.org/gnu/texinfo/texinfo-6.7.tar.xz"],
+            "env": "chroot"    
+        },
+        {
+            "name": "util-linux",
+            "src_urls": ["https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz"],
+            "env": "chroot"    
         }
     ]
 }
