@@ -41,7 +41,7 @@ def main() -> int:
 
     # "don't fuck up my system"-protection
     if not os.path.exists("lfs_sign.loc"):
-        print("Error: provided lfs path doesn't have sign file; use sign_lfs.py to create one")
+        print(f"Error: provided lfs path '{lfs_dir}' doesn't have sign file; use sign_lfs.py to create one")
         return 1
 
     if not check_all_reqs():
