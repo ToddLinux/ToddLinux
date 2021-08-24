@@ -28,6 +28,7 @@ def main() -> int:
     with open(SIGN_FILE, "w") as file:
         file.write(f"ToddLinux Chroot Environment created on {datetime.now()}")
     os.chmod(SIGN_FILE, 0o444)
+    print("added sign file to '{lfs_dir}'")
 
     return 0
 

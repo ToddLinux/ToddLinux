@@ -7,7 +7,7 @@ from argparse import ArgumentParser
 from typing import Optional
 
 from check_req import check_all_reqs
-from install_from_host import install_required_packages
+from install_from_host import install_required_packages_from_host
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
 DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
@@ -47,7 +47,7 @@ def main() -> int:
     if not check_all_reqs():
         return 1
 
-    if not install_required_packages(lfs_dir, verbose, jobs, measure_time):
+    if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
         return 1
 
     # todo: prepare_chroot missing
