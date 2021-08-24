@@ -3,8 +3,6 @@ import csv
 import pathlib
 import subprocess
 import re
-import sys
-from typing import Tuple
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
 
@@ -140,17 +138,3 @@ def check_sym_links() -> bool:
         if not check_sym(req):
             all_ok = False
     return all_ok
-
-
-def main() -> int:
-    all_ok = True
-    if not check_requirements():
-        all_ok = False
-    if not check_sym_links():
-        all_ok = False
-
-    return 0 if all_ok else -1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
