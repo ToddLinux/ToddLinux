@@ -35,3 +35,17 @@ def check_sym_links() -> bool:
         if not check_sym(req):
             all_ok = False
     return all_ok
+
+
+def check_all_reqs() -> bool:
+    print("checking requirements: ...")
+    all_ok = True
+    if not check_reqs():
+        all_ok = False
+    if not check_sym_links():
+        all_ok = False
+    if not all_ok:
+        print("checking requirements: failure")
+        return False
+    print("checking requirements: ok")
+    return True

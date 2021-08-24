@@ -1,5 +1,7 @@
 # See LICENSE for license details.
 import sys
+import time
+import datetime
 import json
 import os
 import shutil
@@ -91,11 +93,14 @@ def get_installed_packages(lock_file) -> Set[str]:
 
 
 # install all requested packages in order
-def install_packages(names: List[str], repo: str, env: str, lock_file: str, verbose: bool, jobs: int) -> bool:
+def install_packages(names: List[str], repo: str, env: str, lock_file: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
     os.environ["MAKEFLAGS"] = f"-j{jobs}"
     installed_packages = get_installed_packages(lock_file)
     packages = load_packages(repo)
 
+    print("attempting installation of the following packages:")
+    print(", ".join(names))
+    start = time()
     with open(lock_file, "a", newline="") as file:
         for name in names:
             # go/no-go poll for installation
@@ -115,41 +120,7 @@ def install_packages(names: List[str], repo: str, env: str, lock_file: str, verb
             # package has been successfully installed
             file.write(f"{name}\n")
             file.flush()
-    return True
-
-
-def main() -> int:
-    # handle command line arguments
-    parser = ArgumentParser(description='Build cross toolchain and required tools')
-    parser.add_argument('path', help='path to chroot environment', type=str)
-    parser.add_argument('-time', help='measure build time', action='store_true')
-    parser.add_argument('-quiet', help='don\'t print messages from underlaying processes', action='store_true')
-    parser.add_argument('-jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
-
-    args = parser.parse_args()
-    quiet_mode = args.quiet
-    measure_time = args.time
-    jobs = args.jobs
-    lfs_dir = os.path.abspath(args.path)
-    os.chdir(lfs_dir)
-    if not os.path.exists("lfs_sign.loc"):
-        print("Error: provided lfs path doesn't have sign file; use sign_lfs.py to create one")
-        return 1
-
-    # use nproc to determin amount of threads to use
-    if jobs is None:
-        output = subprocess.check_output("nproc", stderr=subprocess.STDOUT).decode()
-        jobs = int(output)
-    os.environ["LFS"] = lfs_dir
-    os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
-    os.environ["MAKEFLAGS"] = f"-j{jobs}"
-    os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
-
-    start = time()
-    ok = build_all_required_packages(lfs_dir, quiet_mode)
     end = time()
-
     if measure_time:
-        print("host_cross_tool_chain time:", timedelta(seconds=(end - start)))
-
-    return 0 if ok else 1
+        print("all packages installed time:", datetime.timedelta(seconds=(end - start)))
+    return True
