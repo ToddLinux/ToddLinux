@@ -24,7 +24,7 @@ class Package:
 
 def dwn_file(url: str) -> bool:
     local_filename = url.split('/')[-1]
-    print(f"downloading {local_filename}: ...", end="")
+    print(f"downloading {local_filename}: ...")
     with requests.get(url, stream=True) as r:
         if r.status_code != 200:
             print(f"downloading {local_filename}: failure", file=sys.stderr)
