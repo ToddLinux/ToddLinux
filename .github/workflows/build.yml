@@ -30,9 +30,9 @@ jobs:
       - name: Create LFS Environment
         run: |
           mkdir ${{github.workspace}}/lfs
-          python3 ${{github.workspace}}/sign_lfs.py ${{github.workspace}}/lfs
+          python3 ${{github.workspace}}/host/sign_lfs.py ${{github.workspace}}/lfs
 
       - name: Build
         run: |
-          python3 ${{github.workspace}}/main.py ${{github.workspace}}/lfs
+          python3 ${{github.workspace}}/host/setup.py ${{github.workspace}}/lfs
 

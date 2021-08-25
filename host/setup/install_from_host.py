@@ -1,10 +1,12 @@
 import os
 import pathlib
-from typing import List
-
-from pkg_manager import install_packages
+import sys
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
+sys.path.append(f"{file_dir_path}/../..")
+from pkg_manager import install_packages  # nopep8
+
+
 LOCK_FILE = "host_installed.lock"
 
 REQUIRED_PACKAGES = [

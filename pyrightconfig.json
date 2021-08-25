@@ -1,0 +1,12 @@
+{
+    "include": [
+        "host",
+        "pkg_manager"
+    ],
+    "executionEnvironments": [
+        {
+            "root": "host",
+            "extraPaths": ["/mnt/tlh"]
+        }
+    ]
+}

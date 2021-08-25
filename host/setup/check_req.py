@@ -1,10 +1,11 @@
 # See LICENSE for license details.
 import csv
 import pathlib
-
-from pkg_manager import Requirement, check_req, SymRequirement, check_sym
+import sys
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
+sys.path.append(f"{file_dir_path}/../..")
+from pkg_manager import Requirement, check_req, SymRequirement, check_sym  # nopep8
 
 
 # return True if all packages are satisfied
