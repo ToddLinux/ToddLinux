@@ -8,6 +8,7 @@ from typing import Optional
 from .install_from_host import install_required_packages_from_host
 from .check_req import check_all_reqs
 from .create_directory_layout import create_directory_layout
+from .prepare_chroot import prepare_chroot
 
 
 file_dir_path = pathlib.Path(__file__).parent.resolve()
@@ -43,6 +44,9 @@ def setup() -> bool:
     create_directory_layout()
 
     if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
+        return False
+
+    if not prepare_chroot(lfs_dir):
         return False
 
     # todo: prepare_chroot missing
