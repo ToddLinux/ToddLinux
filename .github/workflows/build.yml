@@ -19,6 +19,10 @@ jobs:
 
       - name: Update environment
         run: |
+          sudo apt update
+          sudo apt install software-properties-common
+          sudo add-apt-repository ppa:deadsnakes/ppa -y
+          sudo apt install python3.7
           sudo apt install -y bash binutils bison bzip2 coreutils diffutils findutils gawk gcc g++ grep gzip m4 make patch perl python3 sed tar texinfo xz-utils
           sudo rm /bin/sh
           sudo ln -s bash /bin/sh
