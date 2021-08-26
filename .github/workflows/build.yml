@@ -38,5 +38,5 @@ jobs:
 
       - name: Build
         run: |
-          python3 ${{github.workspace}}/host/setup.py ${{github.workspace}}/lfs
+          sudo python3 ${{github.workspace}}/host/setup.py ${{github.workspace}}/lfs
 
