@@ -144,6 +144,16 @@
             "env": "host"
         },
         {
+            "name": "python3-certifi",
+            "src_urls": ["https://github.com/certifi/python-certifi/archive/refs/tags/2021.05.30.tar.gz"],
+            "env": "host"
+        },
+        {
+            "name": "python3-idna",
+            "src_urls": ["https://github.com/kjd/idna/archive/refs/tags/v3.2.tar.gz"],
+            "env": "host"
+        },
+        {
             "name": "libstdcpp_pass2",
             "src_urls": ["https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz"],
             "env": "chroot"    
@@ -165,7 +175,7 @@
         },
         {
             "name": "python3_pass2",
-            "src_urls": ["https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz"],
+            "src_urls": ["https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz"],
             "env": "chroot"    
         },
         {

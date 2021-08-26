@@ -10,7 +10,15 @@ from pkg_manager import install_packages  # nopep8
 
 LOCK_FILE = "chroot_installed.lock"
 SIGN_FILE = "lfs_sign.lock"
-REQUIRED_PACKAGES = []
+REQUIRED_PACKAGES = [
+    "libstdcpp_pass2",
+    "gettext",
+    "bison",
+    "perl",
+    "python3_pass2",
+    "texinfo",
+    "util-linux"
+]
 
 
 def main() -> bool:

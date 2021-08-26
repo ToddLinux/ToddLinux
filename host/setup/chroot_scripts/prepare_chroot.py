@@ -17,7 +17,7 @@ def main() -> bool:
     for folder in DIRECTORY_LAYOUT:
         if not os.path.isdir(folder):
             os.mkdir(folder)
-    if not os.system("""
+    if os.system("""
     mkdir -pv /etc/{opt,sysconfig} &&
     mkdir -pv /lib/firmware &&
     mkdir -pv /media/{floppy,cdrom} &&
@@ -32,7 +32,7 @@ def main() -> bool:
     install -dv -m 0750 /root &&
     install -dv -m 1777 /tmp /var/tmp &&
     ln -sv /proc/self/mounts /etc/mtab
-    """):
+    """) != 0:
         return False
 
     with open("/etc/hosts", "w") as file:
@@ -73,19 +73,19 @@ wheel:x:97:
 nogroup:x:99:
 users:x:999:""")
 
-    if not os.system("""
+    if os.system("""
     echo "tester:x:$(ls -n $(tty) | cut -d" " -f3):101::/home/tester:/bin/bash" >> /etc/passwd &&
     echo "tester:x:101:" >> /etc/group &&
     install -o tester -d /home/tester
-    """):
+    """) != 0:
         return False
 
-    if not os.system("""
+    if os.system("""
     touch /var/log/{btmp,lastlog,faillog,wtmp} &&
     chgrp -v utmp /var/log/lastlog &&
     chmod -v 664  /var/log/lastlog &&
     chmod -v 600  /var/log/btmp
-    """):
+    """) != 0:
         return False
 
     print("preparing chroot from within chroot environment: ok")

@@ -61,7 +61,7 @@ def prepare_chroot(lfs_dir: str) -> bool:
     print("copying scripts: ok")
 
     # perform further actions from within chroot environment itself
-    if not os.system(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 /{SCRIPTS_FOLDER}/host/setup/chroot_scripts/prepare_chroot.py"):
+    if os.system(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 /{SCRIPTS_FOLDER}/host/setup/chroot_scripts/prepare_chroot.py") != 0:
         return False
 
     print("preparing chroot environment: ok")

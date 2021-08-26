@@ -36,7 +36,9 @@ REQUIRED_PACKAGES = [
     "zlib",
     "python3.7",
     "python3-requests",
-    "python3-urllib3"]
+    "python3-urllib3",
+    "python3-certifi",
+    "python3-idna"]
 
 
 def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
