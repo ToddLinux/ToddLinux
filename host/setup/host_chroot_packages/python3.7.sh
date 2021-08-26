@@ -12,7 +12,8 @@ configure() {
     sed -i 's/#zlib/zlib' Modules/Setup
     ./configure --prefix=/usr   \
                 --enable-shared \
-                --without-ensurepip
+                --without-ensurepip \
+                --with-zlib=/usr/include
     return
 }
 

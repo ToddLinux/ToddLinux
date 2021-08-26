@@ -33,6 +33,7 @@ REQUIRED_PACKAGES = [
     "xz",
     "binutils_pass2",
     "gcc_pass2",
+    "zlib",
     "python3.7",
     "python3-requests",
     "python3-urllib3"]

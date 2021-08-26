@@ -124,6 +124,11 @@
             "env": "host"
         },
         {
+            "name": "zlib",
+            "src_urls": ["https://www.zlib.net/zlib-1.2.11.tar.xz"],
+            "env": "host"
+        },
+        {
             "name": "python3.7",
             "src_urls": ["https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz"],
             "env": "host"
