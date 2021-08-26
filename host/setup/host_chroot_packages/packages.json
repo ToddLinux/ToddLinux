@@ -124,8 +124,18 @@
             "env": "host"
         },
         {
-            "name": "python3",
-            "src_urls": ["https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz"],
+            "name": "python3.7",
+            "src_urls": ["https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz"],
+            "env": "host"
+        },
+        {
+            "name": "python3-requests",
+            "src_urls": ["https://github.com/psf/requests/archive/refs/tags/v2.26.0.tar.gz"],
+            "env": "host"
+        },
+        {
+            "name": "python3-urllib3",
+            "src_urls": ["https://github.com/urllib3/urllib3/archive/refs/tags/1.26.6.tar.gz"],
             "env": "host"
         },
         {

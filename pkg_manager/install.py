@@ -57,7 +57,7 @@ def install_package(package: Package, verbose=False) -> bool:
     print(f"running build script for {package.name}: ...")
     cmd_suffix = "" if verbose else " >/dev/null 2>&1"
     if os.system(f"{package.build_script}{cmd_suffix}") != 0:
-        print(f"build script for {package.name}: failure", file=sys.stderr)
+        print(f"running build script for {package.name}: failure", file=sys.stderr)
         return False
 
     print(f"running build script for {package.name}: ok")

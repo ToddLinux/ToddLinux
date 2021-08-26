@@ -2,7 +2,8 @@ import os
 import pathlib
 
 
-file_dir_path = pathlib.Path(__file__).parent.resolve()
+FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
+ROOT_PATH = f"{FILE_DIR_PATH}/../.."
 DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
 
 

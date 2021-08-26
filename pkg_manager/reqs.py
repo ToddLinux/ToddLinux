@@ -3,15 +3,16 @@ import subprocess
 
 
 class Requirement:
-    def __init__(self, name: str, min_version: str, command: str, version_regex_pattern: str):
+    def __init__(self, name: str, min_version: str, command: str, version_regex_pattern: str, later_version_ok: bool):
         self.name = name
         self.min_version = min_version
         # quotes in command not supported
         self.command = command.split(" ")
         self.version_regex_pattern = version_regex_pattern
+        self.later_version_ok = later_version_ok
 
     def __repr__(self):
-        return f"<Requirement name: '{self.name}'\tmin_version: '{self.min_version}'\tcommand: '{self.command}'\tversion_regex_pattern: '{self.version_regex_pattern}'>"
+        return f"<Requirement name: '{self.name}'\tmin_version: '{self.min_version}'\tcommand: '{self.command}'\tversion_regex_pattern: '{self.version_regex_pattern}' later_version_ok: {self.later_version_ok}>"
 
 
 # get installed version from command output
@@ -46,17 +47,23 @@ def satisfied(req: Requirement, installed_version) -> bool:
                 ins_part = part[1][:-1]
                 ins_last_letter = part[1][-1]
 
-            # check number part
-            if int(min_part) > int(ins_part):
-                return False
-            if int(min_part) < int(ins_part):
-                return True
+            if req.later_version_ok:
+                # check number part
+                if int(min_part) > int(ins_part):
+                    return False
+                if int(min_part) < int(ins_part):
+                    return True
 
-            # check letter part
-            if min_last_letter > ins_last_letter:
-                return False
-            if min_last_letter < ins_last_letter:
-                return True
+                # check letter part
+                if min_last_letter > ins_last_letter:
+                    return False
+                if min_last_letter < ins_last_letter:
+                    return True
+            else:
+                # everything has to be exact
+                if int(min_part) != int(ins_part) or min_last_letter != ins_last_letter:
+                    return False
+
         # everything is the same
         return True
     except ValueError:

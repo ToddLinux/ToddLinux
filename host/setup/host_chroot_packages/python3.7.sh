@@ -3,12 +3,13 @@
 set -euo pipefail
 
 unpack_src() {
-    tar xf Python-3.9.2.tar.xz
-    cd Python-3.9.2
+    tar xf Python-3.7.11.tar.xz
+    cd Python-3.7.11
     return
 }
 
 configure() {
+    sed -i 's/#zlib/zlib' Modules/Setup
     ./configure --prefix=/usr   \
                 --enable-shared \
                 --without-ensurepip

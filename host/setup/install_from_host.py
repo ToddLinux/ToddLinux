@@ -2,8 +2,9 @@ import os
 import pathlib
 import sys
 
-file_dir_path = pathlib.Path(__file__).parent.resolve()
-sys.path.append(f"{file_dir_path}/../..")
+FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
+ROOT_PATH = f"{FILE_DIR_PATH}/../.."
+sys.path.append(ROOT_PATH)
 from pkg_manager import install_packages  # nopep8
 
 
@@ -32,7 +33,9 @@ REQUIRED_PACKAGES = [
     "xz",
     "binutils_pass2",
     "gcc_pass2",
-    "python3"]
+    "python3.7",
+    "python3-requests",
+    "python3-urllib3"]
 
 
 def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
@@ -40,4 +43,4 @@ def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, 
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
-    return install_packages(REQUIRED_PACKAGES, f"{file_dir_path}/host_chroot_packages", "host", f"{lfs_dir}/{LOCK_FILE}", verbose, jobs, measure_time)
+    return install_packages(REQUIRED_PACKAGES, f"{FILE_DIR_PATH}/host_chroot_packages", "host", f"{lfs_dir}/{LOCK_FILE}", verbose, jobs, measure_time)

@@ -1,23 +1,23 @@
-name;min_version;command;version_regex_pattern
-Bash;3.2;bash --version;((\d+)(\.(\d+))+)
-Binutils;2.25;ld --version;((\d+)(\.(\d+))+)
-Bison;2.7;bison --version;((\d+)(\.(\d+))+)
-Bzip2;1.0.4;bzip2 --version;((\d+)(\.(\d+))+)
-Coreutils;6.9;chown --version;((\d+)(\.(\d+))+)
-Diffutils;2.8.1;diff --version;((\d+)(\.(\d+))+)
-Findutils;4.3.21;find --version;((\d+)(\.(\d+))+)
-Gawk;4.0.1;gawk --version;((\d+)(\.(\d+))+)
-GCC;6.2;gcc --version;((\d+)(\.(\d+))+)
-Glibc;2.11;ldd --version;((\d+)(\.(\d+))+)
-Grep;2.5.1a;grep --version;((\d+)(\.(\d+))+[a-z]?)
-Gzip;1.3.12;gzip --version;((\d+)(\.(\d+))+)
-Linux kernel;3.2;cat /proc/version;((\d+)(\.(\d+))+)
-M4;1.4.10;cat /proc/version;((\d+)(\.(\d+))+)
-Make;4.0;make --version;((\d+)(\.(\d+))+)
-Patch;2.5.4;patch --version;((\d+)(\.(\d+))+)
-Perl;5.8.8;perl --version;((\d+)(\.(\d+))+)
-Python;3.4;python3 --version;((\d+)(\.(\d+))+)
-Sed;4.1.5;sed --version;((\d+)(\.(\d+))+)
-Tar;1.22;tar --version;((\d+)(\.(\d+))+)
-Texinfo;4.7;makeinfo --version;((\d+)(\.(\d+))+)
-XZ;5.0.0;xz --version;((\d+)(\.(\d+))+)
+name;min_version;command;version_regex_pattern;later_version_ok
+Bash;3.2;bash --version;((\d+)(\.(\d+))+);true
+Binutils;2.25;ld --version;((\d+)(\.(\d+))+);true
+Bison;2.7;bison --version;((\d+)(\.(\d+))+);true
+Bzip2;1.0.4;bzip2 --version;((\d+)(\.(\d+))+);true
+Coreutils;6.9;chown --version;((\d+)(\.(\d+))+);true
+Diffutils;2.8.1;diff --version;((\d+)(\.(\d+))+);true
+Findutils;4.3.21;find --version;((\d+)(\.(\d+))+);true
+Gawk;4.0.1;gawk --version;((\d+)(\.(\d+))+);true
+GCC;6.2;gcc --version;((\d+)(\.(\d+))+);true
+Glibc;2.11;ldd --version;((\d+)(\.(\d+))+);true
+Grep;2.5.1a;grep --version;((\d+)(\.(\d+))+[a-z]?);true
+Gzip;1.3.12;gzip --version;((\d+)(\.(\d+))+);true
+Linux kernel;3.2;cat /proc/version;((\d+)(\.(\d+))+);true
+M4;1.4.10;cat /proc/version;((\d+)(\.(\d+))+);true
+Make;4.0;make --version;((\d+)(\.(\d+))+);true
+Patch;2.5.4;patch --version;((\d+)(\.(\d+))+);true
+Perl;5.8.8;perl --version;((\d+)(\.(\d+))+);true
+Python;3.7;python3 --version;((\d+)(\.(\d+))+);false
+Sed;4.1.5;sed --version;((\d+)(\.(\d+))+);true
+Tar;1.22;tar --version;((\d+)(\.(\d+))+);true
+Texinfo;4.7;makeinfo --version;((\d+)(\.(\d+))+);true
+XZ;5.0.0;xz --version;((\d+)(\.(\d+))+);true

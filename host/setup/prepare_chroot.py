@@ -1,12 +1,13 @@
 # See LICENSE for license details.
-import sys
 import os
 import pathlib
 import shutil
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
+ROOT_PATH = f"{FILE_DIR_PATH}/../.."
 
 VIRTUAL_KERNEL_FILESYSTEMS = ["dev", "proc", "sys", "run"]
+SCRIPTS_FOLDER = "scripts"
 
 
 # execute command and raise error at failure
@@ -16,9 +17,10 @@ def throw_me(cmd: str) -> None:
 
 
 def prepare_chroot(lfs_dir: str) -> bool:
+    print("preparing chroot environment: ...")
     try:
         if os.geteuid() != 0:
-            print("prepare chroot must be executed as root")
+            print("prepare chroot must be executed as root; restart the script with root privileges and it will pick up where it left of")
             return False
         os.chdir(lfs_dir)
 
@@ -45,10 +47,22 @@ def prepare_chroot(lfs_dir: str) -> bool:
         throw_me(f"mount -v -t tmpfs tmpfs {lfs_dir}/run")
 
         # create symbolic link to /run/shm
-        throw_me(f"if [ -h {lfs_dir}/dev/shm ]; then; mkdir -pv {lfs_dir}/$(readlink {lfs_dir}/dev/shm); fi")
+        throw_me(f"if [ -h {lfs_dir}/dev/shm ]; then mkdir -pv {lfs_dir}/$(readlink {lfs_dir}/dev/shm); fi")
 
     except ValueError as e:
         print(str(e))
         return False
 
+    print("copying scripts: ...")
+    # delete old scripts folder
+    if os.path.isdir(SCRIPTS_FOLDER):
+        shutil.rmtree(SCRIPTS_FOLDER)
+    shutil.copytree(ROOT_PATH, SCRIPTS_FOLDER)
+    print("copying scripts: ok")
+
+    # perform further actions from within chroot environment itself
+    if not os.system(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 /{SCRIPTS_FOLDER}/host/setup/chroot_scripts/prepare_chroot.py"):
+        return False
+
+    print("preparing chroot environment: ok")
     return True
