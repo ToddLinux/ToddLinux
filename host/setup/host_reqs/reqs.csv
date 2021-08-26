@@ -16,7 +16,7 @@ M4;1.4.10;cat /proc/version;((\d+)(\.(\d+))+);true
 Make;4.0;make --version;((\d+)(\.(\d+))+);true
 Patch;2.5.4;patch --version;((\d+)(\.(\d+))+);true
 Perl;5.8.8;perl --version;((\d+)(\.(\d+))+);true
-Python;3.7;python3 --version;((\d+)(\.(\d+))+);false
+Python;3.7;python3.7 --version;((\d+)(\.(\d+))+);false
 Sed;4.1.5;sed --version;((\d+)(\.(\d+))+);true
 Tar;1.22;tar --version;((\d+)(\.(\d+))+);true
 Texinfo;4.7;makeinfo --version;((\d+)(\.(\d+))+);true
