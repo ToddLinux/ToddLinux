@@ -1,5 +1,6 @@
 # See LICENSE for license details.
 import os
+from datetime import datetime
 import pathlib
 import shutil
 
@@ -8,6 +9,7 @@ ROOT_PATH = f"{FILE_DIR_PATH}/../.."
 
 VIRTUAL_KERNEL_FILESYSTEMS = ["dev", "proc", "sys", "run"]
 SCRIPTS_FOLDER = "scripts"
+LOCK_FILE = "chroot_prepared.lock"
 
 
 # execute command and raise error at failure
@@ -61,8 +63,13 @@ def prepare_chroot(lfs_dir: str) -> bool:
     print("copying scripts: ok")
 
     # perform further actions from within chroot environment itself
-    if os.system(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 /{SCRIPTS_FOLDER}/host/setup/chroot_scripts/prepare_chroot.py") != 0:
-        return False
+    if not os.path.exists(LOCK_FILE):
+        if os.system(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 /{SCRIPTS_FOLDER}/host/setup/chroot_scripts/prepare_chroot.py") != 0:
+            return False
+        with open(LOCK_FILE, "w") as file:
+            file.write(f"ToddLinux Chroot Environment successfully prepared on {datetime.now()}")
+    else:
+        print("internal chroot environment preparation has already been performed")
 
     print("preparing chroot environment: ok")
     return True

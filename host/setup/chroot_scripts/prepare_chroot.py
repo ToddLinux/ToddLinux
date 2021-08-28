@@ -88,6 +88,10 @@ users:x:999:""")
     """) != 0:
         return False
 
+    # required for openssl with python3
+    if os.system("ldconfig /usr/local/lib") != 0:
+        return False
+
     print("preparing chroot from within chroot environment: ok")
     return True
 

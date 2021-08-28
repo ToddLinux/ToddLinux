@@ -8,7 +8,7 @@ sys.path.append(ROOT_PATH)
 from pkg_manager import install_packages  # nopep8
 
 
-LOCK_FILE = "host_installed.lock"
+LOCK_FILE = "installed.lock"
 
 REQUIRED_PACKAGES = [
     "binutils",
@@ -34,6 +34,7 @@ REQUIRED_PACKAGES = [
     "binutils_pass2",
     "gcc_pass2",
     "zlib",
+    "openssl",
     "python3.7",
     "python3-requests",
     "python3-urllib3",

@@ -9,9 +9,13 @@ unpack_src() {
 }
 
 configure() {
-    sed -i 's/#zlib/zlib' Modules/Setup
-    ./configure --prefix=/usr   \
-                --enable-shared \
+    # sed -i 's/#zlib/zlib' Modules/Setup.dist
+    sed -i "338 s/^#//" Modules/Setup.dist
+    sed -i "207 s/^#//" Modules/Setup.dist
+    sed -i "211,214 s/^#//" Modules/Setup.dist
+    sed -i "211 s:^SSL=/usr/local/ssl:SSL=/usr/lib/openssl:" Modules/Setup.dist
+    ./configure --prefix=/usr       \
+                --enable-shared     \
                 --without-ensurepip \
                 --with-zlib=/usr/include
     return

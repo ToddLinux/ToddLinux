@@ -8,7 +8,7 @@ sys.path.append(SCRIPTS_FOLDER)
 from pkg_manager import install_packages  # nopep8
 
 
-LOCK_FILE = "chroot_installed.lock"
+LOCK_FILE = "installed.lock"
 SIGN_FILE = "lfs_sign.lock"
 REQUIRED_PACKAGES = [
     "libstdcpp_pass2",
