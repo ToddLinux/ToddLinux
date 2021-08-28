@@ -9,8 +9,9 @@ unpack_src() {
 }
 
 configure() {
-    ./config --prefix=/usr/lib/openssl \
-             --openssldir=/usr/lib/openssl
+    # ./config --prefix=/usr/lib/ssl \
+    #          --openssldir=/usr/lib/ssl
+    ./config
 }
 
 make_install() {
