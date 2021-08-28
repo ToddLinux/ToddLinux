@@ -38,7 +38,7 @@ def main() -> bool:
         print(f"Error: chroot root path doesn't contain the sign file; Are you sure you're using this script from within the chroot environment; use sign_lfs.py to create one")
         return False
 
-    if not install_packages(REQUIRED_PACKAGES, f"{SCRIPTS_FOLDER}/host/setup/host_chroot_packages", "chroot", f"/{LOCK_FILE}", verbose, jobs, measure_time):
+    if not install_packages(REQUIRED_PACKAGES, f"{SCRIPTS_FOLDER}/host/setup/packages", "chroot", f"/{LOCK_FILE}", verbose, jobs, measure_time):
         return False
     print("installing tools from within chroot environment: ok")
     return True

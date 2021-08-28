@@ -36,6 +36,7 @@ REQUIRED_PACKAGES = [
     "zlib",
     "openssl",
     "python3.7",
+    "python3-setuptools",
     "python3-requests",
     "python3-urllib3",
     "python3-certifi",
@@ -47,4 +48,4 @@ def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, 
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
-    return install_packages(REQUIRED_PACKAGES, f"{FILE_DIR_PATH}/host_chroot_packages", "host", f"{lfs_dir}/{LOCK_FILE}", verbose, jobs, measure_time)
+    return install_packages(REQUIRED_PACKAGES, f"{FILE_DIR_PATH}/packages", "host", f"{lfs_dir}/{LOCK_FILE}", verbose, jobs, measure_time)

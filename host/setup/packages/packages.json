@@ -139,6 +139,11 @@
             "env": "host"
         },
         {
+            "name": "python3-setuptools",
+            "src_urls": ["https://github.com/pypa/setuptools/archive/refs/tags/v57.4.0.tar.gz"],
+            "env": "host"
+        },
+        {
             "name": "python3-requests",
             "src_urls": ["https://github.com/psf/requests/archive/refs/tags/v2.26.0.tar.gz"],
             "env": "host"

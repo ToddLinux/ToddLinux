@@ -31,7 +31,7 @@ def main() -> bool:
     ln -sfv /run/lock /var/lock &&
     install -dv -m 0750 /root &&
     install -dv -m 1777 /tmp /var/tmp &&
-    ln -sv /proc/self/mounts /etc/mtab
+    ln -sfv /proc/self/mounts /etc/mtab
     """) != 0:
         return False
 
@@ -74,8 +74,8 @@ nogroup:x:99:
 users:x:999:""")
 
     if os.system("""
-    echo "tester:x:$(ls -n $(tty) | cut -d" " -f3):101::/home/tester:/bin/bash" >> /etc/passwd &&
-    echo "tester:x:101:" >> /etc/group &&
+    echo "\ntester:x:$(ls -n $(tty) | cut -d" " -f3):101::/home/tester:/bin/bash" >> /etc/passwd &&
+    echo "\ntester:x:101:" >> /etc/group &&
     install -o tester -d /home/tester
     """) != 0:
         return False
@@ -86,10 +86,6 @@ users:x:999:""")
     chmod -v 664  /var/log/lastlog &&
     chmod -v 600  /var/log/btmp
     """) != 0:
-        return False
-
-    # required for openssl with python3
-    if os.system("ldconfig /usr/local/lib") != 0:
         return False
 
     print("preparing chroot from within chroot environment: ok")
