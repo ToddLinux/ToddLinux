@@ -1,8 +1,10 @@
+import argparse
 import os
 import subprocess
 import pathlib
+
 from argparse import ArgumentParser
-from typing import Optional
+from typing import Callable, Optional, Tuple, Callable, List
 
 from .install_from_host import install_required_packages_from_host
 from .install_from_chroot import install_required_packages_from_chroot
@@ -13,6 +15,34 @@ from .prepare_chroot import prepare_chroot
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 SIGN_FILE = "lfs_sign.lock"
+
+
+def prepare_cmd_args(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> List[str]:
+    args = ["/usr/bin/env", "python3", f"{FILE_DIR_PATH}/install_host_toolchain.py"]
+
+    if verbose:
+        args.append('-v')
+    if measure_time:
+        args.append('-t')
+
+    args.append("-j")
+    args.append(str(jobs))
+    args.append(lfs_dir)
+
+    return args
+
+
+def get_ids() -> Tuple[int, int]:
+    uid = os.environ.get("SUDO_UID") if "SUDO_UID" in os.environ else os.getuid()
+    gid = os.environ.get("SUDO_GID") if "SUDO_GID" in os.environ else os.getgid()
+    return int(uid), int(gid)
+
+
+def demote(user_uid: int, user_gid: int) -> Callable[[], None]:
+    def result():
+        os.setgid(user_gid)
+        os.setuid(user_uid)
+    return result
 
 
 def setup() -> bool:
@@ -28,7 +58,7 @@ def setup() -> bool:
     lfs_dir = os.path.abspath(args.path)
     os.chdir(lfs_dir)
 
-    # use nproc to determin amount of threads to use
+    # use nproc to determine amount of threads to use
     if jobs is None:
         output = subprocess.check_output("nproc", stderr=subprocess.STDOUT).decode()
         jobs = int(output)
@@ -44,7 +74,16 @@ def setup() -> bool:
     if not check_all_reqs():
         return False
 
-    create_directory_layout()
+    user_uid, user_gid = get_ids()
+    cmd_args = prepare_cmd_args(lfs_dir, verbose, jobs, measure_time)
+    process = subprocess.Popen(
+        cmd_args,
+        preexec_fn=demote(user_uid, user_gid),
+        cwd=FILE_DIR_PATH
+    )
+    result = process.wait()
+    if result != 0:
+        return False
 
     if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
         return False
