@@ -9,7 +9,6 @@ from typing import Callable, Optional, Tuple, Callable, List
 from .install_from_host import install_required_packages_from_host
 from .install_from_chroot import install_required_packages_from_chroot
 from .check_req import check_all_reqs
-from .create_directory_layout import create_directory_layout
 from .prepare_chroot import prepare_chroot
 
 
