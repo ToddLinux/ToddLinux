@@ -5,6 +5,9 @@ import sys
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 ROOT_PATH = f"{FILE_DIR_PATH}/../.."
 sys.path.append(ROOT_PATH)
+
+from typing import Optional
+from argparse import ArgumentParser
 from pkg_manager import install_packages  # nopep8
 
 
@@ -42,6 +45,17 @@ REQUIRED_PACKAGES = [
     "python3-certifi",
     "python3-idna"]
 
+DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
+
+
+# create folders in root
+def create_directory_layout():
+    print("creating minimal directory layout: ...")
+    for folder in DIRECTORY_LAYOUT:
+        if not os.path.isdir(folder):
+            os.mkdir(folder)
+    print("creating minimal directory layout: ok")
+
 
 def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
     os.environ["LFS"] = lfs_dir
@@ -49,3 +63,30 @@ def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, 
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
     return install_packages(REQUIRED_PACKAGES, f"{FILE_DIR_PATH}/packages", "host", f"{lfs_dir}/{LOCK_FILE}", verbose, jobs, measure_time)
+
+
+# TODO: find a better way to pass these arguments
+def main() -> bool:
+    parser = ArgumentParser(description="Run Todd Linux build system")
+    parser.add_argument('path', help='path to chroot environment', type=str)
+    parser.add_argument('-t', '--time', help='measure build time', action='store_true')
+    parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
+    parser.add_argument('-j', '--jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
+    args = parser.parse_args()
+    verbose: bool = args.verbose
+    measure_time: bool = args.time
+    jobs: Optional[int] = args.jobs
+    lfs_dir = os.path.abspath(args.path)
+
+    os.chdir(lfs_dir)
+
+    create_directory_layout()
+
+    if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
+        return False
+
+    return True
+
+
+if __name__ == '__main__':
+    sys.exit(0 if main() else 1)
