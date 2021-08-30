@@ -1,3 +1,5 @@
+from argparse import ArgumentParser
+from typing import Optional
 import os
 import pathlib
 import sys
@@ -6,8 +8,6 @@ FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 ROOT_PATH = f"{FILE_DIR_PATH}/../.."
 sys.path.append(ROOT_PATH)
 
-from typing import Optional
-from argparse import ArgumentParser
 from pkg_manager import install_packages  # nopep8
 
 
@@ -71,11 +71,11 @@ def main() -> bool:
     parser.add_argument('path', help='path to chroot environment', type=str)
     parser.add_argument('-t', '--time', help='measure build time', action='store_true')
     parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
-    parser.add_argument('-j', '--jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
+    parser.add_argument('-j', '--jobs', help='number of concurrent jobs')
     args = parser.parse_args()
     verbose: bool = args.verbose
     measure_time: bool = args.time
-    jobs: Optional[int] = args.jobs
+    jobs: int = args.jobs
     lfs_dir = os.path.abspath(args.path)
 
     os.chdir(lfs_dir)
