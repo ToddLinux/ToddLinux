@@ -2,6 +2,9 @@ import argparse
 import os
 import subprocess
 import pathlib
+import pwd
+import grp
+
 
 from argparse import ArgumentParser
 from typing import Callable, Optional, Tuple, Callable, List
@@ -37,6 +40,19 @@ def get_ids() -> Tuple[int, int]:
     return int(uid), int(gid)
 
 
+def get_user_and_group() -> Tuple[str, str]:
+    uid, gid = get_ids()
+    username = pwd.getpwuid(uid)[0]
+    group = grp.getgrgid(gid).gr_name
+    return username, group
+
+
+def change_lfs_owner(lfs_dir: str) -> None:
+    user, group = get_user_and_group()
+    os.system(f"chown {user}:{group} {lfs_dir}")
+    pass
+
+
 def demote(user_uid: int, user_gid: int) -> Callable[[], None]:
     def result():
         os.setgid(user_gid)
@@ -56,6 +72,8 @@ def setup() -> bool:
     jobs: Optional[int] = args.jobs
     lfs_dir = os.path.abspath(args.path)
     os.chdir(lfs_dir)
+
+    change_lfs_owner(lfs_dir)
 
     # use nproc to determine amount of threads to use
     if jobs is None:
