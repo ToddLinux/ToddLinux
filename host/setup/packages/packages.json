@@ -124,6 +124,16 @@
             "env": "host"
         },
         {
+            "name": "iproute2",
+            "src_urls": ["https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.10.0.tar.xz"],
+            "env": "host"
+        },
+        {
+            "name": "inetutils",
+            "src_urls": ["http://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz"],
+            "env": "host"
+        },
+        {
             "name": "zlib",
             "src_urls": ["https://www.zlib.net/zlib-1.2.11.tar.xz"],
             "env": "host"

@@ -49,7 +49,7 @@ def get_user_and_group() -> Tuple[str, str]:
 
 def change_lfs_owner(lfs_dir: str) -> None:
     user, group = get_user_and_group()
-    os.system(f"chown {user}:{group} {lfs_dir}")
+    os.system(f"chown -R {user}:{group} {lfs_dir}")
     pass
 
 
