@@ -9,7 +9,6 @@ from typing import Callable, Optional, Tuple, Callable, List
 from .install_from_host import install_required_packages_from_host
 from .install_from_chroot import install_required_packages_from_chroot
 from .check_req import check_all_reqs
-from .create_directory_layout import create_directory_layout
 from .prepare_chroot import prepare_chroot
 
 
@@ -18,7 +17,7 @@ SIGN_FILE = "lfs_sign.lock"
 
 
 def prepare_cmd_args(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> List[str]:
-    args = ["/usr/bin/env", "python3", f"{FILE_DIR_PATH}/install_host_toolchain.py"]
+    args = ["/usr/bin/env", "python3", f"{FILE_DIR_PATH}/install_from_host.py"]
 
     if verbose:
         args.append('-v')
