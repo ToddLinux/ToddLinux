@@ -60,35 +60,11 @@ def create_directory_layout():
 
 
 def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+    os.chdir(lfs_dir)
+    create_directory_layout()
+
     os.environ["LFS"] = lfs_dir
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
     return install_packages(REQUIRED_PACKAGES, f"{FILE_DIR_PATH}/packages", "host", f"{lfs_dir}/{LOCK_FILE}", verbose, jobs, measure_time)
-
-
-# TODO: find a better way to pass these arguments
-def main() -> bool:
-    parser = ArgumentParser(description="Run Todd Linux build system")
-    parser.add_argument('path', help='path to chroot environment', type=str)
-    parser.add_argument('-t', '--time', help='measure build time', action='store_true')
-    parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
-    parser.add_argument('-j', '--jobs', help='number of concurrent jobs')
-    args = parser.parse_args()
-    verbose: bool = args.verbose
-    measure_time: bool = args.time
-    jobs: int = args.jobs
-    lfs_dir = os.path.abspath(args.path)
-
-    os.chdir(lfs_dir)
-
-    create_directory_layout()
-
-    if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
-        return False
-
-    return True
-
-
-if __name__ == '__main__':
-    sys.exit(0 if main() else 1)

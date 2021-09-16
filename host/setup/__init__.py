@@ -4,6 +4,7 @@ import subprocess
 import pathlib
 import pwd
 import grp
+import sys
 
 
 from argparse import ArgumentParser
@@ -19,19 +20,26 @@ FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 SIGN_FILE = "lfs_sign.lock"
 
 
-def prepare_cmd_args(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> List[str]:
-    args = ["/usr/bin/env", "python3", f"{FILE_DIR_PATH}/install_from_host.py"]
+def install_unelevated(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+    demote(*get_ids())
 
-    if verbose:
-        args.append('-v')
-    if measure_time:
-        args.append('-t')
+    if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
+        return False
 
-    args.append("-j")
-    args.append(str(jobs))
-    args.append(lfs_dir)
+    return True
 
-    return args
+
+def install_elevated(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+    if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
+        return False
+
+    if not prepare_chroot(lfs_dir):
+        return False
+
+    if not install_required_packages_from_chroot(lfs_dir, verbose, jobs, measure_time):
+        return False
+
+    return True
 
 
 def get_ids() -> Tuple[int, int]:
@@ -53,11 +61,9 @@ def change_lfs_owner(lfs_dir: str) -> None:
     pass
 
 
-def demote(user_uid: int, user_gid: int) -> Callable[[], None]:
-    def result():
-        os.setgid(user_gid)
-        os.setuid(user_uid)
-    return result
+def demote(user_uid: int, user_gid: int) -> None:
+    os.setgid(user_gid)
+    os.setuid(user_uid)
 
 
 def setup() -> bool:
@@ -85,30 +91,22 @@ def setup() -> bool:
         print(f"Error: provided lfs path '{os.getcwd()}' doesn't have sign file; use sign_lfs.py to create one")
         return False
 
+    # TODO: terminate on insufficient privileges
     if os.geteuid() != 0:
         print("Warning: executing script without root privileges; the script will perform all possible actions and fail when root rights are required")
 
     if not check_all_reqs():
         return False
 
-    user_uid, user_gid = get_ids()
-    cmd_args = prepare_cmd_args(lfs_dir, verbose, jobs, measure_time)
-    process = subprocess.Popen(
-        cmd_args,
-        preexec_fn=demote(user_uid, user_gid),
-        cwd=FILE_DIR_PATH
-    )
-    result = process.wait()
-    if result != 0:
-        return False
+    # fork and install software as unelevated user
+    newpid = os.fork()
+    if newpid == 0:
+        success = install_unelevated(lfs_dir, verbose, jobs, measure_time)
+        return success
+    else:
+        _, exit_code = os.waitpid(newpid, 0)
+        if exit_code != 0:
+            return False
 
-    if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
-        return False
-
-    if not prepare_chroot(lfs_dir):
-        return False
-
-    if not install_required_packages_from_chroot(lfs_dir, verbose, jobs, measure_time):
-        return False
-
-    return True
+        success = install_elevated(lfs_dir, verbose, jobs, measure_time)
+        return success
