@@ -1,14 +1,10 @@
-import argparse
 import os
 import subprocess
 import pathlib
 import pwd
-import grp
-import sys
-
 
 from argparse import ArgumentParser
-from typing import Callable, Optional, Tuple, Callable, List
+from typing import Optional, Tuple, Union
 
 from .install_from_host import install_required_packages_from_host
 from .install_from_chroot import install_required_packages_from_chroot
@@ -20,8 +16,10 @@ FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 SIGN_FILE = "lfs_sign.lock"
 
 
-def install_unelevated(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
-    demote(*get_ids())
+def install_unelevated(build_user: Tuple[int, int], lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+    uid = build_user.pw_uid
+    gid = build_user.pw_gid
+    demote(uid, gid)
 
     if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
         return False
@@ -42,23 +40,18 @@ def install_elevated(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool)
     return True
 
 
-def get_ids() -> Tuple[int, int]:
-    uid = os.environ.get("SUDO_UID") if "SUDO_UID" in os.environ else os.getuid()
-    gid = os.environ.get("SUDO_GID") if "SUDO_GID" in os.environ else os.getgid()
-    return int(uid), int(gid)
+def get_build_user() -> Union[None, pwd.struct_passwd]:
+    try:
+        lfs_user = pwd.getpwnam("lfs_build")
+        return lfs_user
+    except:
+        return None
 
 
-def get_user_and_group() -> Tuple[str, str]:
-    uid, gid = get_ids()
-    username = pwd.getpwuid(uid)[0]
-    group = grp.getgrgid(gid).gr_name
-    return username, group
-
-
-def change_lfs_owner(lfs_dir: str) -> None:
-    user, group = get_user_and_group()
-    os.system(f"chown -R {user}:{group} {lfs_dir}")
-    pass
+def change_lfs_owner(build_user: Tuple[int, int], lfs_dir: str) -> None:
+    uid = build_user.pw_uid
+    gid = build_user.pw_gid
+    os.system(f"chown -R {uid}:{gid} {lfs_dir}")
 
 
 def demote(user_uid: int, user_gid: int) -> None:
@@ -72,14 +65,28 @@ def setup() -> bool:
     parser.add_argument('-t', '--time', help='measure build time', action='store_true')
     parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
     parser.add_argument('-j', '--jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
+    
     args = parser.parse_args()
     verbose: bool = args.verbose
     measure_time: bool = args.time
     jobs: Optional[int] = args.jobs
     lfs_dir = os.path.abspath(args.path)
+    build_user = get_build_user()
+
     os.chdir(lfs_dir)
 
-    change_lfs_owner(lfs_dir)
+    if os.geteuid() != 0:
+        print("Insufficient privlieges")
+        return False
+
+    # if user doesn't exist exit with error
+    if not build_user:
+        print("No such user: lfs_build")
+        print("Refer to Wiki on how to add build user")
+        return False
+
+    # lfs directory must be owned by build user
+    change_lfs_owner(build_user, lfs_dir)
 
     # use nproc to determine amount of threads to use
     if jobs is None:
@@ -91,17 +98,13 @@ def setup() -> bool:
         print(f"Error: provided lfs path '{os.getcwd()}' doesn't have sign file; use sign_lfs.py to create one")
         return False
 
-    # TODO: terminate on insufficient privileges
-    if os.geteuid() != 0:
-        print("Warning: executing script without root privileges; the script will perform all possible actions and fail when root rights are required")
-
     if not check_all_reqs():
         return False
 
-    # fork and install software as unelevated user
     newpid = os.fork()
     if newpid == 0:
-        success = install_unelevated(lfs_dir, verbose, jobs, measure_time)
+        # install software as unelevated user
+        success = install_unelevated(build_user, lfs_dir, verbose, jobs, measure_time)
         return success
     else:
         _, exit_code = os.waitpid(newpid, 0)
