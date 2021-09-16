@@ -1,13 +1,12 @@
 import pathlib
 
+from dataclasses import dataclass
 
+
+@dataclass
 class SymRequirement:
-    def __init__(self, cmd_name, sym_link):
-        self.cmd_name = cmd_name
-        self.sym_link = sym_link
-
-    def __repr__(self):
-        return f"<SymRequirement cmd_name: '{self.cmd_name}'\t'{self.sym_link}'>"
+    cmd_name: str
+    sym_link: str
 
 
 # return False if not satisfied
