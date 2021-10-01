@@ -37,6 +37,7 @@ REQUIRED_PACKAGES = [
     "binutils_pass2",
     "gcc_pass2",
     "iproute2",
+    "iana-etc",
     "inetutils",
     "zlib",
     "openssl",

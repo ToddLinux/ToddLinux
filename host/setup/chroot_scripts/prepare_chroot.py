@@ -88,6 +88,17 @@ users:x:999:""")
     """) != 0:
         return False
 
+    # todo: better domain?
+    if os.system("""cat > /etc/resolv.conf << "EOF"
+# Begin /etc/resolv.conf
+domain todd.org
+nameserver 1.1.1.1
+nameserver 8.8.8.8
+# End /etc/resolv.conf
+EOF
+        """):
+        return False
+
     print("preparing chroot from within chroot environment: ok")
     return True
 
