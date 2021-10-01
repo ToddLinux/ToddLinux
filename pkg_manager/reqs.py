@@ -1,18 +1,21 @@
 import re
 import subprocess
 
+from typing import List
 
+# TODO: change this to dataclass
 class Requirement:
-    def __init__(self, name: str, min_version: str, command: str, version_regex_pattern: str, later_version_ok: bool):
+    def __init__(self, name: str, min_version: str, command: List[str], version_regex_pattern: str, later_version_ok: bool, read_stderr_instead_of_stdout: bool):
         self.name = name
         self.min_version = min_version
         # quotes in command not supported
-        self.command = command.split(" ")
+        self.command = command
         self.version_regex_pattern = version_regex_pattern
         self.later_version_ok = later_version_ok
+        self.read_stderr_instead_of_stdout = read_stderr_instead_of_stdout
 
     def __repr__(self):
-        return f"<Requirement name: '{self.name}'\tmin_version: '{self.min_version}'\tcommand: '{self.command}'\tversion_regex_pattern: '{self.version_regex_pattern}' later_version_ok: {self.later_version_ok}>"
+        return f"<Requirement name: '{self.name}'\tmin_version: '{self.min_version}'\tcommand: '{self.command}'\tversion_regex_pattern: '{self.version_regex_pattern}' later_version_ok: {self.later_version_ok}\tread_stderr_instead_of_stdout: {self.read_stderr_instead_of_stdout}>"
 
 
 # get installed version from command output
@@ -70,12 +73,38 @@ def satisfied(req: Requirement, installed_version) -> bool:
         raise ValueError(f"Version broken for {req}")
 
 
+# run command and collect stdout only
+def collect_stdout(command):
+    return subprocess.run(command,
+                          check=True,
+                          stdin=subprocess.DEVNULL,
+                          stdout=subprocess.PIPE,
+                          stderr=subprocess.DEVNULL).stdout.decode()
+
+
+# run command and collect stderr only
+def collect_stderr(command):
+    # dedicated to bzip2
+    return subprocess.run(command,
+                          check=True,
+                          stdin=subprocess.DEVNULL,
+                          stdout=subprocess.DEVNULL,
+                          stderr=subprocess.PIPE).stderr.decode()
+
+
+# run requirement command and collect output
+def collect_output(requirement):
+    if requirement.read_stderr_instead_of_stdout:
+        return collect_stderr(requirement.command)
+    else:
+        return collect_stdout(requirement.command)
+
+
 # return False if not satisfied
 def check_req(req: Requirement) -> bool:
     print(f"checking {req.name}: ...")
     try:
-        output = subprocess.check_output(
-            req.command, stderr=subprocess.STDOUT).decode()
+        output = collect_output(req)
 
         installed_version = get_installed_version(req, output)
 
