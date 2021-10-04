@@ -16,24 +16,35 @@ BUILD_FOLDER = "/tmp/todd_linux_build"
 
 # represents build and installation of <package>
 class Package:
-    def __init__(self, name: str, src_urls: List[str], env: str, repo: str, build_script: str = None):
+    def __init__(
+        self,
+        name: str,
+        src_urls: List[str],
+        env: str,
+        repo: str,
+        build_script: str = None,
+    ):
         self.name = name
         self.src_urls = src_urls
-        self.build_script = f"{repo}/{name}.sh" if build_script is None else f"{repo}/{build_script}"
+        self.build_script = (
+            f"{repo}/{name}.sh" if build_script is None else f"{repo}/{build_script}"
+        )
         self.env = env
+        # files to be deleted when uninstalling
+        self.index: List[str] = []
 
     def __repr__(self):
         return f"<Package: '{self.name}' src_urls: {', '.join(self.src_urls)} build_script: '{self.build_script}'>"
 
 
 def dwn_file(url: str) -> bool:
-    local_filename = url.split('/')[-1]
+    local_filename = url.split("/")[-1]
     print(f"downloading {local_filename}: ...")
     with requests.get(url, stream=True) as r:
         if r.status_code != 200:
             print(f"downloading {local_filename}: failure", file=sys.stderr)
             return False
-        with open(local_filename, 'wb') as f:
+        with open(local_filename, "wb") as f:
             for chunk in r.iter_content(chunk_size=8192):
                 f.write(chunk)
     print(f"downloading {local_filename}: ok")
@@ -71,9 +82,11 @@ def load_packages(repo: str) -> Dict[str, Package]:
     packages = {}
     for raw_pkg in raw_packages["packages"]:
         # check integrity of packages file
-        if raw_pkg.get("name") is None or \
-                raw_pkg.get("src_urls") is None or \
-                raw_pkg.get("env") is None:
+        if (
+            raw_pkg.get("name") is None
+            or raw_pkg.get("src_urls") is None
+            or raw_pkg.get("env") is None
+        ):
             raise ValueError(f"package {raw_pkg} is faulty")
 
         package = Package(
@@ -82,14 +95,18 @@ def load_packages(repo: str) -> Dict[str, Package]:
             raw_pkg["env"],
             repo,
             # using get() <- return None when not found
-            raw_pkg.get("build_script"))
+            raw_pkg.get("build_script"),
+        )
         if package.name in packages:
-            raise ValueError(f"The repository '{repo}' contains the package '{package.name}' twice")
+            raise ValueError(
+                f"The repository '{repo}' contains the package '{package.name}' twice"
+            )
         packages[package.name] = package
 
     return packages
 
 
+# todo: replace with better index
 def get_installed_packages(lock_file) -> Set[str]:
     installed_packages = set()
     if os.path.isfile(lock_file):
@@ -99,7 +116,15 @@ def get_installed_packages(lock_file) -> Set[str]:
 
 
 # install all requested packages in order
-def install_packages(names: List[str], repo: str, env: str, lock_file: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+def install_packages(
+    names: List[str],
+    repo: str,
+    env: str,
+    lock_file: str,
+    verbose: bool,
+    jobs: int,
+    measure_time: bool,
+) -> bool:
     os.environ["MAKEFLAGS"] = f"-j{jobs}"
     installed_packages = get_installed_packages(lock_file)
     packages = load_packages(repo)
