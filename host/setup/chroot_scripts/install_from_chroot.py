@@ -3,7 +3,7 @@ import sys
 import os
 from argparse import ArgumentParser
 
-SCRIPTS_FOLDER = f"scripts"
+SCRIPTS_FOLDER = f"/scripts"
 sys.path.append(SCRIPTS_FOLDER)
 from pkg_manager import install_packages  # nopep8
 
