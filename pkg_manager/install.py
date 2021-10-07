@@ -19,12 +19,14 @@ class Package:
     def __init__(
         self,
         name: str,
+        version: str,
         src_urls: List[str],
         env: str,
         repo: str,
         build_script: str = None,
     ):
         self.name = name
+        self.version = version
         self.src_urls = src_urls
         self.build_script = (
             f"{repo}/{name}.sh" if build_script is None else f"{repo}/{build_script}"
@@ -34,7 +36,7 @@ class Package:
         self.index: List[str] = []
 
     def __repr__(self):
-        return f"<Package: '{self.name}' src_urls: {', '.join(self.src_urls)} build_script: '{self.build_script}'>"
+        return f"<Package: '{self.name}' v.'{self.version}' src_urls: {', '.join(self.src_urls)} build_script: '{self.build_script}'>"
 
 
 def dwn_file(url: str) -> bool:
