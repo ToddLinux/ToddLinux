@@ -50,9 +50,6 @@ def install_elevated(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool)
     :param measure_time: measure installation time
     :return: true if successfully installed false otherwise
     """
-    if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
-        return False
-
     if not prepare_chroot(lfs_dir):
         return False
 
