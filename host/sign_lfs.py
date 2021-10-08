@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os
-import os.path
 import sys
 from argparse import ArgumentParser
 from datetime import datetime
@@ -22,6 +21,10 @@ def create_sign_file(force: bool, lfs_dir: str) -> bool:
     :return: true if completed successfully false otherwise
     """
     os.chdir(lfs_dir)
+
+    if not os.access('.', os.W_OK):
+        print("You don't have sufficient privlieges to write sign file to this directory")
+        return False
 
     # if directory is not empty don't do anything unless asked to
     if os.listdir("."):

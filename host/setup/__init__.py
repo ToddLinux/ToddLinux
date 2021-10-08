@@ -5,6 +5,7 @@ import pwd
 
 from argparse import ArgumentParser
 from typing import Optional, Tuple, Union
+from pwd import struct_passwd
 
 from .install_from_host import install_required_packages_from_host
 from .install_from_chroot import install_required_packages_from_chroot
@@ -13,10 +14,22 @@ from .prepare_chroot import prepare_chroot
 
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
+
+# system protection
 SIGN_FILE = "lfs_sign.lock"
 
 
-def install_unelevated(build_user: Tuple[int, int], lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+def install_unelevated(build_user: struct_passwd, lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+    """
+    Installs software as unelevated user
+
+    :param build_user: the user by which the software is being build and installed
+    :param lfs_dir: installation directory
+    :param verbose: if true print build messages
+    :param jobs: number of build jobs
+    :param measure_time: measure installation time
+    :return: true if successfully installed false otherwise
+    """
     uid = build_user.pw_uid
     gid = build_user.pw_gid
     demote(uid, gid)
@@ -28,6 +41,15 @@ def install_unelevated(build_user: Tuple[int, int], lfs_dir: str, verbose: bool,
 
 
 def install_elevated(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+    """
+    Installs software as elevated user
+
+    :param lfs_dir: installation directory
+    :param verbose: if true print build messages
+    :param jobs: number of build jobs
+    :param measure_time: measure installation time
+    :return: true if successfully installed false otherwise
+    """
     if not install_required_packages_from_host(lfs_dir, verbose, jobs, measure_time):
         return False
 
@@ -40,7 +62,12 @@ def install_elevated(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool)
     return True
 
 
-def get_build_user() -> Union[None, pwd.struct_passwd]:
+def get_build_user() -> Union[None, struct_passwd]:
+    """
+    Fetches the information about build user
+
+    :return: user information if can be obtained, None otherwise
+    """
     try:
         lfs_user = pwd.getpwnam("lfs_build")
         return lfs_user
@@ -48,13 +75,25 @@ def get_build_user() -> Union[None, pwd.struct_passwd]:
         return None
 
 
-def change_lfs_owner(build_user: Tuple[int, int], lfs_dir: str) -> None:
-    uid = build_user.pw_uid
-    gid = build_user.pw_gid
+def change_lfs_owner(user: struct_passwd, lfs_dir: str) -> None:
+    """
+    Changes the owner of directory
+
+    :param user: user information
+    :param lfs_dir: directory path
+    """
+    uid = user.pw_uid
+    gid = user.pw_gid
     os.system(f"chown -R {uid}:{gid} {lfs_dir}")
 
 
 def demote(user_uid: int, user_gid: int) -> None:
+    """
+    Change process UID and GID to non-privileged user
+
+    :param user_uid: UID of user the process is being demoted to
+    :param user_gid: GID of user the process is being demoted to
+    """
     os.setgid(user_gid)
     os.setuid(user_uid)
 
@@ -65,7 +104,7 @@ def setup() -> bool:
     parser.add_argument('-t', '--time', help='measure build time', action='store_true')
     parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
     parser.add_argument('-j', '--jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
-    
+
     args = parser.parse_args()
     verbose: bool = args.verbose
     measure_time: bool = args.time
