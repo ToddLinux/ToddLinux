@@ -9,7 +9,7 @@ unpack_src() {
 }
 
 configure() {
-    ../configure --prefix=$LFS/tools \
+    ../configure --prefix=/tools \
         --with-sysroot=$LFS \
         --target=$LFS_TGT \
         --disable-nls \

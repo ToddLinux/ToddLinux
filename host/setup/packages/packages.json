@@ -2,6 +2,7 @@
     "packages": [
         {
             "name": "binutils",
+            "version": "2.36.1",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz"
             ],
@@ -9,6 +10,7 @@
         },
         {
             "name": "gcc",
+            "version": "10.2.0",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
                 "https://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
@@ -19,6 +21,7 @@
         },
         {
             "name": "linux_headers",
+            "version": "5.10.17",
             "src_urls": [
                 "https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.10.17.tar.xz"
             ],
@@ -26,6 +29,7 @@
         },
         {
             "name": "glibc",
+            "version": "2.33",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.xz",
                 "https://www.linuxfromscratch.org/patches/lfs/10.1/glibc-2.33-fhs-1.patch"
@@ -34,6 +38,7 @@
         },
         {
             "name": "libstdcpp",
+            "version": "10.2.0",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz"
             ],
@@ -41,6 +46,7 @@
         },
         {
             "name": "m4",
+            "version": "1.4.18",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/m4/m4-1.4.18.tar.xz"
             ],
@@ -48,6 +54,7 @@
         },
         {
             "name": "ncurses",
+            "version": "6.2",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz"
             ],
@@ -55,6 +62,7 @@
         },
         {
             "name": "bash",
+            "version": "5.1",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/bash/bash-5.1.tar.gz"
             ],
@@ -62,6 +70,7 @@
         },
         {
             "name": "coreutils",
+            "version": "8.32",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/coreutils/coreutils-8.32.tar.xz"
             ],
@@ -69,6 +78,7 @@
         },
         {
             "name": "diffutils",
+            "version": "3.7",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/diffutils/diffutils-3.7.tar.xz"
             ],
@@ -76,6 +86,7 @@
         },
         {
             "name": "file",
+            "version": "5.39",
             "src_urls": [
                 "http://ftp.astron.com/pub/file/file-5.39.tar.gz"
             ],
@@ -83,6 +94,7 @@
         },
         {
             "name": "findutils",
+            "version": "4.8.0",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/findutils/findutils-4.8.0.tar.xz"
             ],
@@ -90,6 +102,7 @@
         },
         {
             "name": "gawk",
+            "version": "5.1.0",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/gawk/gawk-5.1.0.tar.xz"
             ],
@@ -97,6 +110,7 @@
         },
         {
             "name": "grep",
+            "version": "3.6",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/grep/grep-3.6.tar.xz"
             ],
@@ -104,6 +118,7 @@
         },
         {
             "name": "gzip",
+            "version": "1.10",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz"
             ],
@@ -111,6 +126,7 @@
         },
         {
             "name": "make",
+            "version": "4.3",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/make/make-4.3.tar.gz"
             ],
@@ -118,6 +134,7 @@
         },
         {
             "name": "patch",
+            "version": "2.7.6",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz"
             ],
@@ -125,6 +142,7 @@
         },
         {
             "name": "sed",
+            "version": "4.8",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz"
             ],
@@ -132,6 +150,7 @@
         },
         {
             "name": "tar",
+            "version": "1.34",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/tar/tar-1.34.tar.xz"
             ],
@@ -139,6 +158,7 @@
         },
         {
             "name": "xz",
+            "version": "5.2.5",
             "src_urls": [
                 "https://tukaani.org/xz/xz-5.2.5.tar.xz"
             ],
@@ -146,6 +166,7 @@
         },
         {
             "name": "binutils_pass2",
+            "version": "2.36.1",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz"
             ],
@@ -153,6 +174,7 @@
         },
         {
             "name": "gcc_pass2",
+            "version": "10.2.0",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
                 "https://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
@@ -163,6 +185,7 @@
         },
         {
             "name": "iproute2",
+            "version": "5.10.0",
             "src_urls": [
                 "https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.10.0.tar.xz"
             ],
@@ -170,6 +193,7 @@
         },
         {
             "name": "iana-etc",
+            "version": "20210611",
             "src_urls": [
                 "https://github.com/Mic92/iana-etc/releases/download/20210611/iana-etc-20210611.tar.gz"
             ],
@@ -177,6 +201,7 @@
         },
         {
             "name": "inetutils",
+            "version": "2.0",
             "src_urls": [
                 "http://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz"
             ],
@@ -184,6 +209,7 @@
         },
         {
             "name": "zlib",
+            "version": "1.2.11",
             "src_urls": [
                 "https://www.zlib.net/zlib-1.2.11.tar.xz"
             ],
@@ -191,6 +217,7 @@
         },
         {
             "name": "openssl",
+            "version": "1.1.1",
             "src_urls": [
                 "https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1l.tar.gz"
             ],
@@ -198,6 +225,7 @@
         },
         {
             "name": "python3.7",
+            "version": "3.7.11",
             "src_urls": [
                 "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz"
             ],
@@ -205,6 +233,7 @@
         },
         {
             "name": "python3-setuptools",
+            "version": "57.4.0",
             "src_urls": [
                 "https://github.com/pypa/setuptools/archive/refs/tags/v57.4.0.tar.gz"
             ],
@@ -212,6 +241,7 @@
         },
         {
             "name": "python3-requests",
+            "version": "2.26.0",
             "src_urls": [
                 "https://github.com/psf/requests/archive/refs/tags/v2.26.0.tar.gz"
             ],
@@ -219,6 +249,7 @@
         },
         {
             "name": "python3-urllib3",
+            "version": "1.26.6",
             "src_urls": [
                 "https://github.com/urllib3/urllib3/archive/refs/tags/1.26.6.tar.gz"
             ],
@@ -226,6 +257,7 @@
         },
         {
             "name": "python3-certifi",
+            "version": "2021.05.30",
             "src_urls": [
                 "https://github.com/certifi/python-certifi/archive/refs/tags/2021.05.30.tar.gz"
             ],
@@ -233,6 +265,7 @@
         },
         {
             "name": "python3-idna",
+            "version": "3.2",
             "src_urls": [
                 "https://github.com/kjd/idna/archive/refs/tags/v3.2.tar.gz"
             ],
@@ -240,6 +273,7 @@
         },
         {
             "name": "libstdcpp_pass2",
+            "version": "10.2.0",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz"
             ],
@@ -247,6 +281,7 @@
         },
         {
             "name": "gettext",
+            "version": "0.21",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/gettext/gettext-0.21.tar.xz"
             ],
@@ -254,6 +289,7 @@
         },
         {
             "name": "bison",
+            "version": "3.7.5",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/bison/bison-3.7.5.tar.xz"
             ],
@@ -261,6 +297,7 @@
         },
         {
             "name": "perl",
+            "version": "5.32.1",
             "src_urls": [
                 "https://www.cpan.org/src/5.0/perl-5.32.1.tar.xz"
             ],
@@ -268,6 +305,7 @@
         },
         {
             "name": "python3_pass2",
+            "version": "3.7.11",
             "src_urls": [
                 "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz"
             ],
@@ -275,6 +313,7 @@
         },
         {
             "name": "texinfo",
+            "version": "6.7",
             "src_urls": [
                 "https://ftp.gnu.org/gnu/texinfo/texinfo-6.7.tar.xz"
             ],
@@ -282,6 +321,7 @@
         },
         {
             "name": "util-linux",
+            "version": "2.36.2",
             "src_urls": [
                 "https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz"
             ],
