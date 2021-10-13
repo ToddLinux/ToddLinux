@@ -5,4 +5,4 @@
 [Linux From Scratch Book](https://www.linuxfromscratch.org/lfs/downloads/stable/LFS-BOOK-11.0.pdf)
 
 ## Build instructions
-Build instructions are in Todd Linux [wiki](https://github.com/adamjedrzejewski/ToddLinux/wiki/Building)
+Build instructions are in Todd Linux [wiki](https://github.com/ToddLinux/ToddLinux/wiki)
