@@ -9,12 +9,13 @@ unpack_src() {
 }
 
 create_links() {
-    ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64 && ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64/ld-lsb-x86-64.so.3
+    mkdir $TODD_FAKE_ROOT_DIR/lib64 &&\
+    ln -sfv $TODD_FAKE_ROOT_DIR/lib/ld-linux-x86-64.so.2 $TODD_FAKE_ROOT_DIR/lib64 &&\
+    ln -sfv $TODD_FAKE_ROOT_DIR/lib/ld-linux-x86-64.so.2 $TODD_FAKE_ROOT_DIR/lib64/ld-lsb-x86-64.so.3
     return
 }
 
 patch_src() {
-    echo $PWD
     patch -Np1 -i ../glibc-2.33-fhs-1.patch
     return
 }
@@ -31,19 +32,20 @@ configure() {
 }
 
 make_install() {
-    make -j1 && make -j1 DESTDIR=$LFS install
+    make -j1 && make -j1 install
 }
 
 # TODO: FIX THIS
 # grep output should be "[Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]""
-test_toolchain() {
-    echo 'int main(){}' > dummy.c && $LFS/tools/bin/$LFS_TGT-gcc dummy.c && readelf -l a.out | grep '/ld-linux'
-    return
-}
+# test_toolchain() {
+#     echo 'int main(){}' > dummy.c && $LFS/tools/bin/$LFS_TGT-gcc dummy.c && readelf -l a.out | grep '/ld-linux'
+#     return
+# }
 
+# TODO: this is not tracked
 finalize_headers() {
     $LFS/tools/libexec/gcc/$LFS_TGT/10.2.0/install-tools/mkheaders
     return
 }
 
-unpack_src && patch_src && configure && make_install && create_links && test_toolchain && finalize_headers
+unpack_src && patch_src && configure && make_install && create_links && finalize_headers
