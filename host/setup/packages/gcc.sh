@@ -14,9 +14,10 @@ unpack_src() {
 }
 
 configure() {
+    # why do you hardcode absoulte paths in scripts? 
     ../configure \
         --target=$LFS_TGT \
-        --prefix=/tools \
+        --prefix=$LFS/tools \
         --with-glibc-version=2.11 \
         --with-sysroot=$LFS \
         --with-newlib \
@@ -43,8 +44,12 @@ make_install() {
 }
 
 post_install() {
+    # I hate the antichrist
+    LFS_ROOT=$(ls $TODD_FAKE_ROOT_DIR)
+    mv $TODD_FAKE_ROOT_DIR/$LFS/* $TODD_FAKE_ROOT_DIR
+    rm -rv $TODD_FAKE_ROOT_DIR/$LFS_ROOT
     cat $TODD_BUILD_DIR/gcc-10.2.0/gcc/{limitx.h,glimits.h,limity.h}\
-        > `dirname $($TODD_FAKE_ROOT_DIR/tools/bin/${LFS_TGT}-gcc -print-libgcc-file-name)`/install-tools/include/limits.h
+        > `dirname $($TODD_FAKE_ROOT_DIR/tools/bin/${LFS_TGT}-gcc -print-libgcc-file-name)`/install-tools/include/limits.h    
     return
 }
 
