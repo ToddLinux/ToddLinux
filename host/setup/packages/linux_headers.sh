@@ -12,7 +12,8 @@ prepare_headers() {
     make mrproper && make headers && \
         find usr/include -name '.*' -delete && \
         rm usr/include/Makefile && \
-        cp -rv usr/include $LFS/usr
+        mkdir $TODD_FAKE_ROOT_DIR/usr && \
+        cp -rv usr/include $TODD_FAKE_ROOT_DIR/usr
     return
 }
 
