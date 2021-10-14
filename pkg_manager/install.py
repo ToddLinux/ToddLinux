@@ -11,6 +11,7 @@ from typing import List, Dict, Set
 from distutils.dir_util import copy_tree
 
 from .index import PackageIndex, read_index, append_index
+from .download import PKG_CACHE_DIRECTORY, is_cached, fetch_package_sources
 
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
@@ -43,17 +44,17 @@ class Package:
         return f"<Package: '{self.name}' v.'{self.version}' src_urls: {', '.join(self.src_urls)} build_script: '{self.build_script}'>"
 
 
-def dwn_file(url: str) -> bool:
-    local_filename = url.split("/")[-1]
-    print(f"downloading {local_filename}: ...")
-    with requests.get(url, stream=True) as r:
-        if r.status_code != 200:
-            print(f"downloading {local_filename}: failure", file=sys.stderr)
+def get_sources(lfs_dir: str, package: Package) -> bool:
+    cache_dir = f"{lfs_dir}/{PKG_CACHE_DIRECTORY}"
+    package_dest_dir = f"{cache_dir}/{package.name}/{package.version}"
+    if not is_cached(package, lfs_dir):
+        if not fetch_package_sources(package, package_dest_dir):
             return False
-        with open(local_filename, "wb") as f:
-            for chunk in r.iter_content(chunk_size=8192):
-                f.write(chunk)
-    print(f"downloading {local_filename}: ok")
+
+    print("copying package sources into build directory")
+    for file in os.listdir(package_dest_dir):
+        shutil.copy(f"{package_dest_dir}/{file}", BUILD_FOLDER)
+
     return True
 
 
@@ -67,13 +68,12 @@ def install_package(lfs_dir: str, package: Package, verbose=False) -> bool:
         shutil.rmtree(FAKE_ROOT)
     os.mkdir(FAKE_ROOT)
 
-    os.chdir("/tmp/todd_linux_build")
+    os.chdir(BUILD_FOLDER)
     print(f"preparing {package.name}: ok")
 
-    print(f"downloading sources for {package.name}: ...")
-    for src in package.src_urls:
-        if not dwn_file(src):
-            return False
+    print(f"getting sources for {package.name}: ...")
+    if not get_sources(lfs_dir, package):
+        return False
 
     print(f"running build script for {package.name}: ...")
     os.environ["DESTDIR"] = FAKE_ROOT
@@ -87,7 +87,6 @@ def install_package(lfs_dir: str, package: Package, verbose=False) -> bool:
     index_files: List[str] = []
     for root, dirs, files in os.walk(FAKE_ROOT):
         for file in files:
-            print(file)
             # green green, what is your problem green?
             index_files.append(f"/{os.path.relpath(os.path.join(root, file), FAKE_ROOT)}")
     copy_tree(FAKE_ROOT, lfs_dir)
