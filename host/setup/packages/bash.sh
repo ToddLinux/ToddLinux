@@ -17,11 +17,14 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 install
+    # is DESTDIR overwritten somehow in bash Makefile?
+    # BASH EXPLAIN ??????????
+    make && make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install
     return
 }
 
 post_install() {
+    mkdir $TODD_FAKE_ROOT_DIR/bin
     mv $TODD_FAKE_ROOT_DIR/usr/bin/bash $TODD_FAKE_ROOT_DIR/bin/bash
     ln -sv bash $TODD_FAKE_ROOT_DIR/bin/sh
     return
