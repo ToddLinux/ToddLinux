@@ -21,7 +21,8 @@ make_install() {
 }
 
 post_install() {
-    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/find $TODD_FAKE_ROOT_DIR/bin
+    mkdir -p $TODD_FAKE_ROOT_DIR/bin
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/find $TODD_FAKE_ROOT_DIR/bin/
     sed -i 's|find:=${BINDIR}|find:=/bin|' $TODD_FAKE_ROOT_DIR/usr/bin/updatedb
     return
 }
