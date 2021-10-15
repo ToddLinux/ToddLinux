@@ -18,14 +18,15 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 DESTDIR=$LFS install
+    make && make -j1 install
     return
 }
 
 post_install() {
-    mv -v $LFS/usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat}  $LFS/bin
-    mv -v $LFS/usr/lib/liblzma.so.*                       $LFS/lib
-    ln -svf ../../lib/$(readlink $LFS/usr/lib/liblzma.so) $LFS/usr/lib/liblzma.so
+    mkdir -p $TODD_FAKE_ROOT_DIR/{bin,lib}
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat}  $TODD_FAKE_ROOT_DIR/bin
+    mv -v $TODD_FAKE_ROOT_DIR/usr/lib/liblzma.so.*                       $TODD_FAKE_ROOT_DIR/lib
+    ln -svf ../../lib/$(readlink $TODD_FAKE_ROOT_DIR/usr/lib/liblzma.so) $TODD_FAKE_ROOT_DIR/usr/lib/liblzma.so
     return
 }
 

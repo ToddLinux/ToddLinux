@@ -36,7 +36,7 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 DESTDIR=$LFS install && ln -sv gcc $LFS/usr/bin/cc
+    make && make -j1 install && ln -sv gcc $TODD_FAKE_ROOT_DIR/usr/bin/cc
     return
 }
 

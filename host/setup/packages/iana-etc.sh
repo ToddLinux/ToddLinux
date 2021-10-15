@@ -9,7 +9,8 @@ unpack_src() {
 }
 
 copy() {
-    cp services protocols "$LFS/etc"
+    mkdir $TODD_FAKE_ROOT_DIR/etc
+    cp services protocols $TODD_FAKE_ROOT_DIR/etc
     return
 }
 

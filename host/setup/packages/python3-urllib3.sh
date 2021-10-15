@@ -9,8 +9,9 @@ unpack_src() {
 }
 
 python_install() {
-    export PYTHONPATH="$LFS/usr/lib/python3.7/site-packages/"
-    python3.7 setup.py install --prefix="$LFS/usr"
+    export PYTHONPATH="$TODD_FAKE_ROOT_DIR/usr/lib/python3.7/site-packages/"
+    mkdir -p $TODD_FAKE_ROOT_DIR/usr/lib/python3.7/site-packages/
+    python3.7 setup.py install --prefix="$TODD_FAKE_ROOT_DIR/usr"
     return
 }
 
