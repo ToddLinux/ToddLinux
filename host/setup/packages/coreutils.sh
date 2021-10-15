@@ -23,6 +23,7 @@ make_install() {
 }
 
 post_install() {
+    mkdir -p $TODD_FAKE_ROOT_DIR/{bin,usr/sbin}
     mv -v $TODD_FAKE_ROOT_DIR/usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} $TODD_FAKE_ROOT_DIR/bin
     mv -v $TODD_FAKE_ROOT_DIR/usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm}        $TODD_FAKE_ROOT_DIR/bin
     mv -v $TODD_FAKE_ROOT_DIR/usr/bin/{rmdir,stty,sync,true,uname}               $TODD_FAKE_ROOT_DIR/bin
