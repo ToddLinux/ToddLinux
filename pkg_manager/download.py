@@ -5,7 +5,6 @@ import shutil
 
 PKG_CACHE_DIRECTORY = "/var/cache/todd"
 
-# from .install import Package # wtf
 
 def dwn_file(url: str, file_path: str, source_pretty_name: str) -> bool:
     """
@@ -40,10 +39,10 @@ def get_local_file_name(url: str) -> str:
 
 def fetch_package_sources(package, package_dest_dir: str) -> bool:
     """
-    Download all pakcage sources for package
+    Download all package sources for package
 
     :param package: package for which the sources are being downloaded
-    :param package_dest_dir: direcotry to which the package sources are going to be written to
+    :param package_dest_dir: directory to which the package sources are going to be written to
     :return: true if successfully downloaded all package sources false otherwise
     """
     if not os.path.isdir(package_dest_dir):
@@ -56,14 +55,14 @@ def fetch_package_sources(package, package_dest_dir: str) -> bool:
             if not dwn_file(url, dest_file, local_file_name):  # lol
                 return False
         else:
-            print("Source:", local_file_name, "for package", package.name, "already downloaded")
+            print(f"Source: '{local_file_name}' for package {package.name} already downloaded")
 
     return True
 
 
 def is_cached(package, lfs_dir: str) -> bool:
     """
-    Check if all package sources for specified package has been downloaded
+    Check if all package sources for specified package have been downloaded
 
     :param package: package for which sources are being checked
     :param lfs_dir: package management system root directory

@@ -19,7 +19,7 @@ BUILD_FOLDER = "/tmp/todd_linux_build"
 FAKE_ROOT = "/tmp/todd_linux_fake_root"
 
 
-# represents build and installation of <package>
+# represents build and installation
 class Package:
     def __init__(
         self,
@@ -51,7 +51,7 @@ def get_sources(lfs_dir: str, package: Package) -> bool:
         if not fetch_package_sources(package, package_dest_dir):
             return False
 
-    print("copying package sources into build directory")
+    print("copying package sources into build directory: ...")
     for file in os.listdir(package_dest_dir):
         shutil.copy(f"{package_dest_dir}/{file}", BUILD_FOLDER)
 
