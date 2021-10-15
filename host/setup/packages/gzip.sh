@@ -15,12 +15,12 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 DESTDIR=$LFS install
+    make && make -j1 install
     return
 }
 
 post_install() {
-    mv -v $LFS/usr/bin/gzip $LFS/bin
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/gzip $TODD_FAKE_ROOT_DIR/bin
     return
 }
 

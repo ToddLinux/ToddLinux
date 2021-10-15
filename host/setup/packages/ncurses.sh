@@ -30,10 +30,11 @@ configure() {
 
 make_install() {
     make && \
-    make -j1 DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install && \
-    echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so && \
-    mv -v $LFS/usr/lib/libncursesw.so.6* $LFS/lib && \
-    ln -sfv ../../lib/$(readlink $LFS/usr/lib/libncursesw.so) $LFS/usr/lib/libncursesw.so
+    make -j1 TIC_PATH=$(pwd)/build/progs/tic install && \
+    echo "INPUT(-lncursesw)" > $TODD_FAKE_ROOT_DIR/usr/lib/libncurses.so && \
+    mkdir -p $TODD_FAKE_ROOT_DIR/lib && \
+    mv -v $TODD_FAKE_ROOT_DIR/usr/lib/libncursesw.so.6* $TODD_FAKE_ROOT_DIR/lib && \
+    ln -sfv ../../lib/$(readlink $TODD_FAKE_ROOT_DIR/usr/lib/libncursesw.so) $TODD_FAKE_ROOT_DIR/usr/lib/libncursesw.so
     return 
 }
 

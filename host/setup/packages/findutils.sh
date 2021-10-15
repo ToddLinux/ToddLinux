@@ -16,13 +16,13 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 DESTDIR=$LFS install
+    make && make -j1 install
     return
 }
 
 post_install() {
-    mv -v $LFS/usr/bin/find $LFS/bin
-    sed -i 's|find:=${BINDIR}|find:=/bin|' $LFS/usr/bin/updatedb
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/find $TODD_FAKE_ROOT_DIR/bin
+    sed -i 's|find:=${BINDIR}|find:=/bin|' $TODD_FAKE_ROOT_DIR/usr/bin/updatedb
     return
 }
 

@@ -8,7 +8,7 @@ FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 ROOT_PATH = f"{FILE_DIR_PATH}/../.."
 sys.path.append(ROOT_PATH)
 
-from pkg_manager import install_packages, FAKE_ROOT, BUILD_FOLDER  # nopep8
+from pkg_manager import install_packages  # nopep8
 
 
 REQUIRED_PACKAGES = [
@@ -65,7 +65,5 @@ def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, 
     os.environ["LFS"] = lfs_dir
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
-    os.environ["TODD_BUILD_DIR"] = BUILD_FOLDER
-    os.environ["TODD_FAKE_ROOT_DIR"] = FAKE_ROOT
 
     return install_packages(REQUIRED_PACKAGES, f"{FILE_DIR_PATH}/packages", "host", lfs_dir, verbose, jobs, measure_time)

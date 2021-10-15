@@ -1,7 +1,6 @@
 # See LICENSE for license details.
 import pathlib
-from typing import Dict, Optional, List
-from dataclasses import dataclass
+from typing import Dict, List
 
 import json
 import os
@@ -51,4 +50,4 @@ def read_index(lfs_dir: str) -> Dict[str, PackageIndex]:
 
 def update_index(lfs_dir: str, index: Dict[str, PackageIndex]) -> None:
     with open(f"{lfs_dir}{INDEX_FILE_PATH}", "w") as file:
-        json.dump({pkg.name: pkg.__dict__ for pkg in index.values()}, file)
+        json.dump({pkg.name: pkg.__dict__ for pkg in index.values()}, file, indent=4)

@@ -17,13 +17,13 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 DESTDIR=$LFS install
+    make && make -j1 install
     return
 }
 
 post_install() {
-    mv $LFS/usr/bin/bash $LFS/bin/bash
-    ln -sv bash $LFS/bin/sh
+    mv $TODD_FAKE_ROOT_DIR/usr/bin/bash $TODD_FAKE_ROOT_DIR/bin/bash
+    ln -sv bash $TODD_FAKE_ROOT_DIR/bin/sh
     return
 }
 

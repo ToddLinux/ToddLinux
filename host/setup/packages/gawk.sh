@@ -16,7 +16,7 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 DESTDIR=$LFS install
+    make && make -j1 install
 }
 
 unpack_src && configure && make_install

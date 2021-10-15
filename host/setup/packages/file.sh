@@ -22,7 +22,7 @@ configure() {
 
 make_install() {
     make FILE_COMPILE=$(pwd)/build/src/file && \
-    make -j1 DESTDIR=$LFS install
+    make -j1 install
     return
 }
 

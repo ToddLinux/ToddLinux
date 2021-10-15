@@ -18,19 +18,19 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 DESTDIR=$LFS install
+    make && make -j1 install
     return
 }
 
 post_install() {
-    mv -v $LFS/usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} $LFS/bin
-    mv -v $LFS/usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm}        $LFS/bin
-    mv -v $LFS/usr/bin/{rmdir,stty,sync,true,uname}               $LFS/bin
-    mv -v $LFS/usr/bin/{head,nice,sleep,touch}                    $LFS/bin
-    mv -v $LFS/usr/bin/chroot                                     $LFS/usr/sbin
-    mkdir -pv $LFS/usr/share/man/man8
-    mv -v $LFS/usr/share/man/man1/chroot.1                        $LFS/usr/share/man/man8/chroot.8
-    sed -i 's/"1"/"8"/'                                           $LFS/usr/share/man/man8/chroot.8
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} $TODD_FAKE_ROOT_DIR/bin
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm}        $TODD_FAKE_ROOT_DIR/bin
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/{rmdir,stty,sync,true,uname}               $TODD_FAKE_ROOT_DIR/bin
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/{head,nice,sleep,touch}                    $TODD_FAKE_ROOT_DIR/bin
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/chroot                                     $TODD_FAKE_ROOT_DIR/usr/sbin
+    mkdir -pv $TODD_FAKE_ROOT_DIR/usr/share/man/man8
+    mv -v $TODD_FAKE_ROOT_DIR/usr/share/man/man1/chroot.1                        $TODD_FAKE_ROOT_DIR/usr/share/man/man8/chroot.8
+    sed -i 's/"1"/"8"/'                                           $TODD_FAKE_ROOT_DIR/usr/share/man/man8/chroot.8
     return
 }
 
