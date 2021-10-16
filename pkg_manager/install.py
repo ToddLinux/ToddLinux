@@ -76,7 +76,6 @@ def install_package(lfs_dir: str, package: Package, verbose=False) -> bool:
         return False
 
     print(f"running build script for {package.name}: ...")
-    os.environ["DESTDIR"] = FAKE_ROOT
     os.environ["TODD_BUILD_DIR"] = BUILD_FOLDER
     os.environ["TODD_FAKE_ROOT_DIR"] = FAKE_ROOT
     cmd_suffix = "" if verbose else " >/dev/null 2>&1"

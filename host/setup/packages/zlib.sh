@@ -15,7 +15,7 @@ configure() {
 
 make_install() {
     make
-    make -j1 install
+    make -j1 DESTDIR=$TODD_FAKE_ROOT_DIR install
     return
 }
 

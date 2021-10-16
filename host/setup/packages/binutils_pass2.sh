@@ -21,7 +21,7 @@ configure() {
 
 make_install() {
     # https://sourceware.org/bugzilla/show_bug.cgi?id=27482
-    make && make -j1 install && install -vm755 $TODD_BUILD_DIR/binutils-2.36.1/build/libctf/.libs/libctf.so.0.0.0 $TODD_FAKE_ROOT_DIR/usr/lib
+    make && make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install && install -vm755 $TODD_BUILD_DIR/binutils-2.36.1/build/libctf/.libs/libctf.so.0.0.0 $TODD_FAKE_ROOT_DIR/usr/lib
     return
 }
 

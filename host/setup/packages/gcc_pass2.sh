@@ -36,7 +36,7 @@ configure() {
 }
 
 make_install() {
-    make && make -j1 install && ln -sv gcc $TODD_FAKE_ROOT_DIR/usr/bin/cc
+    make && make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install && ln -sv gcc $TODD_FAKE_ROOT_DIR/usr/bin/cc
     return
 }
 

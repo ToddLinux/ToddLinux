@@ -32,7 +32,7 @@ configure() {
 }
 
 make_install() {
-    make -j1 && make -j1 install
+    make -j1 && make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install
 }
 
 # TODO: FIX THIS

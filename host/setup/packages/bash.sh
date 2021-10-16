@@ -17,8 +17,6 @@ configure() {
 }
 
 make_install() {
-    # is DESTDIR overwritten somehow in bash Makefile?
-    # BASH EXPLAIN ??????????
     make && make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install
     return
 }

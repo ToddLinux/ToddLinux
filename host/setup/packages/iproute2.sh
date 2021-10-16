@@ -18,7 +18,7 @@ configure() {
 
 make_install() {
     make
-    make -j1 DOCDIR=/usr/share/doc/iproute2-5.10.0 install
+    make -j1 DESTDIR=$TODD_FAKE_ROOT_DIR DOCDIR=/usr/share/doc/iproute2-5.10.0 install
     return
 }
 
