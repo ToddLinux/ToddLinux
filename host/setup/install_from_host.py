@@ -40,8 +40,8 @@ REQUIRED_PACKAGES = [
     "zlib",
     "openssl",
     "python3.7",
-    "python3-pip",
     "python3-setuptools",
+    "python3-pip",
     # will be installed with pip instead
     # "python3-requests",
     # "python3-urllib3",

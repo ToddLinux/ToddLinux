@@ -180,6 +180,10 @@ def main() -> bool:
     with open("/etc/resolv.conf", "w") as file:
         file.write(RESOLV_FILE)
 
+    print("installing requests with pip: ...")
+    os.system(f"pip install requests")
+    print("installing requests with pip: ok")
+
     print("preparing chroot from within chroot environment: ok")
     return True
 

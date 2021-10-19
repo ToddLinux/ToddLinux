@@ -6,7 +6,6 @@ import json
 import os
 import shutil
 import pathlib
-import requests
 from typing import List, Dict, Set
 from distutils.dir_util import copy_tree
 
