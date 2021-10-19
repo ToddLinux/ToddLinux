@@ -3,8 +3,8 @@
 set -euo pipefail
 
 unpack_src() {
-    tar xf v58.2.0.tar.gz
-    cd setuptools-58.2.0
+    tar xf 21.3.tar.gz
+    cd pip-21.3
     return
 }
 

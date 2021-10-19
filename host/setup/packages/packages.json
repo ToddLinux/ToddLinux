@@ -233,9 +233,17 @@
         },
         {
             "name": "python3-setuptools",
-            "version": "57.4.0",
+            "version": "58.2.0",
             "src_urls": [
-                "https://github.com/pypa/setuptools/archive/refs/tags/v57.4.0.tar.gz"
+                "https://github.com/pypa/setuptools/archive/refs/tags/v58.2.0.tar.gz"
+            ],
+            "env": "host"
+        },
+        {
+            "name": "python3-pip",
+            "version": "21.3.0",
+            "src_urls": [
+                "https://github.com/pypa/pip/archive/refs/tags/21.3.tar.gz"
             ],
             "env": "host"
         },

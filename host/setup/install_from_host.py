@@ -40,11 +40,14 @@ REQUIRED_PACKAGES = [
     "zlib",
     "openssl",
     "python3.7",
-    # "python3-setuptools",
-    "python3-requests",
-    "python3-urllib3",
-    "python3-certifi",
-    "python3-idna"]
+    "python3-pip",
+    "python3-setuptools",
+    # will be installed with pip instead
+    # "python3-requests",
+    # "python3-urllib3",
+    # "python3-certifi",
+    # "python3-idna",
+]
 
 DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
 
