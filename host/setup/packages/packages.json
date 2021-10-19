@@ -248,38 +248,6 @@
             "env": "host"
         },
         {
-            "name": "python3-requests",
-            "version": "2.26.0",
-            "src_urls": [
-                "https://github.com/psf/requests/archive/refs/tags/v2.26.0.tar.gz"
-            ],
-            "env": "host"
-        },
-        {
-            "name": "python3-urllib3",
-            "version": "1.26.6",
-            "src_urls": [
-                "https://github.com/urllib3/urllib3/archive/refs/tags/1.26.6.tar.gz"
-            ],
-            "env": "host"
-        },
-        {
-            "name": "python3-certifi",
-            "version": "2021.05.30",
-            "src_urls": [
-                "https://github.com/certifi/python-certifi/archive/refs/tags/2021.05.30.tar.gz"
-            ],
-            "env": "host"
-        },
-        {
-            "name": "python3-idna",
-            "version": "3.2",
-            "src_urls": [
-                "https://github.com/kjd/idna/archive/refs/tags/v3.2.tar.gz"
-            ],
-            "env": "host"
-        },
-        {
             "name": "libstdcpp_pass2",
             "version": "10.2.0",
             "src_urls": [
