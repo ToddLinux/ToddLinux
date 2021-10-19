@@ -3,3 +3,6 @@ vms
 backup
 __pycache__
 vm_backup.ova
+
+# don't be stupid
+status.json
