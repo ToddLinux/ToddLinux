@@ -1,8 +1,9 @@
 # ToddLinux
 
-[![License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/adamjedrzejewski/ToddLinux/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/ToddLinux/ToddLinux/blob/main/LICENSE)
 
-[Linux From Scratch Book](https://www.linuxfromscratch.org/lfs/downloads/stable/LFS-BOOK-11.0.pdf)
+## Reference
+[Linux From Scratch Book](https://www.linuxfromscratch.org/lfs/downloads/10.1/LFS-BOOK-10.1.pdf)
 
 ## Build instructions
-Build instructions are in Todd Linux [wiki](https://github.com/ToddLinux/ToddLinux/wiki)
+Build instructions are in Todd Linux [wiki](https://github.com/ToddLinux/ToddLinux/wiki).
