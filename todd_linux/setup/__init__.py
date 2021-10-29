@@ -3,15 +3,16 @@ import subprocess
 import pathlib
 import pwd
 
-from argparse import ArgumentParser
-from typing import Optional, Tuple, Union
+from typing import Optional, Union
 from pwd import struct_passwd
 
+from .enter_chroot import enter_chroot
+from .sign_lfs import create_sign_file
 from .install_from_host import install_required_packages_from_host
 from .install_from_chroot import install_required_packages_from_chroot
 from .check_req import check_all_reqs
 from .prepare_chroot import prepare_chroot
-from pkg_manager import load_packages, PKG_CACHE_DIRECTORY, fetch_package_sources
+from todd import load_packages, PKG_CACHE_DIRECTORY, fetch_package_sources
 
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
@@ -118,23 +119,15 @@ def prefetch_packages(lfs_dir: str) -> bool:
     return True
 
 
-def setup() -> bool:
-    parser = ArgumentParser(description="Run Todd Linux build system")
-    parser.add_argument('path', help='path to chroot environment', type=str)
-    parser.add_argument('-t', '--time', help='measure build time', action='store_true')
-    parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
-    parser.add_argument('-j', '--jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
-    parser.add_argument('-p', '--prefetch', help='download package sources before building', action='store_true')
-
-    args = parser.parse_args()
-    verbose: bool = args.verbose
-    measure_time: bool = args.time
-    prefetch: bool = args.prefetch
-    jobs: Optional[int] = args.jobs
-    lfs_dir = os.path.abspath(args.path)
-    build_user = get_build_user()
-
+def setup(
+    lfs_dir: str,
+    verbose: bool,
+    measure_time: bool,
+    prefetch: bool,
+    jobs: Optional[int]
+) -> bool:
     os.chdir(lfs_dir)
+    build_user = get_build_user()
 
     if os.geteuid() != 0:
         print("Insufficient privlieges")

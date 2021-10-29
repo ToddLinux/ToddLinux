@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 
 SCRIPTS_FOLDER = f"/scripts"
 sys.path.append(SCRIPTS_FOLDER)
-from pkg_manager import install_packages  # nopep8
+from todd import install_packages  # nopep8
 
 
 SIGN_FILE = "lfs_sign.lock"

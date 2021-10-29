@@ -1,7 +1,4 @@
-#!/usr/bin/env python3
 import os
-import sys
-from argparse import ArgumentParser
 from datetime import datetime
 
 # A sign file signifies the root directory of the target system,
@@ -10,7 +7,7 @@ from datetime import datetime
 SIGN_FILE = "lfs_sign.lock"
 
 
-def create_sign_file(force: bool, lfs_dir: str) -> bool:
+def create_sign_file(lfs_dir: str, force: bool) -> bool:
     """
     Write sign file to directory.
     If directory is not empty fail, setting force to true overrides this behavior.
@@ -46,18 +43,4 @@ def create_sign_file(force: bool, lfs_dir: str) -> bool:
 
     return True
 
-
-def main() -> bool:
-    parser = ArgumentParser(description="Sign LFS Chroot Environment")
-    parser.add_argument('path', help='path to lfs chroot environment', type=str)
-    parser.add_argument("-f", "--force", help="Add sign file even when folder is not empty", action="store_true")
-
-    args = parser.parse_args()
-    force = args.force
-    lfs_dir = os.path.abspath(args.path)
-
-    return create_sign_file(force, lfs_dir)
-
-
-if __name__ == "__main__":
-    sys.exit(0 if main() else 1)
+# TODO: add function for check if not fucking up system
