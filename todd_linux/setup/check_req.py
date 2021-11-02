@@ -5,7 +5,7 @@ import sys
 import json
 
 from typing import Callable, List, Any
-from todd import Requirement, check_req, SymRequirement, check_sym  # nopep8
+from todd.todd import Requirement, check_req, SymRequirement, check_sym  # nopep8
 
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()

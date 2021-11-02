@@ -12,7 +12,7 @@ from .install_from_host import install_required_packages_from_host
 from .install_from_chroot import install_required_packages_from_chroot
 from .check_req import check_all_reqs
 from .prepare_chroot import prepare_chroot
-from todd import load_packages, PKG_CACHE_DIRECTORY, fetch_package_sources
+from todd.todd import load_packages, PKG_CACHE_DIRECTORY, fetch_package_sources
 
 
 FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()

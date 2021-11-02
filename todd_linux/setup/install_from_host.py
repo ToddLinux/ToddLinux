@@ -8,7 +8,7 @@ FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
 ROOT_PATH = f"{FILE_DIR_PATH}/../.."
 sys.path.append(ROOT_PATH)
 
-from todd import install_packages  # nopep8
+from todd.todd import install_packages  # nopep8
 
 
 REQUIRED_PACKAGES = [
