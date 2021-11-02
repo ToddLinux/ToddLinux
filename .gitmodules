@@ -1,0 +1,3 @@
+[submodule "todd"]
+	path = todd
+	url = https://github.com/ToddLinux/Todd
