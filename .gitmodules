@@ -1,3 +1,3 @@
-[submodule "todd"]
-	path = todd
+[submodule "todd_linux/todd"]
+	path = todd_linux/todd
 	url = https://github.com/ToddLinux/Todd

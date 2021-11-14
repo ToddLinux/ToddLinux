@@ -13,10 +13,9 @@ from .sign_lfs import assert_signed
 from .prepare_chroot import prepare_chroot
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
-ROOT_PATH = f"{BASE_DIR}/.."
-sys.path.append(f"{ROOT_PATH}/todd")
 
-from ..todd.todd import fetch_package_sources, load_packages  # nopep8
+sys.path.append("./todd/todd")
+from .todd.todd import fetch_package_sources, load_packages  # nopep8
 
 
 def install_unelevated(build_user: struct_passwd, lfs_dir: str, verbose: bool, jobs: int) -> bool:

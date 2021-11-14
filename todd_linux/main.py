@@ -1,11 +1,10 @@
 from argparse import ArgumentParser
 import os
-import sys
 from typing import Optional
 
-from .todd_linux.sign_lfs import create_sign_file
-from .todd_linux.enter_chroot import enter_chroot
-from .todd_linux.setup import setup
+from .sign_lfs import create_sign_file
+from .enter_chroot import enter_chroot
+from .setup import setup
 
 
 def main() -> bool:
@@ -43,7 +42,3 @@ def main() -> bool:
         return enter_chroot(lfs_dir)
 
     return setup(lfs_dir, verbose, prefetch, jobs)
-
-
-if __name__ == "__main__":
-    sys.exit(0 if main() else 1)
