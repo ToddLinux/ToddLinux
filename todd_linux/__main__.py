@@ -3,9 +3,9 @@ import os
 import sys
 from typing import Optional
 
-from sign_lfs import create_sign_file
-from enter_chroot import enter_chroot
-from setup import setup
+from .sign_lfs import create_sign_file
+from .enter_chroot import enter_chroot
+from .setup import setup
 
 
 def main() -> bool:
