@@ -1,14 +1,8 @@
-from argparse import ArgumentParser
-from typing import Optional
+from ..todd.todd import install_packages
 import os
 import pathlib
-import sys
 
-FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
-ROOT_PATH = f"{FILE_DIR_PATH}/../.."
-sys.path.append(ROOT_PATH)
-
-from todd.todd import install_packages  # nopep8
+BASE_DIR = pathlib.Path(__file__).parent.resolve()
 
 
 REQUIRED_PACKAGES = [
@@ -61,7 +55,7 @@ def create_directory_layout():
     print("creating minimal directory layout: ok")
 
 
-def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, measure_time: bool) -> bool:
+def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int) -> bool:
     os.chdir(lfs_dir)
     create_directory_layout()
 
@@ -69,4 +63,4 @@ def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int, 
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
-    return install_packages(REQUIRED_PACKAGES, f"{FILE_DIR_PATH}/packages", "host", lfs_dir, verbose, jobs, measure_time)
+    return install_packages(REQUIRED_PACKAGES, f"{BASE_DIR}/packages", "host", lfs_dir, verbose, jobs)

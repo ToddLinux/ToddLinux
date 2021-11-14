@@ -1,6 +1,5 @@
 # See LICENSE for license details.
 import os
-from datetime import datetime
 import pathlib
 import shutil
 
