@@ -22,12 +22,10 @@ REQUIRED_PACKAGES = [
 
 def main() -> bool:
     parser = ArgumentParser(description="Install host tools from within chroot environemnt")
-    parser.add_argument('-t', '--time', help='measure build time', action='store_true')
     parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
     parser.add_argument('-j', '--jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
     args = parser.parse_args()
     verbose: bool = args.verbose
-    measure_time: bool = args.time
     jobs: int = args.jobs
 
     os.chdir("/")
@@ -37,7 +35,7 @@ def main() -> bool:
         print(f"Error: chroot root path doesn't contain the sign file; Are you sure you're using this script from within the chroot environment; use sign_lfs.py to create one")
         return False
 
-    if not install_packages(REQUIRED_PACKAGES, f"{SCRIPTS_FOLDER}/host/setup/packages", "chroot", "/", verbose, jobs, measure_time):
+    if not install_packages(REQUIRED_PACKAGES, f"{SCRIPTS_FOLDER}/host/setup/packages", "chroot", "/", verbose, jobs):
         return False
     print("installing tools from within chroot environment: ok")
     return True

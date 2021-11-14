@@ -4,10 +4,6 @@ import os
 import sys
 from typing import Optional
 
-from setup import enter_chroot
-from setup import create_sign_file
-from setup import setup
-
 
 def main() -> bool:
     parser = ArgumentParser(description="ToddLinux Builder.")
@@ -20,7 +16,6 @@ def main() -> bool:
     parser.add_argument('path', help='path to lfs chroot environment', type=str)
 
     # installation
-    parser.add_argument('-t', '--time', help='measure build time', action='store_true')
     parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
     parser.add_argument('-j', '--jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
     parser.add_argument('-p', '--prefetch', help='download package sources before building', action='store_true')
@@ -36,7 +31,6 @@ def main() -> bool:
 
     # installation
     verbose: bool = args.verbose
-    measure_time: bool = args.time
     prefetch: bool = args.prefetch
     jobs: Optional[int] = args.jobs
 
@@ -45,7 +39,7 @@ def main() -> bool:
     if enter:
         return enter_chroot(lfs_dir)
 
-    return setup(lfs_dir, verbose, measure_time, prefetch, jobs)
+    return setup(lfs_dir, verbose, prefetch, jobs)
 
 
 if __name__ == "__main__":

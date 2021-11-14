@@ -43,4 +43,6 @@ def create_sign_file(lfs_dir: str, force: bool) -> bool:
 
     return True
 
-# TODO: add function for check if not fucking up system
+
+def assert_signed(lfs_dir: str = ".") -> None:
+    assert os.path.exists(f"{lfs_dir}/{SIGN_FILE}"), f"Error: provided lfs path '{os.path.abspath(lfs_dir)}' doesn't have sign file; use sign_lfs.py to create one"
