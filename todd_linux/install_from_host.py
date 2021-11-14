@@ -1,9 +1,13 @@
-from ..todd.todd import install_packages
 import os
 import pathlib
+import sys
+
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
+ROOT_PATH = f"{BASE_DIR}/.."
+sys.path.append(f"{ROOT_PATH}/todd")
 
+from ..todd.todd import install_packages  # nopep8
 
 REQUIRED_PACKAGES = [
     "binutils",

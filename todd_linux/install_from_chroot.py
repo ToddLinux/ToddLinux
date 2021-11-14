@@ -2,7 +2,7 @@ import os
 import pathlib
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
-ROOT_PATH = f"{BASE_DIR}/../.."
+ROOT_PATH = f"{BASE_DIR}/.."
 SCRIPTS_FOLDER = "scripts"
 
 
