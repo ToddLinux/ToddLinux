@@ -45,7 +45,7 @@ def main() -> bool:
     if enter:
         return enter_chroot(lfs_dir)
     if chroot:
-        assert not lfs_dir == "/", "Chroot scripts must be launched from root path."
+        assert lfs_dir == "/", f"Chroot scripts must be launched from root path, not '{lfs_dir}'."
         return install_from_chroot(verbose, jobs)
 
     return setup_host(lfs_dir, verbose, prefetch, jobs)
