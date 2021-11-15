@@ -14,6 +14,7 @@ configure() {
 
 make_install() {
     make
+    mkdir -p $TODD_FAKE_ROOT_DIR/usr/bin
     cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} $TODD_FAKE_ROOT_DIR/usr/bin
 }
 
