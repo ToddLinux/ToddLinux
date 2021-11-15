@@ -60,7 +60,6 @@ def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int) 
     create_directory_layout()
 
     os.environ["LFS"] = lfs_dir
-    os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
     return install_packages(REQUIRED_PACKAGES, PACKAGES_PATH, "host", lfs_dir, verbose, jobs)
