@@ -41,7 +41,7 @@ def main() -> bool:
 
     if sign:
         return create_sign_file(lfs_dir, force)
-    assert_signed("lfs_dir")
+    assert_signed(lfs_dir)
     if enter:
         return enter_chroot(lfs_dir)
     if chroot:
