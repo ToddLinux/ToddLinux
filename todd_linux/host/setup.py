@@ -49,7 +49,7 @@ def install_elevated(lfs_dir: str, verbose: bool, jobs: int) -> bool:
     if not prepare_chroot(lfs_dir):
         return False
 
-    if not enter_bootstrap_chroot_python(lfs_dir, verbose, jobs):
+    if not enter_bootstrap_chroot_python(lfs_dir):
         return False
 
     if not enter_install_from_chroot(lfs_dir, verbose, jobs):

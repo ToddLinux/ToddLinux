@@ -2,9 +2,7 @@ from argparse import ArgumentParser
 import os
 from typing import Optional
 
-from .host import create_sign_file
-from .host import enter_chroot
-from .host import setup_host
+from .host import create_sign_file, enter_chroot, setup_host, assert_signed
 from .chroot import install_from_chroot
 
 __all__ = ["main"]
@@ -43,9 +41,11 @@ def main() -> bool:
 
     if sign:
         return create_sign_file(lfs_dir, force)
+    assert_signed("lfs_dir")
     if enter:
         return enter_chroot(lfs_dir)
     if chroot:
+        assert not lfs_dir == "/", "Chroot scripts must be launched from root path."
         return install_from_chroot(verbose, jobs)
 
     return setup_host(lfs_dir, verbose, prefetch, jobs)
