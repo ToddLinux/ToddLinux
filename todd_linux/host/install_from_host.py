@@ -1,10 +1,14 @@
 import os
 import pathlib
 
+from ..todd.todd import install_packages
+
+__all__ = ["install_required_packages_from_host"]
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
+ROOT_PATH = f"{BASE_DIR}/../.."
+PACKAGES_PATH = f"{ROOT_PATH}/todd_linux/packages"
 
-from .todd.todd import install_packages  # nopep8
 
 REQUIRED_PACKAGES = [
     "binutils",
@@ -37,11 +41,6 @@ REQUIRED_PACKAGES = [
     "python3.7",
     "python3-setuptools",
     "python3-pip",
-    # will be installed with pip instead
-    # "python3-requests",
-    # "python3-urllib3",
-    # "python3-certifi",
-    # "python3-idna",
 ]
 
 DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
@@ -64,4 +63,4 @@ def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int) 
     os.environ["LFS_TGT"] = "x86_64-lfs-linux-gnu"
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
-    return install_packages(REQUIRED_PACKAGES, f"{BASE_DIR}/packages", "host", lfs_dir, verbose, jobs)
+    return install_packages(REQUIRED_PACKAGES, PACKAGES_PATH, "host", lfs_dir, verbose, jobs)

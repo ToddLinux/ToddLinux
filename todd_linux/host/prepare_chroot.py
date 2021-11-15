@@ -2,8 +2,10 @@ import os
 import pathlib
 import shutil
 
+__all__ = ["prepare_chroot"]
+
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
-ROOT_PATH = f"{BASE_DIR}/.."
+ROOT_PATH = f"{BASE_DIR}/../.."
 
 VIRTUAL_KERNEL_FILESYSTEMS = ["dev", "proc", "sys", "run"]
 SCRIPTS_FOLDER = "scripts"

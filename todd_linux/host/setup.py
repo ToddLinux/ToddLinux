@@ -10,10 +10,11 @@ from .check_req import check_all_reqs
 from .sign_lfs import assert_signed
 from .prepare_chroot import prepare_chroot
 from .enter_chroot import enter_bootstrap_chroot_python, enter_install_from_chroot
+from ..todd.todd import fetch_package_sources, load_packages
+
+__all__ = ["setup_host"]
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
-
-from .todd.todd import fetch_package_sources, load_packages  # nopep8
 
 
 def install_unelevated(build_user: struct_passwd, lfs_dir: str, verbose: bool, jobs: int) -> bool:
@@ -110,7 +111,7 @@ def prefetch_packages(lfs_dir: str) -> bool:
     return True
 
 
-def setup(
+def setup_host(
     lfs_dir: str,
     verbose: bool,
     prefetch: bool,

@@ -6,9 +6,14 @@ import re
 import subprocess
 from typing import Callable, List, Any, Dict
 
+__all__ = ["check_all_reqs"]
+
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
-REQUIREMENTS_FILE = f"{BASE_DIR}/host_reqs/reqs.json"
+ROOT_PATH = f"{BASE_DIR}/../.."
+
+REQ_FILE = f"{ROOT_PATH}/todd_linux/host_reqs/reqs.json"
+REQ_SYM_LINKS_FILE = f"{ROOT_PATH}/todd_linux/host_reqs/req_sym_links.csv"
 
 
 class Requirement:
@@ -186,7 +191,7 @@ def read_reqs() -> List[Requirement]:
 
     :return: a list of requirements
     """
-    with open(REQUIREMENTS_FILE) as f:
+    with open(REQ_FILE) as f:
         data = json.load(f)
         defaults = data["defaults"]
         req_factory = get_requirement_factory(defaults)
@@ -220,7 +225,7 @@ def check_sym_links() -> bool:
     :return: True if all satisfied False otherwise
     """
     # load csv
-    with open(f"{BASE_DIR}/host_reqs/req_sym_links.csv", "r", newline="") as file:
+    with open(REQ_SYM_LINKS_FILE, "r", newline="") as file:
         raw_sym_requirements = csv.DictReader(file, delimiter=";")
         sym_requirements = [SymRequirement(req["cmd_name"],
                                            req["sym_link"]) for req in raw_sym_requirements]

@@ -2,7 +2,7 @@ import os
 from typing import Optional
 
 from ..todd.todd import install_packages
-from ..sign_lfs import assert_signed
+from ..host import assert_signed
 
 __all__ = ["install_from_chroot"]
 

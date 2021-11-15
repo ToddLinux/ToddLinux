@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
 
+__all__ = ["create_sign_file", "assert_signed"]
+
 # A sign file signifies the root directory of the target system,
 # this is where all of the compiled software is going to be installed to,
 # it's meant to prevent accidental changes to host system

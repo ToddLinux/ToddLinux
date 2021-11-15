@@ -2,10 +2,12 @@ from argparse import ArgumentParser
 import os
 from typing import Optional
 
-from .sign_lfs import create_sign_file
-from .enter_chroot import enter_chroot
-from .setup import setup
-from .chroot_scripts import install_from_chroot
+from .host import create_sign_file
+from .host import enter_chroot
+from .host import setup_host
+from .chroot import install_from_chroot
+
+__all__ = ["main"]
 
 
 def main() -> bool:
@@ -46,4 +48,4 @@ def main() -> bool:
     if chroot:
         return install_from_chroot(verbose, jobs)
 
-    return setup(lfs_dir, verbose, prefetch, jobs)
+    return setup_host(lfs_dir, verbose, prefetch, jobs)
