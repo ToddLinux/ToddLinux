@@ -16,13 +16,14 @@ configure() {
         --prefix=/usr \
         --disable-multilib \
         --disable-nls \
-        --host=$(uname -m)-lfs-linux-gnu \
+        --host=$LFS_TGT \
         --disable-libstdcxx-pch
     return
 }
 
 make_install() {
-    make && make -j1 install
+    make
+    make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install
     return
 }
 

@@ -280,7 +280,7 @@
             "env": "chroot"
         },
         {
-            "name": "python3_pass2",
+            "name": "python3.7_pass2",
             "version": "3.7.11",
             "src_urls": [
                 "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz"

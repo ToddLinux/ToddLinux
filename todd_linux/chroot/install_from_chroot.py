@@ -15,7 +15,7 @@ REQUIRED_PACKAGES = [
     "gettext",
     "bison",
     "perl",
-    "python3_pass2",
+    "python3.7_pass2",
     "texinfo",
     "util-linux"
 ]
