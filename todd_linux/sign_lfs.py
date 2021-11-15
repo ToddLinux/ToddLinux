@@ -44,5 +44,5 @@ def create_sign_file(lfs_dir: str, force: bool) -> bool:
     return True
 
 
-def assert_signed(lfs_dir: str = ".") -> None:
+def assert_signed(lfs_dir: str = "/") -> None:
     assert os.path.exists(f"{lfs_dir}/{SIGN_FILE}"), f"Error: provided lfs path '{os.path.abspath(lfs_dir)}' doesn't have sign file"

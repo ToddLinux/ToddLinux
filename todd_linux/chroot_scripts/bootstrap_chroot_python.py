@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
 # THIS SCRIPT HAS TO BE EXECUTED FROM WITHIN CHROOT ENVIRONMENT!
-import sys
+# it isn't being executed from the main system because requests hasn't been installed yet
 import os
+import sys
 
 SIGN_FILE = "lfs_sign.lock"
 DIRECTORY_LAYOUT = [
@@ -129,12 +131,9 @@ HOSTS_FILE = "127.0.0.1 localhost"
 
 
 def main() -> bool:
+    print("entering chroot to bootstrap python: ...")
     os.chdir("/")
     print("preparing chroot from within chroot environment: ...")
-    # "don't fuck up my system"-protection
-    if not os.path.exists(SIGN_FILE):
-        print(f"Error: chroot root path doesn't contain the sign file; Are you sure you're using this script from within the chroot environment; use sign_lfs.py to create one")
-        return False
 
     for folder in DIRECTORY_LAYOUT:
         if not os.path.isdir(folder):

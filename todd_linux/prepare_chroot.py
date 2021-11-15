@@ -1,10 +1,9 @@
-# See LICENSE for license details.
 import os
 import pathlib
 import shutil
 
-FILE_DIR_PATH = pathlib.Path(__file__).parent.resolve()
-ROOT_PATH = f"{FILE_DIR_PATH}/../.."
+BASE_DIR = pathlib.Path(__file__).parent.resolve()
+ROOT_PATH = f"{BASE_DIR}/.."
 
 VIRTUAL_KERNEL_FILESYSTEMS = ["dev", "proc", "sys", "run"]
 SCRIPTS_FOLDER = "scripts"
@@ -62,10 +61,6 @@ def prepare_chroot(lfs_dir: str) -> bool:
 
     # set correct linker paths for python with openssl
     if os.system(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin ldconfig /usr/local/lib") != 0:
-        return False
-
-    # perform further actions from within chroot environment itself
-    if os.system(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin /usr/bin/python3 /{SCRIPTS_FOLDER}/host/setup/chroot_scripts/prepare_chroot.py") != 0:
         return False
 
     print("preparing chroot environment: ok")

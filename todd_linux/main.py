@@ -5,6 +5,7 @@ from typing import Optional
 from .sign_lfs import create_sign_file
 from .enter_chroot import enter_chroot
 from .setup import setup
+from .chroot_scripts import install_from_chroot
 
 
 def main() -> bool:
@@ -12,20 +13,22 @@ def main() -> bool:
     # different sub-scripts
     parser.add_argument("--sign", help="Sign LFS Directory.", action="store_true")
     parser.add_argument("--enter", help="Enter Chroot Environment.", action="store_true")
+    parser.add_argument("--chroot", help="Perform installation from within chroot environment. Not to be used by the user. (path has to be '/')", action="store_true")
 
     # sign lfs
     parser.add_argument("-f", "--force", help="Add sign file even when folder is not empty", action="store_true")
-    parser.add_argument('path', help='path to lfs chroot environment', type=str)
+    parser.add_argument("path", help="path to lfs chroot environment", type=str)
 
     # installation
-    parser.add_argument('-v', '--verbose', help='print messages from underlaying build processes', action='store_true')
-    parser.add_argument('-j', '--jobs', help='number of concurrent jobs (if not specified `nproc` output is used)')
-    parser.add_argument('-p', '--prefetch', help='download package sources before building', action='store_true')
+    parser.add_argument("-v", "--verbose", help="print messages from underlaying build processes", action="store_true")
+    parser.add_argument("-j", "--jobs", help="number of concurrent jobs (if not specified 'nproc' output is used)")
+    parser.add_argument("-p", "--prefetch", help="download package sources before building", action="store_true")
 
     args = parser.parse_args()
     # different sub-scripts
     sign: bool = args.sign
     enter: bool = args.enter
+    chroot: bool = args.chroot
 
     # sign lfs
     force: bool = args.force
@@ -40,5 +43,7 @@ def main() -> bool:
         return create_sign_file(lfs_dir, force)
     if enter:
         return enter_chroot(lfs_dir)
+    if chroot:
+        return install_from_chroot(verbose, jobs)
 
     return setup(lfs_dir, verbose, prefetch, jobs)

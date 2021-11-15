@@ -1,5 +1,4 @@
 import os
-import sys
 import subprocess
 import pathlib
 import pwd
@@ -7,14 +6,13 @@ from typing import Optional, Union
 from pwd import struct_passwd
 
 from .install_from_host import install_required_packages_from_host
-from .install_from_chroot import install_required_packages_from_chroot
 from .check_req import check_all_reqs
 from .sign_lfs import assert_signed
 from .prepare_chroot import prepare_chroot
+from .enter_chroot import enter_bootstrap_chroot_python, enter_install_from_chroot
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
 
-sys.path.append("./todd/todd")
 from .todd.todd import fetch_package_sources, load_packages  # nopep8
 
 
@@ -50,7 +48,10 @@ def install_elevated(lfs_dir: str, verbose: bool, jobs: int) -> bool:
     if not prepare_chroot(lfs_dir):
         return False
 
-    if not install_required_packages_from_chroot(lfs_dir, verbose, jobs):
+    if not enter_bootstrap_chroot_python(lfs_dir, verbose, jobs):
+        return False
+
+    if not enter_install_from_chroot(lfs_dir, verbose, jobs):
         return False
 
     return True
@@ -139,7 +140,7 @@ def setup(
         output = subprocess.check_output("nproc", stderr=subprocess.STDOUT).decode()
         jobs = int(output)
 
-    assert_signed()
+    assert_signed(".")
 
     if not check_all_reqs():
         return False

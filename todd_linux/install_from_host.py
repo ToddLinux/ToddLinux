@@ -1,10 +1,8 @@
 import os
 import pathlib
-import sys
 
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
-sys.path.append("./todd/todd")
 
 from .todd.todd import install_packages  # nopep8
 
