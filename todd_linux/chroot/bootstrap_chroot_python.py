@@ -180,7 +180,8 @@ def main() -> bool:
         file.write(RESOLV_FILE)
 
     print("installing requests with pip: ...")
-    os.system(f"pip install requests")
+    if os.system(f"python3 -m pip install requests") != 0:
+        return False
     print("installing requests with pip: ok")
 
     print("preparing chroot from within chroot environment: ok")
