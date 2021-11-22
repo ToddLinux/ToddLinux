@@ -11,13 +11,13 @@ SCRIPTS_FOLDER = f"/scripts"
 
 SIGN_FILE = "lfs_sign.lock"
 REQUIRED_PACKAGES = [
-    "libstdcpp_pass2",
-    "gettext",
-    "bison",
-    "perl",
-    "python3.7_pass2",
-    "texinfo",
-    "util-linux"
+    ("libstdcpp", 1),
+    ("gettext", 0),
+    ("bison", 0),
+    ("perl", 0),
+    ("python3.7", 1),
+    ("texinfo", 0),
+    ("util-linux", 0)
 ]
 
 
