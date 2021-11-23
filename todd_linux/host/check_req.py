@@ -1,10 +1,10 @@
 # See LICENSE for license details.
 import csv
-import pathlib
 import json
+import pathlib
 import re
 import subprocess
-from typing import Callable, List, Any, Dict
+from typing import Any, Callable, Dict, List
 
 __all__ = ["check_all_reqs"]
 
@@ -26,7 +26,7 @@ class Requirement:
         command: List[str],
         version_regex_pattern: str,
         later_version_ok: bool,
-        read_stderr_instead_of_stdout: bool
+        read_stderr_instead_of_stdout: bool,
     ):
         self.name = name
         self.min_version = min_version
@@ -97,21 +97,25 @@ def satisfied(req: Requirement, installed_version) -> bool:
 
 def collect_stdout(command: List[str]):
     """run command and collect stdout only"""
-    return subprocess.run(command,
-                          check=True,
-                          stdin=subprocess.DEVNULL,
-                          stdout=subprocess.PIPE,
-                          stderr=subprocess.DEVNULL).stdout.decode()
+    return subprocess.run(
+        command,
+        check=True,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+    ).stdout.decode()
 
 
 def collect_stderr(command: List[str]):
     """run command and collect stderr only"""
     # dedicated to bzip2
-    return subprocess.run(command,
-                          check=True,
-                          stdin=subprocess.DEVNULL,
-                          stdout=subprocess.DEVNULL,
-                          stderr=subprocess.PIPE).stderr.decode()
+    return subprocess.run(
+        command,
+        check=True,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+    ).stderr.decode()
 
 
 def collect_output(req: Requirement):
@@ -130,7 +134,9 @@ def check_req(req: Requirement) -> bool:
         installed_version = get_installed_version(req, output)
 
         if not satisfied(req, installed_version):
-            print(f"checking {req.name}: required version is '{req.min_version}' but only version '{installed_version}' is installed!")
+            print(
+                f"checking {req.name}: required version is '{req.min_version}' but only version '{installed_version}' is installed!"
+            )
             return False
         else:
             # space in end is required to overwrite previous loading dots
@@ -195,11 +201,7 @@ def read_reqs() -> List[Requirement]:
         data = json.load(f)
         defaults = data["defaults"]
         req_factory = get_requirement_factory(defaults)
-        return [
-            req_factory(req)
-            for req
-            in data["requirements"]
-        ]
+        return [req_factory(req) for req in data["requirements"]]
 
 
 def check_reqs() -> bool:
@@ -209,11 +211,7 @@ def check_reqs() -> bool:
     :return: True if all satisfied False otherwise
     """
     requirements = read_reqs()
-    return all(
-        check_req(req)
-        for req
-        in requirements
-    )
+    return all(check_req(req) for req in requirements)
 
 
 # TODO: check recursive symlinks
@@ -227,14 +225,9 @@ def check_sym_links() -> bool:
     # load csv
     with open(REQ_SYM_LINKS_FILE, "r", newline="") as file:
         raw_sym_requirements = csv.DictReader(file, delimiter=";")
-        sym_requirements = [SymRequirement(req["cmd_name"],
-                                           req["sym_link"]) for req in raw_sym_requirements]
+        sym_requirements = [SymRequirement(req["cmd_name"], req["sym_link"]) for req in raw_sym_requirements]
 
-    return all(
-        check_sym(req)
-        for req
-        in sym_requirements
-    )
+    return all(check_sym(req) for req in sym_requirements)
 
 
 def check_all_reqs() -> bool:
@@ -244,10 +237,7 @@ def check_all_reqs() -> bool:
     :return: True if all satisfied False otherwise
     """
     print("checking requirements: ...")
-    all_ok = all([
-        check_reqs(),
-        check_sym_links()
-    ])
+    all_ok = all([check_reqs(), check_sym_links()])
 
     if all_ok:
         print("checking requirements: ok")

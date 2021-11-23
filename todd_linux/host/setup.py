@@ -1,16 +1,16 @@
 import os
-import subprocess
 import pathlib
 import pwd
-from typing import Optional, Union
+import subprocess
 from pwd import struct_passwd
+from typing import Optional, Union
 
-from .install_from_host import install_required_packages_from_host
-from .check_req import check_all_reqs
-from .sign_lfs import assert_signed
-from .prepare_chroot import prepare_chroot
-from .enter_chroot import enter_bootstrap_chroot_python, enter_install_from_chroot
 from ..todd.todd import fetch_package_sources, load_packages
+from .check_req import check_all_reqs
+from .enter_chroot import enter_bootstrap_chroot_python, enter_install_from_chroot
+from .install_from_host import install_required_packages_from_host
+from .prepare_chroot import prepare_chroot
+from .sign_lfs import assert_signed
 
 __all__ = ["setup_host"]
 
@@ -111,12 +111,7 @@ def prefetch_packages(lfs_dir: str) -> bool:
     return True
 
 
-def setup_host(
-    lfs_dir: str,
-    verbose: bool,
-    prefetch: bool,
-    jobs: Optional[int]
-) -> bool:
+def setup_host(lfs_dir: str, verbose: bool, prefetch: bool, jobs: Optional[int]) -> bool:
     os.chdir(lfs_dir)
     build_user = get_build_user()
 

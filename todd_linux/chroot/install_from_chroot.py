@@ -1,8 +1,8 @@
 import os
 from typing import Optional
 
-from ..todd.todd import install_packages
 from ..host import assert_signed
+from ..todd.todd import install_packages
 
 __all__ = ["install_from_chroot"]
 
@@ -17,7 +17,7 @@ REQUIRED_PACKAGES = [
     ("perl", 0),
     ("python3.7", 1),
     ("texinfo", 0),
-    ("util-linux", 0)
+    ("util-linux", 0),
 ]
 
 
@@ -30,7 +30,14 @@ def install_from_chroot(verbose: bool, jobs: Optional[int]) -> bool:
     assert_signed()
     print("installing tools from within chroot environment: ...")
 
-    if not install_packages(REQUIRED_PACKAGES, f"{SCRIPTS_FOLDER}/todd_linux/packages", "chroot", "/", verbose, jobs):
+    if not install_packages(
+        REQUIRED_PACKAGES,
+        f"{SCRIPTS_FOLDER}/todd_linux/packages",
+        "chroot",
+        "/",
+        verbose,
+        jobs,
+    ):
         return False
     print("installing tools from within chroot environment: ok")
     return True

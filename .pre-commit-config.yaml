@@ -1,0 +1,32 @@
+fail_fast: true
+repos:
+  - repo: local
+    hooks:
+      - id: system
+        name: Black
+        entry: black .
+        pass_filenames: false
+        language: system
+  - repo: local
+    hooks:
+      - id: system
+        name: isort
+        entry: isort .
+        pass_filenames: false
+        language: system
+  # TODO: fix this
+  # - repo: local
+  #   hooks:
+  #     - id: system
+  #       name: MyPy
+  #       # this is a general problem with Manim, it's type hints are completely fucked, thus all files using Manim dircectly have to be excluded
+  #       entry: mypy --module todd_linux --exclude "todd_linux/todd/main.py"
+  #       pass_filenames: false
+  #       language: system
+  - repo: local
+    hooks:
+      - id: system
+        name: Codespell
+        entry: codespell . --skip='./.git,./.mypy_cache,./status.json' --ignore-words-list 'tread'
+        pass_filenames: false
+        language: system

@@ -21,7 +21,9 @@ def prepare_chroot(lfs_dir: str) -> bool:
     print("preparing chroot environment: ...")
     try:
         if os.geteuid() != 0:
-            print("prepare chroot must be executed as root; restart the script with root privileges and it will pick up where it left of")
+            print(
+                "prepare chroot must be executed as root; restart the script with root privileges and it will pick up where it left of"
+            )
             return False
         os.chdir(lfs_dir)
 

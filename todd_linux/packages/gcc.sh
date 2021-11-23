@@ -14,7 +14,7 @@ unpack_src() {
 }
 
 configure() {
-    # why do you hardcode absoulte paths in scripts? 
+    # why do you hardcode absolute paths in scripts? 
     ../configure \
         --target=$LFS_TGT \
         --prefix=$LFS/tools \

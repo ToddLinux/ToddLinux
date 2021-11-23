@@ -43,7 +43,17 @@ REQUIRED_PACKAGES = [
     ("python3-pip", 0),
 ]
 
-DIRECTORY_LAYOUT = ["bin", "etc", "lib", "lib64", "sbin", "usr", "var", "tools", "builds"]
+DIRECTORY_LAYOUT = [
+    "bin",
+    "etc",
+    "lib",
+    "lib64",
+    "sbin",
+    "usr",
+    "var",
+    "tools",
+    "builds",
+]
 
 
 # create folders in root

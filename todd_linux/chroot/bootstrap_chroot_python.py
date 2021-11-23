@@ -142,15 +142,25 @@ def main() -> bool:
         if not os.path.isdir(folder):
             os.mkdir(folder)
 
-    if os.system("""ln -sfv /run /var/run &&
+    if (
+        os.system(
+            """ln -sfv /run /var/run &&
                     ln -sfv /run/lock /var/lock &&
-                    ln -sfv /proc/self/mounts /etc/mtab""") != 0:
+                    ln -sfv /proc/self/mounts /etc/mtab"""
+        )
+        != 0
+    ):
         return False
 
-    if os.system("""
+    if (
+        os.system(
+            """
     install -dv -m 0750 /root &&
     install -dv -m 1777 /tmp /var/tmp
-    """) != 0:
+    """
+        )
+        != 0
+    ):
         return False
 
     with open("/etc/hosts", "w") as file:
@@ -163,20 +173,30 @@ def main() -> bool:
         file.write(GROUP_FILE)
 
     # this adds new user
-    if os.system("""
+    if (
+        os.system(
+            """
     echo "\ntester:x:$(ls -n $(tty) | cut -d" " -f3):101::/home/tester:/bin/bash" >> /etc/passwd &&
     echo "\ntester:x:101:" >> /etc/group &&
     install -o tester -d /home/tester
-    """) != 0:
+    """
+        )
+        != 0
+    ):
         return False
 
     # some stub log files
-    if os.system("""
+    if (
+        os.system(
+            """
     touch /var/log/{btmp,lastlog,faillog,wtmp} &&
     chgrp -v utmp /var/log/lastlog &&
     chmod -v 664  /var/log/lastlog &&
     chmod -v 600  /var/log/btmp
-    """) != 0:
+    """
+        )
+        != 0
+    ):
         return False
 
     with open("/etc/resolv.conf", "w") as file:

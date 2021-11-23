@@ -21,7 +21,7 @@ def create_sign_file(lfs_dir: str, force: bool) -> bool:
     """
     os.chdir(lfs_dir)
 
-    if not os.access('.', os.W_OK):
+    if not os.access(".", os.W_OK):
         print("You don't have sufficient privlieges to write sign file to this directory")
         return False
 
