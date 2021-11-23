@@ -131,9 +131,12 @@ HOSTS_FILE = "127.0.0.1 localhost"
 
 
 def main() -> bool:
-    print("entering chroot to bootstrap python: ...")
+    print("entering chroot to bootstrap python: ok")
     os.chdir("/")
     print("preparing chroot from within chroot environment: ...")
+
+    # set correct linker paths for python with openssl
+    os.system("ldconfig /usr/local/lib")
 
     for folder in DIRECTORY_LAYOUT:
         if not os.path.isdir(folder):

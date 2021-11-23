@@ -61,9 +61,5 @@ def prepare_chroot(lfs_dir: str) -> bool:
     shutil.copytree(ROOT_PATH, SCRIPTS_FOLDER)
     print("copying scripts: ok")
 
-    # set correct linker paths for python with openssl
-    if os.system(f"chroot {lfs_dir} /usr/bin/env -i HOME=/root PATH=/bin:/usr/bin:/sbin:/usr/sbin ldconfig /usr/local/lib") != 0:
-        return False
-
     print("preparing chroot environment: ok")
     return True
