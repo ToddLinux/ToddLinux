@@ -3,7 +3,6 @@
 set -euo pipefail
 
 unpack_src() {
-    rm -rf glibc-2.33 2>/dev/null
     tar xf glibc-2.33.tar.xz && cd glibc-2.33
     return
 }

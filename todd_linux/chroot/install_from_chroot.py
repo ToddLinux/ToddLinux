@@ -21,6 +21,7 @@ REQUIRED_INTERMEDIATE_PACKAGES = [
 ]
 REQUIRED_TARGET_PACKAGES = [
     ("man-pages", 0),
+    ("glibc", 1),
     ("pkg-config", 0),
     ("libpipeline", 0),
     # TODO: add back when other packages installed
