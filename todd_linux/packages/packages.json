@@ -351,7 +351,7 @@
             "src_urls": [
                 "https://www.kernel.org/pub/linux/docs/man-pages/man-pages-5.10.tar.xz"
             ],
-            "env": "chroot"
+            "env": "target"
         },
         {
             "name": "pkg-config",
@@ -360,7 +360,7 @@
             "src_urls": [
                 "https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz"
             ],
-            "env": "chroot"
+            "env": "target"
         },
         {
             "name": "libpipeline",
@@ -369,7 +369,7 @@
             "src_urls": [
                 "http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.3.tar.gz"
             ],
-            "env": "chroot"
+            "env": "target"
         },
         {
             "name": "man-db",
@@ -378,7 +378,7 @@
             "src_urls": [
                 "http://download.savannah.gnu.org/releases/man-db/man-db-2.9.4.tar.xz"
             ],
-            "env": "chroot"
+            "env": "target"
         }
     ]
 }
