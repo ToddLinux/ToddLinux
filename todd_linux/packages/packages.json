@@ -313,7 +313,7 @@
             "src_urls": [
                 {
                     "url": "https://github.com/Mic92/iana-etc/releases/download/20210611/iana-etc-20210611.tar.gz",
-                    "checksum": ""
+                    "checksum": "f2854be57fe281e3ffc7364984467d2f"
                 }
             ],
             "env": "host"
@@ -349,7 +349,7 @@
             "src_urls": [
                 {
                     "url": "https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1l.tar.gz",
-                    "checksum": ""
+                    "checksum": "2ff02cd10f96671162df3efd60470cfe"
                 }
             ],
             "env": "host"
@@ -361,7 +361,7 @@
             "src_urls": [
                 {
                     "url": "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz",
-                    "checksum": ""
+                    "checksum": "b3671d35b61f5422605cedad32f3457a"
                 }
             ],
             "env": "host"
@@ -373,7 +373,7 @@
             "src_urls": [
                 {
                     "url": "https://github.com/pypa/setuptools/archive/refs/tags/v58.2.0.tar.gz",
-                    "checksum": ""
+                    "checksum": "719ea12307aede34a180c46fcaadcb61"
                 }
             ],
             "env": "host"
@@ -385,7 +385,7 @@
             "src_urls": [
                 {
                     "url": "https://github.com/pypa/pip/archive/refs/tags/21.3.tar.gz",
-                    "checksum": ""
+                    "checksum": "c44eac743750f93fe4616b38673ab0a3"
                 }
             ],
             "env": "host"
@@ -446,7 +446,7 @@
             "src_urls": [
                 {
                     "url": "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz",
-                    "checksum": ""
+                    "checksum": "b3671d35b61f5422605cedad32f3457a"
                 }
             ],
             "env": "chroot",
