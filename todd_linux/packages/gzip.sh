@@ -20,7 +20,8 @@ make_install() {
 }
 
 post_install() {
-    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/gzip $TODD_FAKE_ROOT_DIR/bin
+    mkdir $TODD_FAKE_ROOT_DIR/bin
+    mv -v $TODD_FAKE_ROOT_DIR/usr/bin/gzip $TODD_FAKE_ROOT_DIR/bin/gzip
     return
 }
 

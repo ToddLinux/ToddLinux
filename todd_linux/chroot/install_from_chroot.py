@@ -18,6 +18,11 @@ REQUIRED_PACKAGES = [
     ("python3.7", 1),
     ("texinfo", 0),
     ("util-linux", 0),
+    ("man-pages", 0),
+    ("pkg-config", 0),
+    ("libpipeline", 0),
+    # TODO: add back when other packages installed
+    # ("man-db", 0),
 ]
 
 
