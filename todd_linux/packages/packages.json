@@ -99,7 +99,7 @@
             "version": "5.39",
             "pass_idx": 0,
             "src_urls": [
-                "http://ftp.astron.com/pub/file/file-5.39.tar.gz"
+                "https://ftp.astron.com/pub/file/file-5.39.tar.gz"
             ],
             "env": "host"
         },
@@ -230,7 +230,7 @@
             "version": "2.0",
             "pass_idx": 0,
             "src_urls": [
-                "http://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz"
+                "https://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz"
             ],
             "env": "host"
         },
@@ -354,6 +354,18 @@
             "env": "target"
         },
         {
+            "name": "glibc",
+            "version": "5.10",
+            "pass_idx": 1,
+            "src_urls": [
+                "https://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.xz",
+                "https://www.linuxfromscratch.org/patches/lfs/10.1/glibc-2.33-fhs-1.patch",
+                "https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz"
+            ],
+            "env": "target",
+            "build_script": "glibc_pass1.sh"
+        },
+        {
             "name": "pkg-config",
             "version": "0.29.2",
             "pass_idx": 0,
@@ -367,7 +379,7 @@
             "version": "1.5.3",
             "pass_idx": 0,
             "src_urls": [
-                "http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.3.tar.gz"
+                "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.3.tar.gz"
             ],
             "env": "target"
         },
@@ -376,7 +388,7 @@
             "version": "2.9.4",
             "pass_idx": 0,
             "src_urls": [
-                "http://download.savannah.gnu.org/releases/man-db/man-db-2.9.4.tar.xz"
+                "https://download.savannah.gnu.org/releases/man-db/man-db-2.9.4.tar.xz"
             ],
             "env": "target"
         }
