@@ -7,13 +7,6 @@ unpack_src() {
     return
 }
 
-create_links() {
-    mkdir $TODD_FAKE_ROOT_DIR/lib64 &&\
-    ln -sfv $TODD_FAKE_ROOT_DIR/lib/ld-linux-x86-64.so.2 $TODD_FAKE_ROOT_DIR/lib64 &&\
-    ln -sfv $TODD_FAKE_ROOT_DIR/lib/ld-linux-x86-64.so.2 $TODD_FAKE_ROOT_DIR/lib64/ld-lsb-x86-64.so.3
-    return
-}
-
 patch_src() {
     patch -Np1 -i ../glibc-2.33-fhs-1.patch
     return
@@ -79,6 +72,13 @@ install_locals() {
 #     return
 # }
 
+create_links() {
+    mkdir $TODD_FAKE_ROOT_DIR/lib64 &&\
+    ln -sfv $TODD_FAKE_ROOT_DIR/lib/ld-linux-x86-64.so.2 $TODD_FAKE_ROOT_DIR/lib64 &&\
+    ln -sfv $TODD_FAKE_ROOT_DIR/lib/ld-linux-x86-64.so.2 $TODD_FAKE_ROOT_DIR/lib64/ld-lsb-x86-64.so.3
+    return
+}
+
 post_configure() {
     cat > $TODD_FAKE_ROOT_DIR/etc/nsswitch.conf << "EOF"
 # Begin /etc/nsswitch.conf
@@ -93,6 +93,15 @@ ethers: files
 rpc: files
 # End /etc/nsswitch.conf
 EOF
+
+    cat > $TODD_FAKE_ROOT_DIR/etc/ld.so.conf << "EOF"
+# Begin /etc/ld.so.conf
+/usr/local/lib
+/opt/lib
+EOF
+}
+
+timezone_setup() {
     tar -xf ../../tzdata2021a.tar.gz
 
     ZONEINFO=$TODD_FAKE_ROOT_DIR/usr/share/zoneinfo
@@ -105,6 +114,8 @@ EOF
     cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
     zic -d $ZONEINFO -p America/New_York
     unset ZONEINFO
+
+    ln -sfv /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 }
 
-unpack_src && patch_src && configure && make_install && create_links
+unpack_src && patch_src && configure && make_install && create_links && post_configure && timezone_setup

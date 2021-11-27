@@ -362,7 +362,8 @@
                 "https://www.linuxfromscratch.org/patches/lfs/10.1/glibc-2.33-fhs-1.patch",
                 "https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz"
             ],
-            "env": "target"
+            "env": "target",
+            "build_script": "glibc_pass1.sh"
         },
         {
             "name": "pkg-config",
