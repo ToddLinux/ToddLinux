@@ -5,7 +5,10 @@
             "version": "2.36.1",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz",
+                    "checksum": "628d490d976d8957279bbbff06cf29d4"
+                }
             ],
             "env": "host"
         },
@@ -14,10 +17,22 @@
             "version": "10.2.0",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
-                "https://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
-                "https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz",
-                "https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
+                    "checksum": "e9fd9b1789155ad09bcf3ae747596b50"
+                },
+                {
+                    "url": "https://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
+                    "checksum": "bdd3d5efba9c17da8d83a35ec552baef"
+                },
+                {
+                    "url": "https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz",
+                    "checksum": "0b82665c4a92fd2ade7440c13fcaa42b"
+                },
+                {
+                    "url": "https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz",
+                    "checksum": "9f16c976c25bb0f76b50be749cd7a3a8"
+                }
             ],
             "env": "host"
         },
@@ -26,7 +41,10 @@
             "version": "5.10.17",
             "pass_idx": 0,
             "src_urls": [
-                "https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.10.17.tar.xz"
+                {
+                    "url": "https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.10.17.tar.xz",
+                    "checksum": "4908707ed841923d8d1814130d5c380f"
+                }
             ],
             "env": "host"
         },
@@ -35,8 +53,14 @@
             "version": "2.33",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.xz",
-                "https://www.linuxfromscratch.org/patches/lfs/10.1/glibc-2.33-fhs-1.patch"
+                {
+                    "url": "https://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.xz",
+                    "checksum": "390bbd889c7e8e8a7041564cb6b27cca"
+                },
+                {
+                    "url": "https://www.linuxfromscratch.org/patches/lfs/10.1/glibc-2.33-fhs-1.patch",
+                    "checksum": "9a5997c3452909b1769918c759eff8a2"
+                }
             ],
             "env": "host"
         },
@@ -45,7 +69,10 @@
             "version": "10.2.0",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
+                    "checksum": "e9fd9b1789155ad09bcf3ae747596b50"
+                }
             ],
             "env": "host"
         },
@@ -54,7 +81,10 @@
             "version": "1.4.18",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/m4/m4-1.4.18.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/m4/m4-1.4.18.tar.xz",
+                    "checksum": "730bb15d96fffe47e148d1e09235af82"
+                }
             ],
             "env": "host"
         },
@@ -63,7 +93,10 @@
             "version": "6.2",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz",
+                    "checksum": "e812da327b1c2214ac1aed440ea3ae8d"
+                }
             ],
             "env": "host"
         },
@@ -72,7 +105,10 @@
             "version": "5.1",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/bash/bash-5.1.tar.gz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/bash/bash-5.1.tar.gz",
+                    "checksum": "bb91a17fd6c9032c26d0b2b78b50aff5"
+                }
             ],
             "env": "host"
         },
@@ -81,7 +117,10 @@
             "version": "8.32",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/coreutils/coreutils-8.32.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/coreutils/coreutils-8.32.tar.xz",
+                    "checksum": "022042695b7d5bcf1a93559a9735e668"
+                }
             ],
             "env": "host"
         },
@@ -90,7 +129,10 @@
             "version": "3.7",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/diffutils/diffutils-3.7.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/diffutils/diffutils-3.7.tar.xz",
+                    "checksum": "4824adc0e95dbbf11dfbdfaad6a1e461"
+                }
             ],
             "env": "host"
         },
@@ -99,7 +141,10 @@
             "version": "5.39",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.astron.com/pub/file/file-5.39.tar.gz"
+                {
+                    "url": "http://ftp.astron.com/pub/file/file-5.39.tar.gz",
+                    "checksum": "1c450306053622803a25647d88f80f25"
+                }
             ],
             "env": "host"
         },
@@ -108,7 +153,10 @@
             "version": "4.8.0",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/findutils/findutils-4.8.0.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/findutils/findutils-4.8.0.tar.xz",
+                    "checksum": "eeefe2e6380931a77dfa6d9350b43186"
+                }
             ],
             "env": "host"
         },
@@ -117,7 +165,10 @@
             "version": "5.1.0",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/gawk/gawk-5.1.0.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/gawk/gawk-5.1.0.tar.xz",
+                    "checksum": "8470c34eeecc41c1aa0c5d89e630df50"
+                }
             ],
             "env": "host"
         },
@@ -126,7 +177,10 @@
             "version": "3.6",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/grep/grep-3.6.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/grep/grep-3.6.tar.xz",
+                    "checksum": "f47fe27049510b2249dba7f862ac1b51"
+                }
             ],
             "env": "host"
         },
@@ -135,7 +189,10 @@
             "version": "1.10",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz",
+                    "checksum": "691b1221694c3394f1c537df4eee39d3"
+                }
             ],
             "env": "host"
         },
@@ -144,7 +201,10 @@
             "version": "4.3",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/make/make-4.3.tar.gz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/make/make-4.3.tar.gz",
+                    "checksum": "fc7a67ea86ace13195b0bce683fd4469"
+                }
             ],
             "env": "host"
         },
@@ -153,7 +213,10 @@
             "version": "2.7.6",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz",
+                    "checksum": "78ad9937e4caadcba1526ef1853730d5"
+                }
             ],
             "env": "host"
         },
@@ -162,7 +225,10 @@
             "version": "4.8",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz",
+                    "checksum": "6d906edfdb3202304059233f51f9a71d"
+                }
             ],
             "env": "host"
         },
@@ -171,7 +237,10 @@
             "version": "1.34",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/tar/tar-1.34.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/tar/tar-1.34.tar.xz",
+                    "checksum": "9a08d29a9ac4727130b5708347c0f5cf"
+                }
             ],
             "env": "host"
         },
@@ -180,7 +249,10 @@
             "version": "5.2.5",
             "pass_idx": 0,
             "src_urls": [
-                "https://tukaani.org/xz/xz-5.2.5.tar.xz"
+                {
+                    "url": "https://tukaani.org/xz/xz-5.2.5.tar.xz",
+                    "checksum": "aa1621ec7013a19abab52a8aff04fe5b"
+                }
             ],
             "env": "host"
         },
@@ -189,7 +261,10 @@
             "version": "2.36.1",
             "pass_idx": 1,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz",
+                    "checksum": "628d490d976d8957279bbbff06cf29d4"
+                }
             ],
             "env": "host",
             "build_script": "binutils_pass1.sh"
@@ -199,10 +274,22 @@
             "version": "10.2.0",
             "pass_idx": 1,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
-                "https://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
-                "https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz",
-                "https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
+                    "checksum": "e9fd9b1789155ad09bcf3ae747596b50"
+                },
+                {
+                    "url": "https://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
+                    "checksum": "bdd3d5efba9c17da8d83a35ec552baef"
+                },
+                {
+                    "url": "https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz",
+                    "checksum": "0b82665c4a92fd2ade7440c13fcaa42b"
+                },
+                {
+                    "url": "https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz",
+                    "checksum": "9f16c976c25bb0f76b50be749cd7a3a8"
+                }
             ],
             "env": "host",
             "build_script": "gcc_pass1.sh"
@@ -212,7 +299,10 @@
             "version": "5.10.0",
             "pass_idx": 0,
             "src_urls": [
-                "https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.10.0.tar.xz"
+                {
+                    "url": "https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.10.0.tar.xz",
+                    "checksum": "19ffea480a21e600453776b7225f3319"
+                }
             ],
             "env": "host"
         },
@@ -221,7 +311,10 @@
             "version": "20210611",
             "pass_idx": 0,
             "src_urls": [
-                "https://github.com/Mic92/iana-etc/releases/download/20210611/iana-etc-20210611.tar.gz"
+                {
+                    "url": "https://github.com/Mic92/iana-etc/releases/download/20210611/iana-etc-20210611.tar.gz",
+                    "checksum": "f2854be57fe281e3ffc7364984467d2f"
+                }
             ],
             "env": "host"
         },
@@ -230,7 +323,10 @@
             "version": "2.0",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz"
+                {
+                    "url": "http://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz",
+                    "checksum": "5e1018502cd131ed8e42339f6b5c98aa"
+                }
             ],
             "env": "host"
         },
@@ -239,7 +335,10 @@
             "version": "1.2.11",
             "pass_idx": 0,
             "src_urls": [
-                "https://www.zlib.net/zlib-1.2.11.tar.xz"
+                {
+                    "url": "https://www.zlib.net/zlib-1.2.11.tar.xz",
+                    "checksum": "85adef240c5f370b308da8c938951a68"
+                }
             ],
             "env": "host"
         },
@@ -248,7 +347,10 @@
             "version": "1.1.1",
             "pass_idx": 0,
             "src_urls": [
-                "https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1l.tar.gz"
+                {
+                    "url": "https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1l.tar.gz",
+                    "checksum": "2ff02cd10f96671162df3efd60470cfe"
+                }
             ],
             "env": "host"
         },
@@ -257,7 +359,10 @@
             "version": "3.7.11",
             "pass_idx": 0,
             "src_urls": [
-                "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz"
+                {
+                    "url": "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz",
+                    "checksum": "b3671d35b61f5422605cedad32f3457a"
+                }
             ],
             "env": "host"
         },
@@ -266,7 +371,10 @@
             "version": "58.2.0",
             "pass_idx": 0,
             "src_urls": [
-                "https://github.com/pypa/setuptools/archive/refs/tags/v58.2.0.tar.gz"
+                {
+                    "url": "https://github.com/pypa/setuptools/archive/refs/tags/v58.2.0.tar.gz",
+                    "checksum": "719ea12307aede34a180c46fcaadcb61"
+                }
             ],
             "env": "host"
         },
@@ -275,7 +383,10 @@
             "version": "21.3.0",
             "pass_idx": 0,
             "src_urls": [
-                "https://github.com/pypa/pip/archive/refs/tags/21.3.tar.gz"
+                {
+                    "url": "https://github.com/pypa/pip/archive/refs/tags/21.3.tar.gz",
+                    "checksum": "c44eac743750f93fe4616b38673ab0a3"
+                }
             ],
             "env": "host"
         },
@@ -284,7 +395,10 @@
             "version": "10.2.0",
             "pass_idx": 1,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
+                    "checksum": "e9fd9b1789155ad09bcf3ae747596b50"
+                }
             ],
             "env": "chroot",
             "build_script": "libstdcpp_pass1.sh"
@@ -294,7 +408,10 @@
             "version": "0.21",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/gettext/gettext-0.21.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/gettext/gettext-0.21.tar.xz",
+                    "checksum": "40996bbaf7d1356d3c22e33a8b255b31"
+                }
             ],
             "env": "chroot"
         },
@@ -303,7 +420,10 @@
             "version": "3.7.5",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/bison/bison-3.7.5.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/bison/bison-3.7.5.tar.xz",
+                    "checksum": "9b762dc24a6723f86d14d957d3deeb90"
+                }
             ],
             "env": "chroot"
         },
@@ -312,7 +432,10 @@
             "version": "5.32.1",
             "pass_idx": 0,
             "src_urls": [
-                "https://www.cpan.org/src/5.0/perl-5.32.1.tar.xz"
+                {
+                    "url": "https://www.cpan.org/src/5.0/perl-5.32.1.tar.xz",
+                    "checksum": "7f104064b906ad8c7329ca5e409a32d7"
+                }
             ],
             "env": "chroot"
         },
@@ -321,7 +444,10 @@
             "version": "3.7.11",
             "pass_idx": 1,
             "src_urls": [
-                "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz"
+                {
+                    "url": "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz",
+                    "checksum": "b3671d35b61f5422605cedad32f3457a"
+                }
             ],
             "env": "chroot",
             "build_script": "python3.7_pass1.sh"
@@ -331,7 +457,10 @@
             "version": "6.7",
             "pass_idx": 0,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/texinfo/texinfo-6.7.tar.xz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/texinfo/texinfo-6.7.tar.xz",
+                    "checksum": "d4c5d8cc84438c5993ec5163a59522a6"
+                }
             ],
             "env": "chroot"
         },
@@ -340,7 +469,10 @@
             "version": "2.36.2",
             "pass_idx": 0,
             "src_urls": [
-                "https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz"
+                {
+                    "url": "https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz",
+                    "checksum": "f78419af679ac9678190ad961eb3cf27"
+                }
             ],
             "env": "chroot"
         },
@@ -349,7 +481,10 @@
             "version": "5.10",
             "pass_idx": 0,
             "src_urls": [
-                "https://www.kernel.org/pub/linux/docs/man-pages/man-pages-5.10.tar.xz"
+                {
+                    "url": "https://www.kernel.org/pub/linux/docs/man-pages/man-pages-5.10.tar.xz",
+                    "checksum": "4ae3f74a1beddd919936e1058642644c"
+                }
             ],
             "env": "target"
         },
@@ -358,9 +493,18 @@
             "version": "5.10",
             "pass_idx": 1,
             "src_urls": [
-                "https://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.xz",
-                "https://www.linuxfromscratch.org/patches/lfs/10.1/glibc-2.33-fhs-1.patch",
-                "https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz"
+                {
+                    "url": "https://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.xz",
+                    "checksum": "390bbd889c7e8e8a7041564cb6b27cca"
+                },
+                {
+                    "url": "https://www.linuxfromscratch.org/patches/lfs/10.1/glibc-2.33-fhs-1.patch",
+                    "checksum": "9a5997c3452909b1769918c759eff8a2"
+                },
+                {
+                    "url": "https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz",
+                    "checksum": "20eae7d1da671c6eac56339c8df85bbd"
+                }
             ],
             "env": "target",
             "build_script": "glibc_pass1.sh"
@@ -370,7 +514,10 @@
             "version": "0.29.2",
             "pass_idx": 0,
             "src_urls": [
-                "https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz"
+                {
+                    "url": "https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz",
+                    "checksum": "f6e931e319531b736fadc017f470e68a"
+                }    
             ],
             "env": "target"
         },
@@ -379,7 +526,10 @@
             "version": "1.5.3",
             "pass_idx": 0,
             "src_urls": [
-                "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.3.tar.gz"
+                {
+                    "url": "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.3.tar.gz",
+                    "checksum": "dad443d0911cf9f0f1bd90a334bc9004"
+                }           
             ],
             "env": "target"
         },
@@ -388,7 +538,10 @@
             "version": "2.9.4",
             "pass_idx": 0,
             "src_urls": [
-                "https://download.savannah.gnu.org/releases/man-db/man-db-2.9.4.tar.xz"
+                {
+                    "url": "https://download.savannah.gnu.org/releases/man-db/man-db-2.9.4.tar.xz",
+                    "checksum": "6e233a555f7b9ae91ce7cd0faa322bce"
+                }
             ],
             "env": "target"
         }
