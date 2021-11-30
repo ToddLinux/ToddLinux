@@ -344,12 +344,12 @@
         },
         {
             "name": "openssl",
-            "version": "1.1.1",
+            "version": "1.1.1j",
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1l.tar.gz",
-                    "checksum": "2ff02cd10f96671162df3efd60470cfe"
+                    "url": "https://www.openssl.org/source/openssl-1.1.1j.tar.gz",
+                    "checksum": "78ad9937e4caadcba1526ef1853730d5"
                 }
             ],
             "env": "host"

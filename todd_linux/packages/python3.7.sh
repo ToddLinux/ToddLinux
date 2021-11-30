@@ -17,7 +17,9 @@ configure() {
     ./configure --prefix=/usr       \
                 --enable-shared     \
                 --without-ensurepip \
-                --with-zlib=/usr/include
+                --with-zlib=/usr/include \
+                LDFLAGS="-Wl,-rpath /usr/local/lib"
+
     return
 }
 
