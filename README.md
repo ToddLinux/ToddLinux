@@ -8,5 +8,3 @@
 
 ## Build instructions
 Build instructions are in Todd Linux [wiki](https://github.com/ToddLinux/ToddLinux/wiki).
-
-test
