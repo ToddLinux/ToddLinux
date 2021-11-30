@@ -475,6 +475,75 @@
                 }
             ],
             "env": "chroot"
+        },
+        {
+            "name": "man-pages",
+            "version": "5.10",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://www.kernel.org/pub/linux/docs/man-pages/man-pages-5.10.tar.xz",
+                    "checksum": "4ae3f74a1beddd919936e1058642644c"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "glibc",
+            "version": "5.10",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.xz",
+                    "checksum": "390bbd889c7e8e8a7041564cb6b27cca"
+                },
+                {
+                    "url": "https://www.linuxfromscratch.org/patches/lfs/10.1/glibc-2.33-fhs-1.patch",
+                    "checksum": "9a5997c3452909b1769918c759eff8a2"
+                },
+                {
+                    "url": "https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz",
+                    "checksum": "20eae7d1da671c6eac56339c8df85bbd"
+                }
+            ],
+            "env": "target",
+            "build_script": "glibc_pass1.sh"
+        },
+        {
+            "name": "pkg-config",
+            "version": "0.29.2",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz",
+                    "checksum": "f6e931e319531b736fadc017f470e68a"
+                }    
+            ],
+            "env": "target"
+        },
+        {
+            "name": "libpipeline",
+            "version": "1.5.3",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.3.tar.gz",
+                    "checksum": "dad443d0911cf9f0f1bd90a334bc9004"
+                }           
+            ],
+            "env": "target"
+        },
+        {
+            "name": "man-db",
+            "version": "2.9.4",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://download.savannah.gnu.org/releases/man-db/man-db-2.9.4.tar.xz",
+                    "checksum": "6e233a555f7b9ae91ce7cd0faa322bce"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
