@@ -544,6 +544,35 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "zlib",
+            "version": "1.2.11",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://www.zlib.net/zlib-1.2.11.tar.xz",
+                    "checksum": "85adef240c5f370b308da8c938951a68"
+                }
+            ],
+            "env": "target",
+            "build_script": "zlib_pass1.sh"
+        },
+        {
+            "name": "bzip2",
+            "version": "1.0.8",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
+                    "checksum": "67e051268d0c475ea773822f7500d0e5"
+                },
+                {
+                    "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/bzip2-1.0.8-install_docs-1.patch",
+                    "checksum": "6a5ac7e89b791aae556de0f745916f7f"
+                }
+            ],
+            "env": "target"
         }
     ]
 }

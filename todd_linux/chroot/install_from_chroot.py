@@ -24,6 +24,8 @@ REQUIRED_TARGET_PACKAGES = [
     ("glibc", 1),
     ("pkg-config", 0),
     ("libpipeline", 0),
+    ("zlib", 1),
+    ("bzip2", 0),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
