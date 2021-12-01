@@ -517,7 +517,7 @@
                 {
                     "url": "https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz",
                     "checksum": "f6e931e319531b736fadc017f470e68a"
-                }    
+                }
             ],
             "env": "target"
         },
@@ -529,7 +529,7 @@
                 {
                     "url": "https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.3.tar.gz",
                     "checksum": "dad443d0911cf9f0f1bd90a334bc9004"
-                }           
+                }
             ],
             "env": "target"
         },
@@ -570,6 +570,56 @@
                 {
                     "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/bzip2-1.0.8-install_docs-1.patch",
                     "checksum": "6a5ac7e89b791aae556de0f745916f7f"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "xz",
+            "version": "5.2.5",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://tukaani.org/xz/xz-5.2.5.tar.xz",
+                    "checksum": "aa1621ec7013a19abab52a8aff04fe5b"
+                }
+            ],
+            "env": "target",
+            "build_script": "xz_pass1.sh"
+        },
+        {
+            "name": "zstd",
+            "version": "1.4.8",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz",
+                    "checksum": "e873db7cfa5ef05832e6d55a5a572840"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "file",
+            "version": "5.39",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "http://ftp.astron.com/pub/file/file-5.39.tar.gz",
+                    "checksum": "1c450306053622803a25647d88f80f25"
+                }
+            ],
+            "env": "target",
+            "build_script": "file_pass1.sh"
+        },
+        {
+            "name": "readline",
+            "version": "8.1",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://ftp.gnu.org/gnu/readline/readline-8.1.tar.gz",
+                    "checksum": "e9557dd5b1409f5d7b37ef717c64518e"
                 }
             ],
             "env": "target"

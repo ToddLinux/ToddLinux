@@ -26,6 +26,10 @@ REQUIRED_TARGET_PACKAGES = [
     ("libpipeline", 0),
     ("zlib", 1),
     ("bzip2", 0),
+    ("xz", 1),
+    ("zstd", 0),
+    ("file", 1),
+    ("readline", 0),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
