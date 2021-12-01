@@ -23,7 +23,7 @@ make_install() {
 post_install() {
     mkdir $TODD_FAKE_ROOT_DIR/lib
     mv -v $TODD_FAKE_ROOT_DIR/usr/lib/libz.so.* $TODD_FAKE_ROOT_DIR/lib
-    ln -sfv ../../lib/$(readlink /usr/lib/libz.so) $TODD_FAKE_ROOT_DIR/usr/lib/libz.so
+    ln -sfv ../../lib/$(readlink $TODD_FAKE_ROOT_DIR/usr/lib/libz.so) $TODD_FAKE_ROOT_DIR/usr/lib/libz.so
 
     rm -fv $TODD_FAKE_ROOT_DIR/usr/lib/libz.a
 }

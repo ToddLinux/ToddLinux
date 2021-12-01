@@ -24,6 +24,7 @@ make_install() {
 }
 
 post_install() {
+    mkdir -p $TODD_FAKE_ROOT_DIR/{lib,bin,usr/lib}
     cp -v bzip2-shared $TODD_FAKE_ROOT_DIR/bin/bzip2
     cp -av libbz2.so* $TODD_FAKE_ROOT_DIR/lib
     ln -sv ../../lib/libbz2.so.1.0 $TODD_FAKE_ROOT_DIR/usr/lib/libbz2.so
@@ -34,4 +35,4 @@ post_install() {
     rm -fv $TODD_FAKE_ROOT_DIR/usr/lib/libbz2.a
 }
 
-unpack_src && configure && make_install && make_install
+unpack_src && configure && make_install && post_install
