@@ -30,6 +30,10 @@ REQUIRED_TARGET_PACKAGES = [
     ("zstd", 0),
     ("file", 1),
     ("readline", 0),
+    ("m4", 1),
+    ("bc", 0),
+    ("flex", 0),
+    ("tcl", 0),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]

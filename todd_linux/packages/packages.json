@@ -142,7 +142,7 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://ftp.astron.com/pub/file/file-5.39.tar.gz",
+                    "url": "https://ftp.astron.com/pub/file/file-5.39.tar.gz",
                     "checksum": "1c450306053622803a25647d88f80f25"
                 }
             ],
@@ -324,7 +324,7 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz",
+                    "url": "https://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz",
                     "checksum": "5e1018502cd131ed8e42339f6b5c98aa"
                 }
             ],
@@ -568,7 +568,7 @@
                     "checksum": "67e051268d0c475ea773822f7500d0e5"
                 },
                 {
-                    "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/bzip2-1.0.8-install_docs-1.patch",
+                    "url": "https://www.linuxfromscratch.org/patches/lfs/10.1/bzip2-1.0.8-install_docs-1.patch",
                     "checksum": "6a5ac7e89b791aae556de0f745916f7f"
                 }
             ],
@@ -605,7 +605,7 @@
             "pass_idx": 1,
             "src_urls": [
                 {
-                    "url": "http://ftp.astron.com/pub/file/file-5.39.tar.gz",
+                    "url": "https://ftp.astron.com/pub/file/file-5.39.tar.gz",
                     "checksum": "1c450306053622803a25647d88f80f25"
                 }
             ],
@@ -618,8 +618,61 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://ftp.gnu.org/gnu/readline/readline-8.1.tar.gz",
+                    "url": "https://ftp.gnu.org/gnu/readline/readline-8.1.tar.gz",
                     "checksum": "e9557dd5b1409f5d7b37ef717c64518e"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "m4",
+            "version": "1.4.18",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/m4/m4-1.4.18.tar.xz",
+                    "checksum": "730bb15d96fffe47e148d1e09235af82"
+                }
+            ],
+            "env": "target",
+            "build_script": "m4_pass1.sh"
+        },
+        {
+            "name": "bc",
+            "version": "3.3.0",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://github.com/gavinhoward/bc/releases/download/3.3.0/bc-3.3.0.tar.xz",
+                    "checksum": "452ae2d467b1d7212bb7896c0c689825"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "flex",
+            "version": "2.6.4",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz",
+                    "checksum": "2882e3179748cc9f9c23ec593d6adc8d"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "tcl",
+            "version": "8.6.11",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://downloads.sourceforge.net/tcl/tcl8.6.11-src.tar.gz",
+                    "checksum": "8a4c004f48984a03a7747e9ba06e4da4"
+                },
+                {
+                    "url": "https://downloads.sourceforge.net/tcl/tcl8.6.11-html.tar.gz",
+                    "checksum": "e358a9140c3a171e42f18c8a7f6a36ea"
                 }
             ],
             "env": "target"
