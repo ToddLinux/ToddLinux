@@ -16,7 +16,12 @@ configure() {
                  -Dsitelib=/usr/lib/perl5/5.32/site_perl \
                  -Dsitearch=/usr/lib/perl5/5.32/site_perl \
                  -Dvendorlib=/usr/lib/perl5/5.32/vendor_perl \
-                 -Dvendorarch=/usr/lib/perl5/5.32/vendor_perl
+                 -Dvendorarch=/usr/lib/perl5/5.32/vendor_perl \
+                 -Dman1dir=/tmp/perl_garbage \
+                 -Dman3dir=/tmp/perl_garbage
+                 # perl is overly excited about writing man pages
+                 # and for some reason if you give it 'none' as manpage directory it will still try to write
+                 # hacky fix but whatever
     return
 }
 
