@@ -34,6 +34,8 @@ REQUIRED_TARGET_PACKAGES = [
     ("bc", 0),
     ("flex", 0),
     ("tcl", 0),
+    ("expect", 0),
+    ("dejagnu", 0)
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
