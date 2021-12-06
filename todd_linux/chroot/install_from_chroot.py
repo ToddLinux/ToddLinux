@@ -40,7 +40,10 @@ REQUIRED_TARGET_PACKAGES = [
     ("gmp", 0),
     ("mpfr", 0),
     ("mpc", 0),
-    ("attr", 0)
+    ("attr", 0),
+    ("acl", 0),
+    ("libcap", 0),
+    ("shadow", 0)
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
