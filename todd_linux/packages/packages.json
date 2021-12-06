@@ -797,6 +797,19 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "gcc",
+            "version": "10.2.0",
+            "pass_idx": 2,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz",
+                    "checksum": "e9fd9b1789155ad09bcf3ae747596b50"
+                }
+            ],
+            "env": "target",
+            "build_script": "gcc_pass2.sh"
         }
     ]
 }

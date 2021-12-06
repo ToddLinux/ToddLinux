@@ -43,7 +43,8 @@ REQUIRED_TARGET_PACKAGES = [
     ("attr", 0),
     ("acl", 0),
     ("libcap", 0),
-    ("shadow", 0)
+    ("shadow", 0),
+    ("gcc", 2)
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
