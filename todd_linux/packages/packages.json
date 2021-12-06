@@ -700,6 +700,67 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "binutils",
+            "version": "2.36.1",
+            "pass_idx": 2,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz",
+                    "checksum": "628d490d976d8957279bbbff06cf29d4"
+                }
+            ],
+            "env": "target",
+            "build_script": "binutils_pass2.sh"
+        },
+        {
+            "name": "gmp",
+            "version": "6.2.1",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz",
+                    "checksum": "0b82665c4a92fd2ade7440c13fcaa42b"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "mpfr",
+            "version": "4.1.0",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
+                    "checksum": "bdd3d5efba9c17da8d83a35ec552baef"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "mpc",
+            "version": "1.2.1",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz",
+                    "checksum": "9f16c976c25bb0f76b50be749cd7a3a8"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "attr",
+            "version": "2.4.48",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz",
+                    "checksum": "bc1e5cb5c96d99b24886f1f527d3bb3d"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
