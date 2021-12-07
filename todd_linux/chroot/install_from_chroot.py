@@ -56,6 +56,12 @@ REQUIRED_TARGET_PACKAGES = [
     ("gdbm", 0),
     ("gperf", 0),
     ("expat", 0),
+    ("inetutils", 1),
+    ("perl", 1),
+    ("xmlparser", 0),
+    ("intltool", 0),
+    ("autoconf", 0),
+    ("automake", 0),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]

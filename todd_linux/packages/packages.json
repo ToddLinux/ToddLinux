@@ -948,6 +948,80 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "inetutils",
+            "version": "2.0",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz",
+                    "checksum": "5e1018502cd131ed8e42339f6b5c98aa"
+                }
+            ],
+            "env": "target",
+            "build_script": "inetutils_pass1.sh"
+        },
+        {
+            "name": "perl",
+            "version": "5.32.1",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://www.cpan.org/src/5.0/perl-5.32.1.tar.xz",
+                    "checksum": "7f104064b906ad8c7329ca5e409a32d7"
+                }
+            ],
+            "env": "target",
+            "build_script": "perl_pass1.sh"
+        },
+        {
+            "name": "xmlparser",
+            "version": "2.46",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz",
+                    "checksum": "80bb18a8e6240fcf7ec2f7b57601c170"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "intltool",
+            "version": "0.51.0",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+                    "checksum": "12e517cac2b57a0121cda351570f1e63"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "autoconf",
+            "version": "2.71",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz",
+                    "checksum": "12cfa1687ffa2606337efe1a64416106"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "automake",
+            "version": "1.16.3",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://ftp.gnu.org/gnu/automake/automake-1.16.3.tar.xz",
+                    "checksum": "c27f608a4e1f302ec7ce42f1251c184e"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
