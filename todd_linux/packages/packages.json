@@ -810,6 +810,83 @@
             ],
             "env": "target",
             "build_script": "gcc_pass2.sh"
+        },
+        {
+            "name": "ncurses",
+            "version": "6.2",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz",
+                    "checksum": "e812da327b1c2214ac1aed440ea3ae8d"
+                }
+            ],
+            "env": "target",
+            "build_script": "ncurses_pass1.sh"
+        },
+        {
+            "name": "sed",
+            "version": "4.8",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz",
+                    "checksum": "6d906edfdb3202304059233f51f9a71d"
+                }
+            ],
+            "env": "target",
+            "build_script": "sed_pass1.sh"
+        },
+        {
+            "name": "psmisc",
+            "version": "23.4",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.4.tar.xz",
+                    "checksum": "8114cd4489b95308efe2509c3a406bbf"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "gettext",
+            "version": "0.21",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/gettext/gettext-0.21.tar.xz",
+                    "checksum": "40996bbaf7d1356d3c22e33a8b255b31"
+                }
+            ],
+            "env": "target",
+            "build_script": "gettext_pass1.sh"
+        },
+        {
+            "name": "bison",
+            "version": "3.7.5",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/bison/bison-3.7.5.tar.xz",
+                    "checksum": "9b762dc24a6723f86d14d957d3deeb90"
+                }
+            ],
+            "env": "target",
+            "build_script": "bison_pass1.sh"
+        },
+        {
+            "name": "grep",
+            "version": "3.6",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/grep/grep-3.6.tar.xz",
+                    "checksum": "f47fe27049510b2249dba7f862ac1b51"
+                }
+            ],
+            "env": "target",
+            "build_script": "grep_pass1.sh"
         }
     ]
 }

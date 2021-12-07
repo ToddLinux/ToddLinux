@@ -44,7 +44,13 @@ REQUIRED_TARGET_PACKAGES = [
     ("acl", 0),
     ("libcap", 0),
     ("shadow", 0),
-    ("gcc", 2)
+    ("gcc", 2),
+    ("ncurses", 1),
+    ("sed", 1),
+    ("psmisc", 0),
+    ("gettext", 1),
+    ("bison", 1),
+    ("grep", 1),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
