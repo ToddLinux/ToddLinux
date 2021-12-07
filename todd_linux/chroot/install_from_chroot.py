@@ -51,6 +51,11 @@ REQUIRED_TARGET_PACKAGES = [
     ("gettext", 1),
     ("bison", 1),
     ("grep", 1),
+    ("bash", 1),
+    ("libtool", 0),
+    ("gdbm", 0),
+    ("gperf", 0),
+    ("expat", 0),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]

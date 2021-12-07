@@ -887,6 +887,67 @@
             ],
             "env": "target",
             "build_script": "grep_pass1.sh"
+        },
+        {
+            "name": "bash",
+            "version": "5.1",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/bash/bash-5.1.tar.gz",
+                    "checksum": "bb91a17fd6c9032c26d0b2b78b50aff5"
+                }
+            ],
+            "env": "target",
+            "build_script": "bash_pass1.sh"
+        },
+        {
+            "name": "libtool",
+            "version": "2.4.6",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz",
+                    "checksum": "1bfb9b923f2c1339b4d2ce1807064aa5"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "gdbm",
+            "version": "1.19",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://ftp.gnu.org/gnu/gdbm/gdbm-1.19.tar.gz",
+                    "checksum": "aeb29c6a90350a4c959cd1df38cd0a7e"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "gperf",
+            "version": "3.1",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz",
+                    "checksum": "9e251c0a618ad0824b51117d5d9db87e"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "expat",
+            "version": "2.4.1",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://prdownloads.sourceforge.net/expat/expat-2.4.1.tar.xz",
+                    "checksum": "e0fe49a6b3480827c9455e4cfc799133"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
