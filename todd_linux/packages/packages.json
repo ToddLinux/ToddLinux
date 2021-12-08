@@ -1205,6 +1205,180 @@
             ],
             "env": "target",
             "build_script": "gzip_pass1.sh"
+        },
+        {
+            "name": "iproute2",
+            "version": "5.10.0",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.10.0.tar.xz",
+                    "checksum": "19ffea480a21e600453776b7225f3319"
+                }
+            ],
+            "env": "target",
+            "build_script": "iproute2_pass1.sh"
+        },
+        {
+            "name": "kbd",
+            "version": "2.4.0",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://www.kernel.org/pub/linux/utils/kbd/kbd-2.4.0.tar.xz",
+                    "checksum": "3cac5be0096fcf7b32dcbd3c53831380"
+                },
+                {
+                    "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/kbd-2.4.0-backspace-1.patch",
+                    "checksum": "f75cca16a38da6caa7d52151f7136895"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "make",
+            "version": "4.3",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/make/make-4.3.tar.gz",
+                    "checksum": "fc7a67ea86ace13195b0bce683fd4469"
+                }
+            ],
+            "env": "target",
+            "build_script": "make_pass1.sh"
+        },
+        {
+            "name": "patch",
+            "version": "2.7.6",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz",
+                    "checksum": "78ad9937e4caadcba1526ef1853730d5"
+                }
+            ],
+            "env": "target",
+            "build_script": "patch_pass1.sh"
+        },
+        {
+            "name": "tar",
+            "version": "1.34",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/tar/tar-1.34.tar.xz",
+                    "checksum": "9a08d29a9ac4727130b5708347c0f5cf"
+                }
+            ],
+            "env": "target",
+            "build_script": "tar_pass1.sh"
+        },
+        {
+            "name": "texinfo",
+            "version": "6.7",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/texinfo/texinfo-6.7.tar.xz",
+                    "checksum": "d4c5d8cc84438c5993ec5163a59522a6"
+                }
+            ],
+            "env": "target",
+            "build_script": "texinfo_pass1.sh"
+        },
+        {
+            "name": "vim",
+            "version": "8.2.2433",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://anduin.linuxfromscratch.org/LFS/vim-8.2.2433.tar.gz",
+                    "checksum": "a26555c8919cf40938d2428d834bf913"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "eudev",
+            "version": "3.2.10",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://dev.gentoo.org/~blueness/eudev/eudev-3.2.10.tar.gz",
+                    "checksum": "60b135a189523f333cea5f71a3345c8d"
+                },
+                {
+                    "url": "http://anduin.linuxfromscratch.org/LFS/udev-lfs-20171102.tar.xz",
+                    "checksum": "27cd82f9a61422e186b9d6759ddf1634"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "procps-ng",
+            "version": "3.3.17",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.17.tar.xz",
+                    "checksum": "d60613e88c2f442ebd462b5a75313d56"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "util-linux",
+            "version": "3.3.17",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz",
+                    "checksum": "f78419af679ac9678190ad961eb3cf27"
+                }
+            ],
+            "env": "target",
+            "build_script": "util-linux_pass1.sh"
+        },
+        {
+            "name": "e2fsprogs",
+            "version": "1.46.1",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.46.1/e2fsprogs-1.46.1.tar.gz",
+                    "checksum": "8c52585522b7ca6bdae2bdecba27b3a4"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "sysklogd",
+            "version": "1.5.1",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz",
+                    "checksum": "c70599ab0d037fde724f7210c2c8d7f8"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "sysvinit",
+            "version": "2.98",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://download.savannah.gnu.org/releases/sysvinit/sysvinit-2.98.tar.xz",
+                    "checksum": "e3254f7622ea5cf2322b1b386a98ba59"
+                },
+                {
+                    "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/sysvinit-2.98-consolidated-1.patch",
+                    "checksum": "4900322141d493e74020c9cf437b2cdc"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
