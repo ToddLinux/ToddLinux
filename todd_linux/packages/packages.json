@@ -1022,6 +1022,89 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "kmod",
+            "version": "28",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-28.tar.xz",
+                    "checksum": "0a2b887b1b3dfb8c0b3f41f598203e56"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "libelf",
+            "version": "0.183",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://sourceware.org/ftp/elfutils/0.183/elfutils-0.183.tar.bz2",
+                    "checksum": "6f58aa1b9af1a5681b1cbf63e0da2d67"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "libffi",
+            "version": "3.3",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://sourceware.org/pub/libffi/libffi-3.3.tar.gz",
+                    "checksum": "6313289e32f1d38a9df4770b014a2ca7"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "openssl",
+            "version": "1.1.1j",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://www.openssl.org/source/openssl-1.1.1j.tar.gz",
+                    "checksum": "78ad9937e4caadcba1526ef1853730d5"
+                }
+            ],
+            "env": "target",
+            "build_script": "openssl_pass1.sh"
+        },
+        {
+            "name": "python3.7",
+            "version": "3.7.11",
+            "pass_idx": 2,
+            "src_urls": [
+                {
+                    "url": "https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz",
+                    "checksum": "b3671d35b61f5422605cedad32f3457a"
+                },
+                {
+                    "url": "https://www.python.org/ftp/python/doc/3.7.11/python-3.7.11-docs-html.tar.bz2",
+                    "checksum": "72f7dfcc150ef1c7258b02fc31bff57c"
+                }
+            ],
+            "env": "target",
+            "build_script": "python3_pass2.sh"
+        },
+        {
+            "name": "coreutils",
+            "version": "8.32",
+            "pass_idx": 1,
+            "src_urls": [
+                {
+                    "url": "https://ftp.gnu.org/gnu/coreutils/coreutils-8.32.tar.xz",
+                    "checksum": "022042695b7d5bcf1a93559a9735e668"
+                },
+                {
+                    "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/coreutils-8.32-i18n-1.patch",
+                    "checksum": "cd8ebed2a67fff2e231026df91af6776"
+                }
+            ],
+            "env": "target",
+            "build_script": "coreutils_pass1.sh"
         }
     ]
 }

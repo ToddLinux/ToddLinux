@@ -62,6 +62,12 @@ REQUIRED_TARGET_PACKAGES = [
     ("intltool", 0),
     ("autoconf", 0),
     ("automake", 0),
+    ("kmod", 0),
+    ("libelf", 0),
+    ("libffi", 0),
+    ("openssl", 1),
+    ("python3.7", 2),
+    ("coreutils", 1),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
