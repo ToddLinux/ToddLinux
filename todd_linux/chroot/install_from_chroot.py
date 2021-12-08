@@ -75,6 +75,7 @@ REQUIRED_TARGET_PACKAGES = [
     ("groff", 0),
     ("grub", 0),
     ("less", 0),
+    ("gzip", 1),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
