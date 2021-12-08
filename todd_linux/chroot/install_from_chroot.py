@@ -68,6 +68,13 @@ REQUIRED_TARGET_PACKAGES = [
     ("openssl", 1),
     ("python3.7", 2),
     ("coreutils", 1),
+    ("check", 0),
+    ("diffutils", 1),
+    ("gawk", 1),
+    ("findutils", 1),
+    ("groff", 0),
+    ("grub", 0),
+    ("less", 0),
     # TODO: add back when other packages installed
     # ("man-db", 0),
 ]
