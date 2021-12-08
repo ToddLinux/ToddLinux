@@ -76,8 +76,21 @@ REQUIRED_TARGET_PACKAGES = [
     ("grub", 0),
     ("less", 0),
     ("gzip", 1),
+    ("iproute2", 1),
+    ("kbd", 0),
+    ("make", 1),
+    ("patch", 1),
     # TODO: add back when other packages installed
-    # ("man-db", 0),
+    # ("man-db", 0), # TODO: fix missing locales
+    ("tar", 1),
+    ("texinfo", 1),
+    ("vim", 0),
+    ("eudev", 0),
+    ("procps-ng", 0),
+    ("util-linux", 1),
+    ("e2fsprogs", 0),
+    ("sysklogd", 0),
+    ("sysvinit", 0),
 ]
 
 
