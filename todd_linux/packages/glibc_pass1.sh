@@ -36,7 +36,7 @@ make_install() {
 }
 
 install_locals() {
-    make -pv $TODD_FAKE_ROOT_DIR/usr/lib/locale
+    mkdir -pv $TODD_FAKE_ROOT_DIR/usr/lib/locale
     localedef --prefix $TODD_FAKE_ROOT_DIR -i POSIX      -f UTF-8       C.UTF-8 2> /dev/null || true
     localedef --prefix $TODD_FAKE_ROOT_DIR -i cs_CZ      -f UTF-8       cs_CZ.UTF-8
     localedef --prefix $TODD_FAKE_ROOT_DIR -i de_DE      -f ISO-8859-1  de_DE
@@ -118,4 +118,4 @@ timezone_setup() {
     ln -sfv /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 }
 
-unpack_src && patch_src && configure && make_install && create_links && post_configure && timezone_setup
+unpack_src && patch_src && configure && make_install && install_locals && create_links && post_configure && timezone_setup

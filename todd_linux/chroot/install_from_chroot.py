@@ -80,8 +80,7 @@ REQUIRED_TARGET_PACKAGES = [
     ("kbd", 0),
     ("make", 1),
     ("patch", 1),
-    # TODO: add back when other packages installed
-    # ("man-db", 0), # TODO: fix missing locales
+    ("man-db", 0), 
     ("tar", 1),
     ("texinfo", 1),
     ("vim", 0),
