@@ -732,7 +732,7 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
+                    "url": "https://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz",
                     "checksum": "bdd3d5efba9c17da8d83a35ec552baef"
                 }
             ],
@@ -756,7 +756,7 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz",
+                    "url": "https://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz",
                     "checksum": "bc1e5cb5c96d99b24886f1f527d3bb3d"
                 }
             ],
@@ -768,7 +768,7 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://download.savannah.gnu.org/releases/acl/acl-2.2.53.tar.gz",
+                    "url": "https://download.savannah.gnu.org/releases/acl/acl-2.2.53.tar.gz",
                     "checksum": "007aabf1dbb550bcddde52a244cd1070"
                 }
             ],
@@ -1099,7 +1099,7 @@
                     "checksum": "022042695b7d5bcf1a93559a9735e668"
                 },
                 {
-                    "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/coreutils-8.32-i18n-1.patch",
+                    "url": "https://www.linuxfromscratch.org/patches/lfs/10.1/coreutils-8.32-i18n-1.patch",
                     "checksum": "cd8ebed2a67fff2e231026df91af6776"
                 }
             ],
@@ -1187,7 +1187,7 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://www.greenwoodsoftware.com/less/less-563.tar.gz",
+                    "url": "https://www.greenwoodsoftware.com/less/less-563.tar.gz",
                     "checksum": "1ee44fa71447a845f6eef5b3f38d2781"
                 }
             ],
@@ -1229,7 +1229,7 @@
                     "checksum": "3cac5be0096fcf7b32dcbd3c53831380"
                 },
                 {
-                    "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/kbd-2.4.0-backspace-1.patch",
+                    "url": "https://www.linuxfromscratch.org/patches/lfs/10.1/kbd-2.4.0-backspace-1.patch",
                     "checksum": "f75cca16a38da6caa7d52151f7136895"
                 }
             ],
@@ -1293,7 +1293,7 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://anduin.linuxfromscratch.org/LFS/vim-8.2.2433.tar.gz",
+                    "url": "https://anduin.linuxfromscratch.org/LFS/vim-8.2.2433.tar.gz",
                     "checksum": "a26555c8919cf40938d2428d834bf913"
                 }
             ],
@@ -1309,7 +1309,7 @@
                     "checksum": "60b135a189523f333cea5f71a3345c8d"
                 },
                 {
-                    "url": "http://anduin.linuxfromscratch.org/LFS/udev-lfs-20171102.tar.xz",
+                    "url": "https://anduin.linuxfromscratch.org/LFS/udev-lfs-20171102.tar.xz",
                     "checksum": "27cd82f9a61422e186b9d6759ddf1634"
                 }
             ],
@@ -1358,7 +1358,7 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz",
+                    "url": "https://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz",
                     "checksum": "c70599ab0d037fde724f7210c2c8d7f8"
                 }
             ],
@@ -1370,11 +1370,11 @@
             "pass_idx": 0,
             "src_urls": [
                 {
-                    "url": "http://download.savannah.gnu.org/releases/sysvinit/sysvinit-2.98.tar.xz",
+                    "url": "https://download.savannah.gnu.org/releases/sysvinit/sysvinit-2.98.tar.xz",
                     "checksum": "e3254f7622ea5cf2322b1b386a98ba59"
                 },
                 {
-                    "url": "http://www.linuxfromscratch.org/patches/lfs/10.1/sysvinit-2.98-consolidated-1.patch",
+                    "url": "https://www.linuxfromscratch.org/patches/lfs/10.1/sysvinit-2.98-consolidated-1.patch",
                     "checksum": "4900322141d493e74020c9cf437b2cdc"
                 }
             ],
