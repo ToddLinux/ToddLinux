@@ -14,7 +14,7 @@ from .sign_lfs import assert_signed
 
 __all__ = ["setup_host"]
 
-BASE_DIR = pathlib.Path(__file__).parent.resolve()
+BASE_DIR = pathlib.Path(__file__).parent.parent.resolve()
 
 
 def install_unelevated(build_user: struct_passwd, lfs_dir: str, verbose: bool, jobs: int) -> bool:
