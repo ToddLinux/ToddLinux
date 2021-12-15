@@ -16,10 +16,10 @@ configure() {
 }
 
 make_install() {
-    mkdir $TODD_FAKE_ROOT_DIR/etc
+    mkdir -p $TODD_FAKE_ROOT_DIR/{etc,sbin,usr/share/man/man{5,8}}
 
     make
-    make DESTDIR=$TODD_FAKE_ROOT_DIR BINDIR=/sbin -j1 install
+    make prefix=$TODD_FAKE_ROOT_DIR BINDIR=$TODD_FAKE_ROOT_DIR/sbin -j1 install
 
     echo "# Begin /etc/syslog.conf
 auth,authpriv.* -/var/log/auth.log
