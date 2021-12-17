@@ -80,7 +80,7 @@ REQUIRED_TARGET_PACKAGES = [
     ("kbd", 0),
     ("make", 1),
     ("patch", 1),
-    ("man-db", 0), 
+    ("man-db", 0),
     ("tar", 1),
     ("texinfo", 1),
     ("vim", 0),
@@ -90,6 +90,10 @@ REQUIRED_TARGET_PACKAGES = [
     ("e2fsprogs", 0),
     ("sysklogd", 0),
     ("sysvinit", 0),
+    ("lfs_bootscripts", 0),
+    ("blfs_bootscripts", 0),
+    ("dhcpcd", 0),
+    ("dhcp", 0),
 ]
 
 

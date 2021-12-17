@@ -1391,6 +1391,42 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "blfs_bootscripts",
+            "version": "20210826",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20210826.tar.xz",
+                    "checksum": "6db4b0da28edc5e1b2819af32d5b02bb"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "dhcpcd",
+            "version": "9.4.0",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://roy.marples.name/downloads/dhcpcd/dhcpcd-9.4.0.tar.xz",
+                    "checksum": "c36715fc629bc40aa94aae06fa1724c2"
+                }
+            ],
+            "env": "target"
+        },
+        {
+            "name": "dhcp",
+            "version": "4.4.2-P1",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://ftp.isc.org/isc/dhcp/4.4.2-P1/dhcp-4.4.2-P1.tar.gz",
+                    "checksum": "3089a1ebd20a802ec0870ae337d43907"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
