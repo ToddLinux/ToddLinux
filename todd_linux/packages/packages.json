@@ -1379,6 +1379,18 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "lfs_bootscripts",
+            "version": "20210201",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "http://www.linuxfromscratch.org/lfs/downloads/10.1/lfs-bootscripts-20210201.tar.xz",
+                    "checksum": "1fc441ef96c522974f7267dec8b40a47"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
