@@ -32,6 +32,7 @@ make_install() {
     make -j1
     make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install
     # now it should work :>
+    # TODO: install dhcp server here aswell
     install -v -m755 client/scripts/linux $TODD_FAKE_ROOT_DIR/usr/sbin/dhclient-script
     return
 }
