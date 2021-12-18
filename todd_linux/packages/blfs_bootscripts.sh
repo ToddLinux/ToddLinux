@@ -9,7 +9,7 @@ unpack_src() {
 }
 
 make_install() {
-    make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install-service-dhcp
+    make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install-service-dhcpcd
     make DESTDIR=$TODD_FAKE_ROOT_DIR -j1 install-service-dhclient
 }
 
