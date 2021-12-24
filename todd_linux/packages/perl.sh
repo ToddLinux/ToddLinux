@@ -22,6 +22,7 @@ configure() {
                  # perl is overly excited about writing man pages
                  # and for some reason if you give it 'none' as manpage directory it will still try to write
                  # hacky fix but whatever
+                 # +rep
     return
 }
 

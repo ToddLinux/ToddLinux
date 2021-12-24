@@ -3,10 +3,11 @@ from typing import Optional
 
 from ..host import assert_signed
 from ..todd.todd import install_packages
+from .post_install_chroot import post_install_chroot
 
 __all__ = ["install_from_chroot"]
 
-SCRIPTS_FOLDER = f"/scripts"
+SCRIPTS_FOLDER = "/scripts"
 
 
 SIGN_FILE = "lfs_sign.lock"
@@ -127,4 +128,6 @@ def install_from_chroot(verbose: bool, jobs: Optional[int]) -> bool:
     ):
         return False
     print("installing target packages from within chroot environment: ok")
+
+    # return post_install_chroot()
     return True

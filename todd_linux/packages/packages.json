@@ -1427,6 +1427,22 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "kernel",
+            "version": "5.10.17",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.10.17.tar.xz",
+                    "checksum": "4908707ed841923d8d1814130d5c380f"
+                },
+                {
+                    "url": "https://github.com/ToddLinux/kernel_config/releases/download/v0.1.0/default.config",
+                    "checksum": "6ce57dd90763c901656a065130b8d495"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
