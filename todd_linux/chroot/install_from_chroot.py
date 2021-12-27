@@ -129,5 +129,4 @@ def install_from_chroot(verbose: bool, jobs: Optional[int]) -> bool:
         return False
     print("installing target packages from within chroot environment: ok")
 
-    # return post_install_chroot()
-    return True
+    return post_install_chroot(verbose, jobs)

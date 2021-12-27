@@ -11,6 +11,7 @@ from .enter_chroot import enter_bootstrap_chroot_python, enter_install_from_chro
 from .install_from_host import install_required_packages_from_host
 from .prepare_chroot import prepare_chroot
 from .sign_lfs import assert_signed
+from .create_iso import create_iso
 
 __all__ = ["setup_host"]
 
@@ -53,6 +54,9 @@ def install_elevated(lfs_dir: str, verbose: bool, jobs: int) -> bool:
         return False
 
     if not enter_install_from_chroot(lfs_dir, verbose, jobs):
+        return False
+
+    if not create_iso(lfs_dir):
         return False
 
     return True
@@ -152,4 +156,7 @@ def setup_host(lfs_dir: str, verbose: bool, prefetch: bool, jobs: Optional[int])
             return False
 
         success = install_elevated(lfs_dir, verbose, jobs)
+        if success:
+            print("All done!")
+            print("Have a nice day.")
         return success

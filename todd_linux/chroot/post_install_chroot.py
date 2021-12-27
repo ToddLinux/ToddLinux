@@ -9,6 +9,18 @@ REQUIRED_TARGET_PACKAGES = [
 
 SCRIPTS_FOLDER = "/scripts"
 
+ETC_FSTAB = """# Begin /etc/fstab
+# file system mount-point type options dump fsck
+# order
+/dev/sda / ext4 defaults 1 1
+proc /proc proc nosuid,noexec,nodev 0 0
+sysfs /sys sysfs nosuid,noexec,nodev 0 0
+devpts /dev/pts devpts gid=5,mode=620 0 0
+tmpfs /run tmpfs defaults 0 0
+devtmpfs /dev devtmpfs mode=0755,nosuid 0 0
+# End /etc/fstab
+"""
+
 # TODO: this file shouldn't be encoded here
 ETC_PROFILE = """# Begin /etc/profile
 export LANG=en_US.UTF-8
@@ -58,13 +70,25 @@ install ohci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i ohci_hcd ; true
 install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 # End /etc/modprobe.d/usb.conf"""
 
+GRUB_CFG = """# Begin /boot/grub/grub.cfg
+set default=0
+set timeout=5
+insmod ext2
+set root=(hd0,1)
+
+menuentry "ToddLinux, Linux 5.10.17-lfs-10.1" {
+linux /boot/vmlinuz-5.10.17-lfs-10.1 root=/dev/sda1 ro
+}
+"""
+
 
 def post_install_chroot(verbose: bool, jobs: int) -> bool:
     os.chdir("/")
     assert_signed()
     print("performing post-install: ...")
 
-    # TODO: missing fstab
+    with open("/etc/fstab", "w") as file:
+        file.write(ETC_FSTAB)
 
     with open("/etc/profile", "w") as file:
         file.write(ETC_PROFILE)
@@ -76,6 +100,7 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
         file.write(ETC_SHELLS)
     print("performing post-install: ok")
 
+    print("installing kernel: ...")
     if not install_packages(
         REQUIRED_TARGET_PACKAGES,
         f"{SCRIPTS_FOLDER}/todd_linux/packages",
@@ -85,9 +110,18 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
         jobs,
     ):
         return False
+    print("installing kernel: ok")
 
-    os.system("install -v -m755 -d /etc/modprobe.d")
+    print("performing final setup: ...")
+    if os.system("install -v -m755 -d /etc/modprobe.d"):
+        return False
     with open("/etc/modprobe.d/usb.conf", "w") as file:
         file.write(ETC_USB)
+
+    if os.system("mkdir -p /boot/grub"):
+        return False
+    with open("/boot/grub/grub.cfg", "w") as file:
+        file.write(GRUB_CFG)
+    print("performing final setup: ok")
 
     return True
