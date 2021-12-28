@@ -192,11 +192,3 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
     print("cleanup: ok")
 
     return True
-
-    # if os.system("mkdir -p /boot/grub"):
-    #     return False
-    # with open("/boot/grub/grub.cfg", "w") as file:
-    #     file.write(GRUB_CFG)
-    # print("performing final setup: ok")
-
-    # return True
