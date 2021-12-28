@@ -94,6 +94,7 @@ REQUIRED_TARGET_PACKAGES = [
     ("lfs_bootscripts", 0),
     ("blfs_bootscripts", 0),
     ("dhcpcd", 0),
+    ("isolinux", 0)
     # ("dhcp", 0),  # we don't two different DHCP clients right now
 ]
 

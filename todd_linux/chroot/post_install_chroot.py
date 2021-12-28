@@ -81,6 +81,16 @@ linux /boot/vmlinuz-5.10.17-lfs-10.1 root=/dev/sda1 ro
 }
 """
 
+ISO_LINUX_CFG = """
+default bootcd
+prompt 1
+timeout 40
+
+label bootcd
+  kernel vmlinuz-5.10.17-lfs-10.1
+  append root=/dev/sr0
+"""
+
 
 def post_install_chroot(verbose: bool, jobs: int) -> bool:
     os.chdir("/")
@@ -118,10 +128,16 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
     with open("/etc/modprobe.d/usb.conf", "w") as file:
         file.write(ETC_USB)
 
-    if os.system("mkdir -p /boot/grub"):
-        return False
-    with open("/boot/grub/grub.cfg", "w") as file:
-        file.write(GRUB_CFG)
+    with open("/boot/isolinux.cfg", "w") as file:
+        file.write(ISO_LINUX_CFG)
     print("performing final setup: ok")
 
     return True
+
+    # if os.system("mkdir -p /boot/grub"):
+    #     return False
+    # with open("/boot/grub/grub.cfg", "w") as file:
+    #     file.write(GRUB_CFG)
+    # print("performing final setup: ok")
+
+    # return True

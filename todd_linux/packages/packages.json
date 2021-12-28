@@ -1443,6 +1443,18 @@
                 }
             ],
             "env": "target"
+        },
+        {
+            "name": "isolinux",
+            "version": "6.03",
+            "pass_idx": 0,
+            "src_urls": [
+                {
+                    "url": "https://kernel.org/pub/linux/utils/boot/syslinux/6.xx/syslinux-6.03.tar.gz",
+                    "checksum": "8bdb4d6faf54001b3456d69e02a870c0"
+                }
+            ],
+            "env": "target"
         }
     ]
 }
