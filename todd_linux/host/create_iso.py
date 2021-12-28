@@ -10,7 +10,7 @@ def create_iso(lfs_dir: str) -> bool:
     assert_signed(lfs_dir)
 
     # uno bruh momento
-    shutil.copytree(f"{lfs_dir}/boot", f"{lfs_dir}/isolinux")
+    shutil.copytree(f"{lfs_dir}/boot", f"{lfs_dir}/isolinux", dirs_exist_ok=True)
 
     print("Creating bootable ISO: ...")
     if os.system(f"umount -l -R -v {lfs_dir}/proc {lfs_dir}/dev {lfs_dir}/run {lfs_dir}/sys"):
