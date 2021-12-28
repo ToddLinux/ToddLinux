@@ -33,6 +33,9 @@ make_install() {
     tar -xvf ../udev-lfs-20171102.tar.xz
     make -f udev-lfs-20171102/Makefile.lfs install
 
+
+    $TODD_FAKE_ROOT_DIR/sbin/udevadm hwdb --update
+
     return
 }
 

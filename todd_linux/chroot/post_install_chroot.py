@@ -162,6 +162,17 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
     print("installing kernel: ok")
 
     print("performing final setup: ...")
+    # setup shadowed passwords and enable root account
+    # TODO: maybe move this to shadow.sh?
+    if os.system("pwconv"):
+        return False
+    
+    if os.system("grpconv"):
+        return False
+
+    if os.system("echo root:root | chpasswd"):
+        return False
+
     if os.system("install -v -m755 -d /etc/modprobe.d"):
         return False
     with open("/etc/modprobe.d/usb.conf", "w") as file:
