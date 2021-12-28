@@ -1,4 +1,6 @@
 import os
+import shutil
+
 
 from ..host import assert_signed
 from ..todd.todd import install_packages
@@ -9,10 +11,11 @@ REQUIRED_TARGET_PACKAGES = [
 
 SCRIPTS_FOLDER = "/scripts"
 
+# TODO: this file shouldn't be encoded here
 ETC_FSTAB = """# Begin /etc/fstab
 # file system mount-point type options dump fsck
 # order
-/dev/sda / ext4 defaults 1 1
+/dev/sda / iso9660 ro 1 1
 proc /proc proc nosuid,noexec,nodev 0 0
 sysfs /sys sysfs nosuid,noexec,nodev 0 0
 devpts /dev/pts devpts gid=5,mode=620 0 0
@@ -60,16 +63,19 @@ set bell-style none
 "\e[F": end-of-line
 # End /etc/inputrc"""
 
+# TODO: this file shouldn't be encoded here
 ETC_SHELLS = """# Begin /etc/shells
 /bin/sh
 /bin/bash
 # End /etc/shells"""
 
+# TODO: this file shouldn't be encoded here
 ETC_USB = """# Begin /etc/modprobe.d/usb.conf
 install ohci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i ohci_hcd ; true
 install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 # End /etc/modprobe.d/usb.conf"""
 
+# TODO: this file shouldn't be encoded here
 GRUB_CFG = """# Begin /boot/grub/grub.cfg
 set default=0
 set timeout=5
@@ -81,6 +87,7 @@ linux /boot/vmlinuz-5.10.17-lfs-10.1 root=/dev/sda1 ro
 }
 """
 
+# TODO: this file shouldn't be encoded here
 ISO_LINUX_CFG = """
 default bootcd
 prompt 1
@@ -91,6 +98,7 @@ label bootcd
   append root=/dev/sr0
 """
 
+# TODO: this file shouldn't be encoded here
 INITTAB = """
 # Begin /etc/inittab
 
@@ -162,6 +170,15 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
     with open("/boot/isolinux.cfg", "w") as file:
         file.write(ISO_LINUX_CFG)
     print("performing final setup: ok")
+
+    print("cleanup: ...")
+
+    shutil.rmtree("/tmp")
+    os.mkdir("/tmp")
+    
+    shutil.rmtree("/tools")
+    
+    print("cleanup: ok")
 
     return True
 
