@@ -16,6 +16,8 @@ ETC_FSTAB = """# Begin /etc/fstab
 # file system mount-point type options dump fsck
 # order
 /dev/sda / iso9660 ro 1 1
+tmpfs /tmp tmpfs mode=1777,nosuid,nodev 0 0
+tmpfs /var/log/ tmpfs mode=1777,nosuid,nodev 0 0
 proc /proc proc nosuid,noexec,nodev 0 0
 sysfs /sys sysfs nosuid,noexec,nodev 0 0
 devpts /dev/pts devpts gid=5,mode=620 0 0
