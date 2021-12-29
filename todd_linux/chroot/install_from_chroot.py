@@ -91,7 +91,7 @@ REQUIRED_TARGET_PACKAGES = [
     ("e2fsprogs", 0),
     ("sysklogd", 0),
     ("sysvinit", 0),
-    ("lfs_bootscripts", 0),
+    ("live_cd_lfs_bootscripts", 0),
     ("blfs_bootscripts", 0),
     ("dhcpcd", 0),
     ("isolinux", 0)

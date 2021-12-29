@@ -1381,7 +1381,7 @@
             "env": "target"
         },
         {
-            "name": "lfs_bootscripts",
+            "name": "live_cd_lfs_bootscripts",
             "version": "20210201",
             "pass_idx": 0,
             "src_urls": [
