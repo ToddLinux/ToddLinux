@@ -1438,8 +1438,8 @@
                     "checksum": "4908707ed841923d8d1814130d5c380f"
                 },
                 {
-                    "url": "https://github.com/ToddLinux/kernel_config/releases/download/v0.1.0/default.config",
-                    "checksum": "6ce57dd90763c901656a065130b8d495"
+                    "url": "https://github.com/ToddLinux/kernel_config/releases/download/v0.1.1/default.config",
+                    "checksum": "b83d8b93569784536f39bc9695cce6aa"
                 }
             ],
             "env": "target"
