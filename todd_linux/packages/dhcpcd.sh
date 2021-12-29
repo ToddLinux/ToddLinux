@@ -35,4 +35,14 @@ make_install() {
     return
 }
 
-unpack_src && setup_users && configure && make_install
+post_install() {
+ONBOOT="yes"
+cat > /etc/sysconfig/ifconfig.enp0s3 << "EOF"
+IFACE="enp0s3"
+SERVICE="dhcpcd"
+DHCP_START="-b -q <insert appropriate start options here>"
+DHCP_STOP="-k <insert additional stop options here>"
+EOF
+}
+
+unpack_src && setup_users && configure && make_install && post_install

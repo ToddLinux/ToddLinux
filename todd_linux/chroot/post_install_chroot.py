@@ -78,16 +78,16 @@ install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 # End /etc/modprobe.d/usb.conf"""
 
 # TODO: this file shouldn't be encoded here
-GRUB_CFG = """# Begin /boot/grub/grub.cfg
-set default=0
-set timeout=5
-insmod ext2
-set root=(hd0,1)
+# GRUB_CFG = """# Begin /boot/grub/grub.cfg
+# set default=0
+# set timeout=5
+# insmod ext2
+# set root=(hd0,1)
 
-menuentry "ToddLinux, Linux 5.10.17-lfs-10.1" {
-linux /boot/vmlinuz-5.10.17-lfs-10.1 root=/dev/sda1 ro
-}
-"""
+# menuentry "ToddLinux, Linux 5.10.17-lfs-10.1" {
+# linux /boot/vmlinuz-5.10.17-lfs-10.1 root=/dev/sda1 ro
+# }
+# """
 
 # TODO: this file shouldn't be encoded here
 ISO_LINUX_CFG = """
@@ -168,7 +168,7 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
     # TODO: maybe move this to shadow.sh?
     if os.system("pwconv"):
         return False
-    
+
     if os.system("grpconv"):
         return False
 
@@ -186,11 +186,14 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
 
     print("cleanup: ...")
 
-    shutil.rmtree("/tmp")
+    shutil.rmtree("/tmp", ignore_errors=True)
     os.mkdir("/tmp")
-    
-    shutil.rmtree("/tools")
-    
+
+    shutil.rmtree("/tools", ignore_errors=True)
+
+    shutil.rmtree("/var/cache/todd", ignore_errors=True)
+    os.mkdir("/var/cache/todd")
+
     print("cleanup: ok")
 
     return True

@@ -23,4 +23,3 @@ def create_iso(lfs_dir: str) -> bool:
     print("Creating bootable ISO: ok")
 
     return True
-
