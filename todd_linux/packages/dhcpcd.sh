@@ -40,8 +40,8 @@ ONBOOT="yes"
 cat > /etc/sysconfig/ifconfig.enp0s3 << "EOF"
 IFACE="enp0s3"
 SERVICE="dhcpcd"
-DHCP_START="-b -q <insert appropriate start options here>"
-DHCP_STOP="-k <insert additional stop options here>"
+DHCP_START="-b -q"
+DHCP_STOP="-k"
 EOF
 }
 
