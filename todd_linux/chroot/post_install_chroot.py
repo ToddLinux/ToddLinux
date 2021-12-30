@@ -130,6 +130,27 @@ su:S016:once:/sbin/sulogin
 # End /etc/inittab
 """
 
+ETC_RCD_INITD_CREATE_RAMDISK = """#!/bin/sh
+
+
+case "$1" in
+        start)
+                mknod /dev/ram0 b 1 0
+                echo -n "Mounting etc ramdisk ...              "
+                mount -t tmpfs -o size=64m tmpfs /etc
+                
+                sleep 1
+                echo -n "Copying files to ramdisk ...                 "
+                cp -pR /etc_files/* /etc
+                sleep 1
+                ;;
+        *)
+                echo "Usage: $0 {start}"
+                exit 1
+                ;;
+esac
+"""
+
 
 def post_install_chroot(verbose: bool, jobs: int) -> bool:
     os.chdir("/")
@@ -149,7 +170,23 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
 
     with open("/etc/shells", "w") as file:
         file.write(ETC_SHELLS)
+
+    with open("/etc/rc.d/init.d/create_ramdisk", "w") as file:
+        file.write(ETC_RCD_INITD_CREATE_RAMDISK)
+
+
+    shutil.rmtree("etc_files")
+    shutil.copytree("etc", "etc_files")
+
+    if os.system("chmod 0755 /etc/rc.d/init.d/create_ramdisk"):
+        return False
+    
+    if os.system("cp /etc/rc.d/init.d/create_ramdisk /etc/rc.d/rcS.d/S99create_ramdisk"):
+        return False
+
+    
     print("performing post-install: ok")
+
 
     print("installing kernel: ...")
     if not install_packages(
