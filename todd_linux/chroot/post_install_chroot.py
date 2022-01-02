@@ -188,7 +188,6 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
     print("installing kernel: ...")
     if not install_packages(
         REQUIRED_TARGET_PACKAGES,
-        f"{SCRIPTS_FOLDER}/todd_linux/packages",
         "target",
         "/",
         verbose,
