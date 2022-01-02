@@ -94,7 +94,8 @@ REQUIRED_TARGET_PACKAGES = [
     ("live_cd_lfs_bootscripts", -1),
     ("blfs_bootscripts", -1),
     ("dhcpcd", -1),
-    ("isolinux", -1)
+    ("isolinux", -1),
+    ("wget", -1),
     # ("dhcp", -1),  # we don't two different DHCP clients right now
 ]
 
