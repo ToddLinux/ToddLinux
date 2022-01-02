@@ -6,7 +6,7 @@ from ..host import assert_signed
 from ..todd.todd import install_packages
 
 REQUIRED_TARGET_PACKAGES = [
-    ("kernel", 0)
+    ("kernel", -1)
 ]
 
 SCRIPTS_FOLDER = "/scripts"
