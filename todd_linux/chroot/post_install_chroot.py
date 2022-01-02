@@ -174,19 +174,16 @@ def post_install_chroot(verbose: bool, jobs: int) -> bool:
     with open("/etc/rc.d/init.d/create_ramdisk", "w") as file:
         file.write(ETC_RCD_INITD_CREATE_RAMDISK)
 
-
-    shutil.rmtree("etc_files")
+    shutil.rmtree("etc_files", ignore_errors=True)
     shutil.copytree("etc", "etc_files")
 
     if os.system("chmod 0755 /etc/rc.d/init.d/create_ramdisk"):
         return False
-    
+
     if os.system("cp /etc/rc.d/init.d/create_ramdisk /etc/rc.d/rcS.d/S99create_ramdisk"):
         return False
 
-    
     print("performing post-install: ok")
-
 
     print("installing kernel: ...")
     if not install_packages(

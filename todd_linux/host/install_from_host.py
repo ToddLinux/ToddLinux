@@ -72,4 +72,4 @@ def install_required_packages_from_host(lfs_dir: str, verbose: bool, jobs: int) 
     os.environ["LFS"] = lfs_dir
     os.environ["PATH"] = lfs_dir + "/tools/bin:" + os.environ["PATH"]
 
-    return install_packages(REQUIRED_PACKAGES, PACKAGES_PATH, "host", lfs_dir, verbose, jobs)
+    return install_packages(REQUIRED_PACKAGES, "host", lfs_dir, verbose, jobs, PACKAGES_PATH)

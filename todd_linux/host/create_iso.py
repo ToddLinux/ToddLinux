@@ -12,7 +12,6 @@ def create_iso(lfs_dir: str) -> bool:
     iso_timestamp = datetime.now().strftime("%Y%m%d%H%M")
     iso_path = f"/tmp/todd_linux_{iso_timestamp}.iso"
 
-    # uno bruh momento
     shutil.copytree(f"{lfs_dir}/boot", f"{lfs_dir}/isolinux", dirs_exist_ok=True)
 
     print("Creating bootable ISO: ...")
