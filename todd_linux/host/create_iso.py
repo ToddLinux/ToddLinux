@@ -17,7 +17,7 @@ def create_iso(lfs_dir: str) -> bool:
     print("Creating bootable ISO: ...")
     if os.system(f"umount -l -R -v {lfs_dir}/proc {lfs_dir}/dev {lfs_dir}/run {lfs_dir}/sys"):
         return False
-    if os.system(f"mkisofs -R -l -L -D -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -V TODD_LIVE {lfs_dir} > {iso_path}"):
+    if os.system(f"mkisofs -R -l -ldots -D -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -V TODD_LIVE {lfs_dir} > {iso_path}"):
         return False
     print("Creating bootable ISO: ok")
 
